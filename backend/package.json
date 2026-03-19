@@ -1,0 +1,25 @@
+{
+  "name": "tcc-cantina",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AnaJuliaSousa05/TCC-CANTINA.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/AnaJuliaSousa05/TCC-CANTINA/issues"
+  },
+  "homepage": "https://github.com/AnaJuliaSousa05/TCC-CANTINA#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
