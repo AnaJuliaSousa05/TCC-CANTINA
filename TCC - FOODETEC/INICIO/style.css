@@ -9,7 +9,7 @@ body {
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: url(Comida\ fofinha\ kawaii\ em\ padrão.png);
+        background-color: rgb(178, 145, 14);
         background-size: cover;
         background-position: center
 }
@@ -80,31 +80,6 @@ header{
       margin-bottom: 50px; 
 }
 
-.search-container {
-    background: white; 
-    padding: 10px 20px; 
-    border-radius: 50px; 
-    border-bottom: 50px; 
-    display: flex; 
-    align-items: center; 
-    justify-self: center; 
-    width: 100%; 
-    max-width: 500px;
-     margin: 20px 0; 
-     transition: transform 0.3s ease; 
-     cursor: pointer; 
-} 
-.search-container input{ 
-    border: none; 
-    outline: none; 
-    width: 100%; 
-    margin-left: 10px; 
-    font-size: 1rem;
-} 
-
-.search-container:hover{ 
-    transform: translateY(-4px) 
-} 
 
 .cards-opcao { 
     display: flex; 
@@ -156,18 +131,3 @@ header{
     font-size: 0.7rem; 
 
 } 
-
-.bnt-cardapio{ 
-    background-color: #61130c; 
-    color: #fff; 
-    width: 140px; 
-    height: 50px; 
-    margin-left: 5px; 
-    border: none; 
-    border-radius: 15px; 
-    cursor: pointer; 
-    transition: transform 0.3s ease; 
-} 
-
-.bnt-cardapio:hover{ 
-    transform: translateY(-5px) }
