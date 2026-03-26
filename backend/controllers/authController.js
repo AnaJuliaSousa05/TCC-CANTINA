@@ -1,3 +1,5 @@
+console.log("CONTROLLER CERTO CARREGADO 🚀");
+
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
 
@@ -6,13 +8,18 @@ const saltRounds = 10;
 exports.register = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
-    const nome = req.body.nickname
+    const nickname = req.body.nickname;
+    console.log("cheguei aqui");
 
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
+        console.log("email recebido:", email);
+        console.log("resultado do SELECT", result);
+       
+       
         if (err) {
             return res.status(500).send(err);
         }
-        if (result.lenght == 0) {
+        if (result.length == 0) {
             // Se for um novo usuario o hash bcrypt criptografam 
             bcrypt.hash(password, saltRounds, (err, hash) => {
                 if (err) {
@@ -20,8 +27,8 @@ exports.register = (req, res) => {
                 }
                 //inserir o usuario no banco
                 db.query(
-                    "INSERT INTO usuarios (email, password, nickname) VALUES (?,?)",
-                    [email, hash, nome],
+                    "INSERT INTO usuarios (email, password, nickname) VALUES (?,?, ?)",
+                    [email, hash, nickname],
                     (error, response) => {
                         if (error) {
                             return res.status(500).send(error)
@@ -34,26 +41,36 @@ exports.register = (req, res) => {
             });
 
         } else {
-            return res.send({ msg: "Email já cadastrado" });
+            return res.send({ msg: "Email já possui um cadastrado" });
 
         }
     });
 };
 
 exports.login = (req, res) => {
+    console.log("bateu login")
     const email = req.body.email;
     const password = req.body.password
-    const nome = req.body.nickname
+    const nickname = req.body.nickname
 
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
+        console.log("bateu login")
+        console.log("Email digitado:", email);
+        console.log("Resultado do SELECT:", result);
+
         if (err) {
            return res.status(500).send(err);
         }
     
     if (result.length > 0) {
         bcrypt.compare(password, result[0].password, (error, response) => {
-            if (err) {
-                return res.status(500).send(err);
+        console.log("Senha digitada:", password);
+        console.log("Senha do banco:", result[0].password);
+        console.log("Senha correta?", response);
+
+
+            if (error) {
+                return res.status(500).send(error);
             }
             if (response) {
                 res.send({ msg: "Usuario logado com sucesso" });

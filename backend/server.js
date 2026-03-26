@@ -6,7 +6,12 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const authRoutes = require("./routes/auth")
+console.log("IMPORTANDO ROTAS...");
+const authRoutes = require("./routes/auth");
+
+app.use("/", authRoutes);
+console.log("ROTAS CARREGADAS 🚀");
+
 
 app.use("/",authRoutes);
 
@@ -18,4 +23,6 @@ app.listen(5000,() => {
 app.get("/teste", (req,res)=>{
     res.send("Backend top")
 })
+
+console.log("SERVIDOR NOVO 🚀");
 
