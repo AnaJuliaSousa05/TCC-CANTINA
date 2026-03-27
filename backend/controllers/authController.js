@@ -1,4 +1,4 @@
-console.log("CONTROLLER CERTO CARREGADO 🚀");
+console.log("CONTROLLER CARREGADO");
 
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
