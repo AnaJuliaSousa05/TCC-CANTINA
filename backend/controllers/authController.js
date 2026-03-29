@@ -1,10 +1,12 @@
-console.log("CONTROLLER CARREGADO");
+//autenticação 
 
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
 
 const saltRounds = 10;
 
+
+//REGISTRO
 exports.register = (req, res) => {
     const email = req.body.email;
     const password = req.body.password;
@@ -47,14 +49,14 @@ exports.register = (req, res) => {
     });
 };
 
+
+//LOGIN
 exports.login = (req, res) => {
-    console.log("bateu login")
     const email = req.body.email;
     const password = req.body.password
     const nickname = req.body.nickname
 
     db.query("SELECT * FROM usuarios WHERE email = ?", [email], (err, result) => {
-        console.log("bateu login")
         console.log("Email digitado:", email);
         console.log("Resultado do SELECT:", result);
 
@@ -73,6 +75,11 @@ exports.login = (req, res) => {
                 return res.status(500).send(error);
             }
             if (response) {
+
+                req.session.usuario =result[0].id;
+                  
+                console.log(req.session)
+                
                 res.send({ msg: "Usuario logado com sucesso" });
             } else {
                 res.send({ msg: "Senha incorreta" });
@@ -85,6 +92,11 @@ exports.login = (req, res) => {
     }
 });
 
+}
+
+exports.logout = (req, res) => {
+    req.session.destroy()
+    res.send({ msg: "Logout feito" })
 }
 
 
