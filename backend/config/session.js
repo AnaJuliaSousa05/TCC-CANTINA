@@ -7,6 +7,7 @@ module.exports = session({
     resave:false, //não salva se não houver nenuma alteração dentro da sessão
     saveUninitialized:false, // não salva sessão sem dado
     cookie: {
-        secure: false //configuração cookie
+        secure: false, //configuração cookie
+        sameSite: "lax"
     }
 })
