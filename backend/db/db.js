@@ -1,5 +1,3 @@
-//BANCO DE DADOS
-
 const mysql = require("mysql");
 
 const db = mysql.createPool({
