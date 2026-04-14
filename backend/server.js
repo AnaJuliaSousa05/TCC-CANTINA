@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -26,7 +27,7 @@ app.get("/", (req, res) => {
 
 
 // cofig email
-require("dotenv").config();
+
 
 const transporter = nodemailer.createTransport({
   service: "gmail",
@@ -34,6 +35,8 @@ const transporter = nodemailer.createTransport({
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS
   }
+
+  
 });
 
 
@@ -45,8 +48,8 @@ app.post("/forgot-password", (req, res) => {
     const expira = new Date(Date.now() + 3600000); // 1h
 
     db.query(
-        "UPDATE usuarios SET reset_token = ?, reset_token_expira = ? WHERE email = ?",
-        [token, expira, email],
+    "UPDATE usuarios SET reset_token = ?, reset_token_expira = ? WHERE email = ?",
+    [token, expira, email],
         (err, result) => {
             if (err) {
                 console.log(err);
@@ -56,8 +59,7 @@ app.post("/forgot-password", (req, res) => {
             if (result.affectedRows === 0) {
                 return res.status(404).send("Email não encontrado");
             }
-
-             const link = `http://127.0.0.1:5500/TCC-CANTINA/front-end/recuperacao-senha/reset-password.html?token=${token}`;
+               const link = `http://127.0.0.1:5500/recuperacao-senha/reset-password.html?token=${token}`;
             const mailOptions = {
                 from: "annaclaracq@gmail.com",
                 to: email,
@@ -102,10 +104,13 @@ app.post("/reset-password", async (req, res) => {
             const hash = await bcrypt.hash(novaSenha, 10);
 
             db.query(
-                "UPDATE usuarios SET senha = ?, reset_token = NULL, reset_token_expira = NULL WHERE id = ?",
+                "UPDATE usuarios SET password = ?, reset_token = NULL, reset_token_expira = NULL WHERE id = ?",
                 [hash, usuario.id],
                 (err) => {
-                    if (err) return res.status(500).send("Erro ao atualizar senha");
+                    if (err) {
+                        console.log("ERRO AO ATUALIZAR:", err);
+                        return res.status(500).send("Erro ao atualizar senha");
+                    }
 
                     res.send("Senha alterada com sucesso!");
                 }
@@ -113,7 +118,6 @@ app.post("/reset-password", async (req, res) => {
         }
     );
 });
-
 
 //server
 app.listen(5000, () => {
