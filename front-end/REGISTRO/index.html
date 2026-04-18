@@ -1,67 +1,103 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Aba de REGISTRO </title>
-    <link rel="stylesheet" href="style.css">
-     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-      <div class="wrapper">
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Aba de REGISTRO </title>
+        <link rel="stylesheet" href="style.css">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+    <body>
+        <div class="wrapper">
 
-        <div class="img-box"> 
-            <img src="foto/teste.png" alt="icon">
+            <div class="img-box"> 
+                <img src="foto/teste.png" alt="icon">
+            </div>
+                <a href="../LOGIN/login.html"> 
+        <i  class='bx bx-log-out btn-voltar' onclick="window.history.back()"></i>
+        </a>
+                <div class="wrapper">
+
+                <div class="form-box-login">
+                        
+            <form id="registrarUsuarios">
+                <h1> Registrar-se </h1>
+
+                <div class="tipo-conta">
+            <label>
+                <input type="radio" name="userType" value="cliente" checked onclick="alternarFormulario()"> 
+                Sou Cliente
+            </label>
+            <label>
+                <input type="radio" name="userType" value="admin" onclick="alternarFormulario()"> 
+                Sou Administrador
+            </label>
         </div>
 
-            <div class="wrapper">
-
-              <div class="form-box-login">
-
-        <form id="registrarUsuarios">
-            <h1> Registrar-se </h1>
-            <div class="input-box"> 
-                <input type="text" id="nickname" placeholder="Digite seu nome de usuário"  required> 
-                <i class='bx bx-user'></i>
-            </div>
-
-             <div class="input-box"> 
-                <input type="email" id="email" placeholder=" Digite seu email" required> 
-                <i class='bx bx-envelope'></i>
-            </div>
-
-            <div class="input-box"> 
-                <input type="password" id="password" placeholder= "Digite sua senha" required> 
-                <i class='bx bx-lock'></i>
-            </div>
-
-            
-            <div class="input-box"> 
-                <input type="password" id="confirmPassword" placeholder= "Confirme sua senha" required> 
-                <i class='bx bx-lock'></i>
-            </div>
-
-            <div class="remember-forgot">
-          <label>
-            <input type="checkbox" required> Eu aceito os <A href="https://www.jusbrasil.com.br/artigos/aspectos-basicos-sobre-termos-e-condicoes/20491">  termos e condições </A> </label>
+        <div id="campos-cliente"> 
+       
+        <div class="input-box"> 
+            <input type="text" id="nickname-cliente" placeholder="Nome de usuário" required> 
+            <i class='bx bx-user'></i>
         </div>
-
-        <div class="registrar">
-          <p>Já possui uma conta? <a href="../LOGIN/login.html">Faça login</a></p>
+        <div class="input-box"> 
+            <input type="email" id="email-cliente" placeholder="Email" required> 
+            <i class='bx bx-envelope'></i>
         </div>
+        <div class="input-box"> 
+            <input type="password" id="password-cliente" placeholder="Senha" required> 
+            <i class='bx bx-lock'></i>
+        </div>
+    </div>
 
-            <div> <button type="submit" class="botao"> Registrar-se </button> </div>
+    <div id="campos-admin" style="display: none;"> 
+   
+        <div class="input-box"> 
+            <input type="text" id="codigo-admin" placeholder="Código de funcionário" required> 
+            <i class='bx bx-id-card'></i>
+        </div>
+        <div class="input-box"> 
+            <input type="email" id="email-admin" placeholder="Email" required> 
+            <i class='bx bx-envelope'></i>
+        </div>
+        <div class="input-box"> 
+            <input type="password" id="password-admin" placeholder="Senha" required> 
+            <i class='bx bx-lock'></i>
+        </div>
+        </div> 
+        <div class="input-box">
+        <input type="password" placeholder="Digite sua senha " required>
+        <i class='bx bx-lock'></i>
+     </div>
+    </div>
 
-             <div class="voltar">
-            <p> Deseja voltar? <a href="../LOGIN/login.html">  Clique aqui </a></p>    
+
+                
+                <div class="remember-forgot">
+            <label>
+                <input type="checkbox" required> Eu aceito os <A href="https://www.jusbrasil.com.br/artigos/aspectos-basicos-sobre-termos-e-condicoes/20491">  termos e condições </A> </label>
             </div>
-            
-         </form> 
-             </div> 
 
+            <div class="registrar">
+            <p>Já possui uma conta? <a href="../LOGIN/login.html">Faça login</a></p>
+            </div>
+
+                <div> <button type="submit" class="botao"> Registrar-se </button> </div>
+
+                <div class="voltar">
+                <p> Deseja voltar? <a href="../LOGIN/login.html">  Clique aqui </a></p>    
+                </div>
+                </div>
+            </form> 
+                </div> 
+
+                
+        
             
+            </div>
+    </body>
+    <script src="/front-end/script.js">
     
-          <script src="/front-end/script.js"></script>
-        </div>
-</body>
-</html>
+
+    </script>
+    </html>

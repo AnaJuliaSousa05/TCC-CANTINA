@@ -9,7 +9,7 @@ body{ display: flex;
 justify-content: center;
 align-items: center;
 min-height: 100vh;
-background: url(foto/Gemini_Generated_Image_570dvr570dvr570d.png) no-repeat;
+background: url() no-repeat;
 background-position: center;
 background-size: cover;
 
@@ -21,7 +21,7 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('foto/Gemini_Generated_Image_570dvr570dvr570d.png') no-repeat;
+    background: url('foto/fundo.png') no-repeat;
     background-position: center;
   background-size: cover;  
     filter: blur(4px);   
@@ -81,6 +81,13 @@ body::before {
 
  }
 
+.tipo-conta{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+   padding-top: 15px;
+   accent-color:  #b36f1d ;
+}
 .input-box input{
     width: 100%;
     height: 100%;
@@ -95,7 +102,7 @@ body::before {
     transform: box-shadow 0.3s ease-in-out;
 }
 .input-box input:hover{ 
- transform: translateY(-3px);
+ transform: translateY(-1px);
     box-shadow: 0 0px 10px rgb(178, 92, 17);
 }
 
@@ -194,6 +201,26 @@ body::before {
     text-decoration: underline;
     display: inline-block;
     transform: translateY(-2px);
+}
+
+.wrapper .botao:hover { 
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
+}
+.btn-voltar {
+    position: absolute;
+    top: 20px;   /* Distância do topo */
+    right: 20px; /* Distância da direita */
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    z-index: 10; /* Garante que fique em cima de tudo */
+}
+
+.btn-voltar:hover {
+    color: #fff;
+    transform: scale(1.1); 
 }
 
 @media (max-width: 360px) {

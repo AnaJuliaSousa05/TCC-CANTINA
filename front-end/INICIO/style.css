@@ -108,7 +108,7 @@ body {
 /* first-section*/
 
 .first-section {
-    background-image: linear-gradient(rgba(29,29,29,0.8)), url(foto/b.png);
+    background-image: linear-gradient(rgba(29,29,29,0.8)), url(foto/fundo.png);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -182,13 +182,14 @@ body {
     margin-top: 1rem;
     margin-bottom: 3rem;
     color: #f7941d;
-    font-family: "Indie Flower"
+    font-family: cursive;
 }
 
 .contentsobre p{
     text-align: center;
     font-size: 1.1rem;
     width: 600px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 /* Cardapio */
@@ -199,42 +200,41 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(12, 12, 12, 0.8);
+    background-color: #292625;
 }
 .cardapio h3{
     font-size: 2rem;
-    color: #fff0ff;
     text-transform: uppercase;
-    margin-top: 15px;
+    margin-top: 25px;
     color: #fff;
-    font-family: cursive;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .itens-cardapio {
-    width: 80%;
+    width: 90%;
     margin-top: 2rem;
     margin-bottom: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 550px));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
     justify-content: center;
     align-items: center;
-    gap: 30px;
+    gap: 40px;
+border-radius: 25px;
 
 }
 
 .itens-cardapio .info {
     background-color: #1f1e1f;
-
     border: none;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 1.2rem;
 }
 
 .itens-cardapio .info h3{
-    font-size: 1.5rem ;
+    font-size: 1.2rem ;
     color: #fff;
     text-transform: uppercase;
     margin-bottom: 1rem;
@@ -243,32 +243,34 @@ body {
 
 .itens-cardapio .info h4{
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 1rem;
-    text-transform: uppercase;
+    font-size: 0.7rem;
+    text-transform: none;
     margin-bottom: 0.6rem;
     display: grid;
     justify-content: center;
     align-items: center;
     color: #fff;
-    
+    opacity: 0.8;
+    min-height: 20px;
 }
 
-.itens-cardapio .info h4 span{
-    font-size: 1.5rem;
-    color: #585858;
-    margin-left: 1.5rem;
-    text-decoration: underline ;
-}
 .itens-cardapio div{
-    background-color:  #9f9c9c;
-    border-radius: 5px;
+    background-color:  #242020;
+    border-radius: 15px;
+    transform: box-shadow 0.5s ease-in-out;
+    overflow: hidden;
+}
 
+.itens-cardapio div:hover{ 
+ transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgb(178, 92, 17);
 }
 
 .itens-cardapio img {
     width: 100%;
-    height: 380px;
+    height: 200px;
     object-fit: contain;
+    border-radius: 10px 10px 0 0 ;
 }
 
 .itens-cardapio .info .pedir{
@@ -292,7 +294,6 @@ body {
 
 .contatos{
     width: 100%;
-    height: 70px;
     background-color: #1a1a1a;
     display: flex;
     flex-direction: column;
@@ -300,27 +301,29 @@ body {
     align-items: center;
     font-size: 0.8rem;
     color: #fff;
-    padding-bottom: 4rem;
+    padding: 2rem 0;
     gap: 10px;
 }
 .contatos h3{
-    margin-top: 60px;
-    font-size: 1rem;
+    margin: 0;
+    padding-top: -5px;
+    font-size: 1.2rem;
     font-family: "indie flower";
 }
 
-#email{
-   margin-left: 90px;
+.contatos-secao{
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    gap: 10px;
 }
 
 .contatos-secao i{
-    margin-right: 0.2rem
+    margin-right: 0.5rem;
+    padding-left: 15px;
 }
 
 .contatos-secao div{
    display: flex;
    
-}
-.contatos-secao div:hover{
-    color: #f7941d;
 }

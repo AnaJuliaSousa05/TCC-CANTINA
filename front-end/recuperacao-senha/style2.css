@@ -28,16 +28,17 @@ body::before {
     z-index: -1; 
     transform: scale(1.1);
 }
+
+
 .wrapper {
     position: relative;
     max-width: 420px;
-    background:#1a1a1a;
+    background-color: #1a1a1a;
     color: #fff;
     border-radius: 10px;
-    padding: 25px;
-    margin: 60px 10px 10px 10px;
+    padding: 30px 20px;
+    margin: 20px;
      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
 
  }
 
@@ -45,25 +46,19 @@ body::before {
     transform:translateY(2px);
         box-shadow: 0 0px 10px rgb(182, 120, 44);
 }
- .wrapper h1{ 
-    color: #b36f1d;
-   font-family:  "Fredoka", sans-seri;
+ .wrapper h2{ 
+    font-family:  "Fredoka", sans-seri;
      font-size: 36px;
+     color: #b36f1d;
      text-align: center;
-        
+     margin-top: 15px;
  }
- .tipo-conta{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-   padding-top: 15px;
-   accent-color:  #b36f1d ;
-}
-.wrapper .input-box {
+
+.wrapper #email{
     position: relative ;
     width: 100%;
     height: 50px;
-    margin: 30px 0;
+    margin: 20px 0;
  }
 
 .wrapper .img-box {
@@ -75,12 +70,10 @@ body::before {
     top: -55px;
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-
  }
 
  .img-box img { 
@@ -92,6 +85,7 @@ body::before {
  }
 
 .input-box input{
+    position: relative;
     width: 100%;
     height: 100%;
     background: transparent;
@@ -106,7 +100,7 @@ body::before {
 }
 .input-box input:hover{ 
  transform: translateY(-1px);
-    box-shadow: 0 0px 10px rgb(182, 120, 44);
+    box-shadow: 0 0px 10px rgb(178, 92, 17);
 }
 
 .input-box input::placeholder{
@@ -115,41 +109,18 @@ body::before {
 
 .input-box i {
     position: absolute;
-    right: 20px;
-    top: 50%;
+    right: 35px;
+    top: 52.5%;
     transform: translateY(-50%);
-    font-size: 20px
+    font-size: 20px;
+}
+
+.input-box i:hover{
+  transform: translateY(-10px);
 }
 
 
-.wrapper .remember-forgot{
-    display: flex;
-    justify-content: space-between;
-    padding-top: 5px;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
-}
-
-.remember-forgot label input {
- 
-    accent-color: #b36f1d ;
-    margin-right: 3px;
-}
-
-.remember-forgot a { 
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.remember-forgot a:hover{
-    text-decoration: underline;
-    display: inline-block;
-    transform: translateY(-2px);
-}
-
-.wrapper .botao{
+.wrapper .botao button{
     width: 100%;
     height: 45px;
     background: #b36f1d;
@@ -164,60 +135,6 @@ body::before {
     font-weight: 600;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.wrapper .botao:hover { 
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-}
-
-.wrapper .registrar { 
-    font-size: 14.5px;
-    text-align: center;
-    margin: 25px 0 15px;
-    
-}
-
-.registrar p a { 
-    color: #fff; 
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.registrar p a:hover{
-    text-decoration: underline;
-    display: inline-block;
-    transform: translateY(-2px);
-
-}
-
-.main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 80vh;
-    text-align: center;
-    padding: 20px;
-}
-.wrapper .voltar {
-     font-size: 13.5px;
-    text-align: center;
-    padding: 17px ;
-}   
-.voltar p a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s ease;
-}
-
-.voltar p a:hover{
-    text-decoration: underline;
-    display: inline-block;
-    transform: translateY(-2px);
-}
-
 
 .wrapper .botao:hover { 
     transform: translateY(-3px);
@@ -238,13 +155,3 @@ body::before {
     color: #fff;
     transform: scale(1.1); 
 }
-
-@media (max-width: 360px) {
-    .wrapper {
-        padding: 20px; 
-    }
-    .wrapper h1 {
-        font-size: 28px;
-    }
-}
-
