@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ======================
     // LOGIN
+    // ======================
     const formLogin = document.getElementById('LoginUsuarios');
 
     if (formLogin) {
@@ -11,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = document.getElementById('senhaLogin').value;
 
             try {
-                const res = await fetch('http://127.0.0.1:5000/login', {
+                const res = await fetch('http://localhost:5000/auth/login', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password: senha }),
@@ -22,8 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 alert(data.msg);
 
-                if (data.msg === "Usuario logado com sucesso") {
-                    window.location.href = "/dashboard.html"; // ou sua página
+                if (res.ok) {
+                    window.location.href = "/dashboard.html";
                 }
 
             } catch (err) {
@@ -33,7 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // ======================
     // REGISTRO
+    // ======================
     const formRegistro = document.getElementById('registrarUsuarios');
 
     if (formRegistro) {
@@ -51,11 +55,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                const res = await fetch('http://127.0.0.1:5000/register', {
+                const res = await fetch('http://localhost:5000/auth/register', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nickname, email, password }),
-                    credentials: 'include'
+                    body: JSON.stringify({ nickname, email, password })
                 });
 
                 const data = await res.json();
@@ -71,33 +74,48 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // DASHBOARD TESTE
+    // ======================
+    // DASHBOARD TESTE (CORRIGIDO)
+    // ======================
     const btnDashboard = document.getElementById('btnDashboard');
 
     if (btnDashboard) {
         btnDashboard.addEventListener('click', async () => {
-            const res = await fetch('http://127.0.0.1:5000/dashboard', {
-                method: 'GET',
-                credentials: 'include'
-            });
+            try {
+                const res = await fetch('http://localhost:5000/auth/dashboard', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
 
-            const text = await res.text();
-            alert(text);
+                const text = await res.text();
+                alert(text);
+
+            } catch (err) {
+                console.error(err);
+            }
         });
     }
 
+    // ======================
     // LOGOUT
+    // ======================
     const btnLogout = document.getElementById('btnLogout');
 
     if (btnLogout) {
         btnLogout.addEventListener('click', async () => {
-            await fetch('http://127.0.0.1:5000/logout', {
-                method: 'GET',
-                credentials: 'include'
-            });
+            try {
+                await fetch('http://localhost:5000/auth/logout', {
+                    method: 'GET',
+                    credentials: 'include'
+                });
 
-            alert("Logout feito");
-            window.location.href = "/login.html";
+                alert("Logout feito");
+                window.location.href = "/login.html";
+
+            } catch (err) {
+                console.log(err);
+                alert("Erro ao fazer logout");
+            }
         });
     }
 
