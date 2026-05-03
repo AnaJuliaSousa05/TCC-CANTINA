@@ -1,5 +1,6 @@
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const saltRounds = 10;
 
@@ -50,6 +51,10 @@ exports.register = (req, res) => {
 // LOGIN
 // ======================
 exports.login = (req, res) => {
+
+    console.log("LOGIN CHAMADO");
+    console.log(req.body);
+    
     const { email, password } = req.body;
 
     db.query(
@@ -62,25 +67,38 @@ exports.login = (req, res) => {
                 return res.send({ msg: "Usuário não encontrado" });
             }
 
-            bcrypt.compare(password, result[0].password, (error, match) => {
+            const user = result[0];
+
+            bcrypt.compare(password, user.password, (error, match) => {
                 if (error) return res.status(500).send(error);
 
                 if (!match) {
                     return res.send({ msg: "Senha incorreta" });
                 }
 
-                req.session.usuario = result[0].id;
+                // 🔥 AQUI entra o JWT (no lugar da session)
+                const token = jwt.sign(
+                    {
+                        id: user.id,
+                        role: user.role
+                    },
+                    process.env.JWT_SECRET,
+                    { expiresIn: "1h" }
+                );
 
-                return res.send({ msg: "Usuario logado com sucesso" });
+                return res.send({
+                    msg: "Usuario logado com sucesso",
+                    token: token,
+                    role: user.role
+                });
             });
         }
     );
 };
 
-// ======================
-// LOGOUT
-// ======================
+//logout
+
 exports.logout = (req, res) => {
-    req.session.destroy();
-    res.send({ msg: "Logout feito" });
+    // JWT não tem sessão no servidor
+    return res.send({ msg: "Logout feito (remova o token do front)" });
 };

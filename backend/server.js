@@ -7,30 +7,29 @@ const bcrypt = require("bcrypt");
 
 console.log("🔥 SERVIDOR ATUALIZADO RODANDO");
 
-const session = require("./config/session"); // ✔ corrigido
+
 const db = require("./db/db");
 
 const app = express();
 
 console.log("🚀 SERVIDOR CERTO AQUI");
 
-// ==============================
-// CONFIGURAÇÕES
-// ==============================
-const corsOptions = {
-    origin: "http://localhost:5500",
-    credentials: true,
+//configurações
+const authRoutes = require("./routes/auth");
+console.log("AUTH:", authRoutes);
+
+app.use(cors({
+    origin: ["http://127.0.0.1:5500", "http://localhost:5500"],
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"]
-};
+    allowedHeaders: ["Content-Type", "Authorization"],
+    
+}));
+
 app.use(express.json());
 
-// 🔥 SESSÃO (CORRETO)
-app.use(session);
+app.use("/auth", authRoutes);
 
-// ==============================
-// CONFIG EMAIL
-// ==============================
+//config email
 const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -38,9 +37,7 @@ const transporter = nodemailer.createTransport({
         pass: process.env.EMAIL_PASS
     }
 });
-// ==============================
-// FORGOT PASSWORD
-// ==============================
+//forgot password
 app.post("/forgot-password", (req, res) => {
     const { email } = req.body;
 
@@ -84,9 +81,7 @@ app.post("/forgot-password", (req, res) => {
     );
 });
 
-// ==============================
-// RESET PASSWORD
-// ==============================
+//reset password
 app.post("/reset-password", async (req, res) => {
     const { token, novaSenha } = req.body;
 
@@ -127,22 +122,23 @@ app.post("/reset-password", async (req, res) => {
     );
 });
 
-// ==============================
-// ROTAS EXISTENTES
-// ==============================
-const authRoutes = require("./routes/auth");
-app.use("/auth", authRoutes);
 
-// ==============================
-// TESTE
-// ==============================
+//api de produtos
+const produtosRoutes = require("./routes/produtos");
+
+console.log(produtosRoutes);
+
+app.use("/produtos", produtosRoutes);
+
+//teste
 app.get("/", (req, res) => {
     res.send("API funcionando");
 });
 
-// ==============================
-// SERVIDOR
-// ==============================
+//server
 app.listen(5000, () => {
     console.log("Servidor rodando na porta 5000");
 });
+
+
+

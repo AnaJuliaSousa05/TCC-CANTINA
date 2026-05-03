@@ -1,24 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const { register, login, logout } = require("../controllers/authController");
-const verificarLogin = require("../middleware/auth");
+const authController = require("../controllers/authController");
 
-// REGISTER
-router.post("/register", register);
-
-// LOGIN
-router.post("/login", (req, res, next) => {
-    console.log("ROTA LOGIN FOI CHAMADA");
-    next();
-}, login);
-
-// DASHBOARD
-router.get('/dashboard', verificarLogin, (req, res) => {
-    res.send("Você está logado");
-});
-
-// LOGOUT
-router.get('/logout', logout);
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.post("/logout", authController.logout);
 
 module.exports = router;
