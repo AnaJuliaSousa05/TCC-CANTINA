@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Cantina</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="container">
+         
+         
+        </div>
+    </header>
+
+    <div class="main-wrapper"> 
+        
+        <aside class="user-sidebar">
+            <div class="profile-img-container">
+                <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
+                <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                <button class="btn-edit-photo" id="btn-foto" onclick="document.getElementById('photo-input').click()" disabled style="opacity: 0.5; cursor: not-allowed;">
+                    <i class='bx bx-camera'></i>
+                </button>
+            </div>
+            <div class="user-profile-info">
+                <h2 id="display-nome">Camilly Iglezias</h2>
+                <span>Estudante</span>
+            </div>
+        </aside>
+
+        <main class="profile-content">
+            <form id="form-perfil">
+                   <a href="../index.html"> <i class='bx bx-log-out btn-voltar'></i> </a>
+                   <h1>Meu Perfil</h1>
+                <div class="form-group">
+                    <label for="input-nome">Nome de Usuário</label>   <i class='bx bx-user'></i>
+                    <input type="text" id="input-nome" value="Camilly" disabled required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-email">E-mail</label>    <i class='bx bx-envelope'></i>
+                    <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled required>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-senha">Sua senha</label>
+                    <div class="password-container">
+                        <input type="password" id="input-senha" value="12345678" placeholder="Digite a nova senha" disabled>   <i class='bx bx-lock'></i>
+                        
+                    </div>
+                </div>
+
+                
+
+                <button type="submit" id="btn-acao" class="btn-salvar" >Deseja alterar informações?</button>
+
+            </form>
+        </main>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

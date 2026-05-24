@@ -45,7 +45,7 @@ body::before {
         box-shadow: 0 0px 10px rgb(182, 120, 44);
 }
  .wrapper h1{ 
-    font-family:  "Fredoka", sans-seri;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
      font-size: 36px;
      color: #b36f1d;
      text-align: center;

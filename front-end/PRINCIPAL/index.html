@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cantina Escolar Digital </title>
+      <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cantina Escolar Digital </title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo"> Cantina Escolar</h3>
+                <p> Seja bem vindo(a) a primeira cantina escolar digital!</p>
+            </div>
+
+            <div class="carrinho-info">
+                <button id="btnAbrirCarrinho">
+                    <i class='bx bx-cart'></i>
+                    <span id="contador-carrinho">0</span>
+                    <span class="carrinho-texto">Carrinho</span>
+                </button>
+                <div class="total-carrinho">
+                    Total: R$ <span id="total-carrinho">0.00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="main-wrapper">
+        <nav class="user-sidebar">
+            <div class="user-profile">
+                <div class="profile-img-container">
+                    <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                    <button class="btn-edit-photo" onclick="document.getElementById('photo-input').click()">
+                        <i class='bx bx-camera'></i>
+                    </button>
+                </div>
+                <h3> Camilly Iglezias</h3>
+                <span> Estudante</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="../PRINCIPAL/perfil/index.html"><i class='bx bx-user'></i> Meu Perfil</a></li>
+                <li><a href="..//PRINCIPAL/configuracao/index.html"><i class='bx bx-cog'></i> Configurações</a></li>
+                <li><a href="../PRINCIPAL/historico/index.html"><i class='bx bx-receipt'></i> Historico de Pedidos</a></li>
+                <hr>
+                <hr>
+                <li><a href="../INICIO/index.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
+            </ul>
+        </nav>
+
+        <section class="cardapio">
+            <h1>Nosso Cardápio</h1>
+            <main class="main-content">
+                <div class="filtros">
+                    <button class="filtro-bnt active" data-categoria="todos">Todas</button>
+                    <button class="filtro-bnt" data-categoria="favoritos">Favoritos</button>
+                    <button class="filtro-bnt" data-categoria="salgados">Fritos</button>
+                    <button class="filtro-bnt" data-categoria="doces">Doces</button>
+                    <button class="filtro-bnt" data-categoria="lanches">Lanches</button>
+                    <button class="filtro-bnt" data-categoria="bebidas">Bebidas</button>
+                </div>
+            </main>
+
+            <div class="itens-cardapio"> 
+                <div class="frito" id="pastel">
+                    <img src="../PRINCIPAL/foto/pastel.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Pastel de Frango </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 11,00 </span>
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Pastel de frango desfiado, bacon e catupity </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="frito" id="batata">
+                    <img src="../PRINCIPAL/foto/batata.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Batata Frita C/ Cheddar</h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 15,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Batata frita, queijo cheddar e bacon </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+
+                <div class="lanche" id="dog">
+                    <img src="../PRINCIPAL/foto/cachorooo.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Cachorro Quente </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 10,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Pào, salsicha, batata palha, milho, ketchup e mostarda </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div> 
+
+                <div class="lanche" id="hamburguer">
+                    <img src="../INICIO/foto/xtudoo.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> X- tudo Completo </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 20,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Pào, 2 carne, queijo, bacon, ovo, tomate e salada </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div> 
+                
+                <div class="doce" id="brownie">
+                    <img src="../PRINCIPAL/foto/broni.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Brownie de Chocolate </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 10,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Brownie com cobertura de chocolate </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="frito" id="coxinha">
+                    <img src="../PRINCIPAL/foto/coxinha.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Coxinha de Frango </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 8,00 </span>
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> Coxinha de frango desfiado e requeijão cremoso </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bebidas" id="fanta">
+                    <img src="../INICIO/foto/fanta.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Fanta Laranja </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 6,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> 350ml </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bebidas" id="coca-cola">
+                    <img src="../PRINCIPAL/foto/coca.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Coca-Cola </h3> 
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                        </div>
+                        <span> R$ 7,00 </span>
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> 350ml </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bebidas" id="guarana">
+                    <img src="../PRINCIPAL/foto/guarana.png" alt="">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3> Guaraná Zero </h3>   
+                            <button class="btn-add" onclick="this.classList.toggle('active')">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                        </div>
+                        <span> R$ 7,00 </span> 
+                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4> 350ml </h4>
+                        <a href="../LOGIN/login.html"> 
+                            <button class="pedir"> Pedir agora </button> 
+                        </a>
+                    </div>
+                </div>
+            </div>   
+        </section>
+    </div>
+<body>
+     </section>
+
+       
+
+    </div>
+
+</div>
+
+
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h2> Cantina Digital </h2>
+                            <p> <i class='bx bx-time-five' ></i> De segunda a sexta das 7h as 21h </p>
+                            <p> <i class='bx bx-phone'></i> (99) 99999-9999 </p>
+                            <p> <i class='bx bx-building-house' ></i> Localizada na Etec de Hortolândia </p>
+                        </div>
+                    </div>
+                </footer>
+
+                  <div class="footer-copyrigth">
+                    <p> &copy; 2026 Cantina Digital </p>
+                </div>
+
+    </body>
+</html>

@@ -21,18 +21,7 @@
                 <div class="form-box-login">
                         
             <form id="registrarUsuarios">
-                <h1> Registrar-se </h1>
-
-                <div class="tipo-conta">
-            <label>
-                <input type="radio" name="userType" value="cliente" checked onclick="alternarFormulario()"> 
-                Sou Cliente
-            </label>
-            <label>
-                <input type="radio" name="userType" value="admin" onclick="alternarFormulario()"> 
-                Sou Administrador
-            </label>
-        </div>
+                <h1> Registrar-se </h1> 
 
         <div id="campos-cliente"> 
        
@@ -96,8 +85,21 @@
             
             </div>
     </body>
-    <script src="/front-end/script.js">
+    <script>
     
+function alternarFormulario() {
 
+        const tipoUsuario = document.querySelector('input[name="userType"]:checked').value;
+        const camposCliente = document.getElementById('campos-cliente');
+        const camposAdmin = document.getElementById('campos-admin');
+
+        if (tipoUsuario === 'cliente') {
+            camposCliente.style.display = 'block';
+            camposAdmin.style.display = 'none';
+        } else{
+            camposCliente.style.display = 'none';
+            camposAdmin.style.display = 'block';
+        }
+    }
     </script>
     </html>
