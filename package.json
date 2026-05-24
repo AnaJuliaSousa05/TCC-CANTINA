@@ -17,5 +17,14 @@
   "bugs": {
     "url": "https://github.com/AnaJuliaSousa05/TCC-CANTINA/issues"
   },
-  "homepage": "https://github.com/AnaJuliaSousa05/TCC-CANTINA#readme"
+  "homepage": "https://github.com/AnaJuliaSousa05/TCC-CANTINA#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "mysql": "^2.18.1",
+    "nodemailer": "^8.0.6"
+  }
 }
