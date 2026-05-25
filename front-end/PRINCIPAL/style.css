@@ -9,7 +9,7 @@
     }
 
     body {
-        background-image: linear-gradient(rgba(29,29,29,0.8)), url(foto/fundo.png);
+        background-image:  linear-gradient(rgba(39, 38, 38, 0.8)), url(foto/fundo.png);
         color: var(--text-primary);
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
