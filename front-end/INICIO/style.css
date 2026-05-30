@@ -1,8 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
+
+:root {
+    --bg-color: #0f1113;
+    --card-bg: #1c1f22;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #b36f1d; /* Tom bronze original da cantina */
+    --accent-hover: #27ae60;
+}
 
 *{ 
     margin: 0;
@@ -18,53 +26,55 @@ body {
     width: 100vw;
     height: 100vh;
     font-size: 63.5%;
-
+    background-color: #141414;
+;
 }
 
 /* Menu */ 
 
 .content {
-    width: 100vw;
+    /* Em vez de 100vw, calculamos a largura subtraindo o espaço das laterais (10px de cada lado = 20px) */
+    width: calc(100vw - 20px); 
     height: 60px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     background-color: #1a1a1a;
+    border: 1px solid #b36f1d;
+    /* Configurações de posicionamento fixo */
     position: fixed;
-    padding-left: 30rem;
+    top: 10px; 
+    left: 10px; /* Afasta 10px da esquerda, centralizando com o calc lá de cima */
+    
     z-index: 1000;
+    border-radius: 15px;
 }
-
 .logo {
-    width: 70px;
-    height: auto;
-    cursor: pointer;
-     gap:280px;
+    /* Removido o width fixo de 70px para a logo respirar e caber a imagem + texto */
     display: flex;
     align-items: center;
-    justify-content: flex-end
+    /* Alinha os elementos à esquerda (início do menu) */
+    justify-content: flex-start; 
+    /* Um espaço menor e controlado entre a imagem e o texto (ajuste se precisar) */
+    gap: 15px; 
+    cursor: pointer;
 }
-
 
 .logo h3 {
     color: #fff;
-    font-size: 1.3rem;
-    display: flex;
-
-
-    
+    /* Convertido para px para alinhar com o tamanho da fonte do resto do menu */
+    font-size: 18px; 
+    font-weight: 600;
 }
 
 .logo img {
+    /* Garante que a altura seja fixa e a largura se ajuste proporcionalmente */
+    height: 45px; 
     width: auto;
-    height: 50px;
-    display: flex;
     transition: transform 0.3s ease;
-
 }
 
-
-.logo img:hover{
+.logo img:hover {
     transform: translateY(-2px);
 }
 
@@ -79,7 +89,7 @@ body {
 
     padding: 3rem 1rem  2rem  1rem ;
     color: #fff;
-    font-size: 17px;
+    font-size: 15px;
     text-transform: uppercase;
     font-weight: 500;
     transition:  100ms ease-in;
@@ -109,7 +119,7 @@ body {
 /* first-section*/
 
 .first-section {
-    background-image: linear-gradient(rgba(29,29,29,0.8)), url(foto/fundo.png);
+    background-image: linear-gradient(rgba(1, 1, 1, 0.8)),  url(../INICIO/foto/pexels-imin-technology-276315592-12935091.jpg);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -130,15 +140,15 @@ body {
 }
 
 .first-section h1{
-    color: #f7941d;
+    color: #ca7a18;
     font-size: 3rem;
     text-transform: uppercase;
     margin-bottom: 1rem;
-    font-family: cursive;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .first-section h2{
-    color: rgb(177, 177, 177);
+    color: rgba(255, 255, 255, 0.785);
     font-size: 1.5rem;
     font-weight: 400;
     text-transform: uppercase;
@@ -148,183 +158,203 @@ body {
 /* Sobre nós */
 
 .sobre-nos {
-    background-color: #1f1e1f;
+    background-color: #141414;
     width: 100%;
     color: white;
-    padding-bottom: 5rem;
+    padding: 8rem 2rem 5rem 2rem; 
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.sobre-nos img{
-    width: 600px;
-    height: 500;
-    margin-top: 10rem;
-    margin-left: 10rem;
-    border-radius: 8px ;
-    border: solid rgb(198, 100, 8);;
-}
-
-.main{
+.main {
     display: flex;
     justify-content: space-between;
+    align-items: center; 
+    width: 100%;
+    max-width: 1200px; 
+    gap: 50px; 
 }
 
-.contentsobre{
+.contentsobre {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+    flex: 1;
 }
 
-.contentsobre h2{
-    font-size: 5rem;
-    margin-top: 1rem;
-    margin-bottom: 3rem;
-    color: #f7941d;
-    font-family: cursive;
+.contentsobre h2 {
+    font-size: 3.5rem; 
+    margin-top: 0;
+    margin-bottom: 50px;
+    color: #ca5b0b;
+
+    font-family: 'Montserrat', sans-serif;
+font-weight: 800; 
+text-transform: uppercase; 
+letter-spacing: -1px; 
 }
 
-.contentsobre p{
-    text-align: center;
+.contentsobre p {
+    text-align: left; 
     font-size: 1.1rem;
-    width: 600px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
-}
-
-/* Cardapio */
-
-.cardapio{ 
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #292625;
-}
-.cardapio h3{
-    font-size: 2rem;
-    text-transform: uppercase;
-    margin-top: 25px;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-.itens-cardapio {
-    width: 90%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 350px));
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-border-radius: 25px;
-
-}
-
-.itens-cardapio .info {
-    background-color: #1f1e1f;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 1.2rem;
-}
-
-.itens-cardapio .info h3{
-    font-size: 1.2rem ;
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    line-height: 1.6; 
+    max-width: 550px;
+    font-family: 'Poppins', sans-serif;;
     
 }
 
-.itens-cardapio .info h4{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 0.7rem;
-    text-transform: none;
-    margin-bottom: 0.6rem;
-    display: grid;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-    opacity: 0.8;
-    min-height: 20px;
-}
-
-.itens-cardapio div{
-    background-color:  #242020;
-    border-radius: 15px;
-    transform: box-shadow 0.5s ease-in-out;
-    overflow: hidden;
-}
-
-.itens-cardapio div:hover{ 
- transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgb(178, 92, 17);
-}
-
-.itens-cardapio img {
+.sobre-nos img {
     width: 100%;
-    height: 200px;
-    object-fit: contain;
-    border-radius: 10px 10px 0 0 ;
+    max-width: 500px; 
+    height: auto; 
+    border-radius: 8px;
+    border: 3px solid #ca5b0b;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); 
+}
+.sugestoes {
+
+    background-image: linear-gradient(rgba(15, 15, 15, 0.85), rgba(15, 15, 15, 0.85)), url(../PRINCIPAL/foto/fundo.png);
+    background-position: center;
+
+    padding: 90px 20px 60px 20px; 
+    text-align: center;
 }
 
-.itens-cardapio .info .pedir{
-    width: 200px;
-    height: 35px;
-    margin-top: 0.5rem;
-    background-color: #f7941d;
-    border-radius: 5px;
+.container-sugestoes {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #1f1e1f; 
+    padding: 40px;
+    border-radius: 15px; 
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); 
+    border: 1px solid rgba(197, 118, 22, 0.15); 
+}
+
+.container-sugestoes h3 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #b46300; 
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+
+.container-sugestoes p {
+    font-size: 14px;
+    color: #b3b3b3; 
+    margin-bottom: 30px;
+}
+
+.form-feedback {
+    text-align: left;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #ca5b0b; /* Laranja de destaque para as etiquetas dos campos */
+    font-size: 14px;
+    text-transform: uppercase;
+}
+
+.input-group input, 
+.input-group select, 
+.input-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: #242020; 
+    border: 1px solid #3a3535; 
+    border-radius: 8px;
+    font-size: 15px;
+    color: #ffffff;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.input-group select option {
+    background-color: #242020;
+    color: #ffffff;
+}
+
+.input-group input::placeholder,
+.input-group textarea::placeholder {
+    color: #777; 
+}
+
+/* Quando o usuário clica para digitar */
+.input-group input:focus, 
+.input-group select:focus, 
+.input-group textarea:focus {
+    border-color: #c57616; /* Acende com o seu laranja principal */
+    box-shadow: 0 0 8px rgba(197, 118, 22, 0.4);
+}
+
+.btn-enviar {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background-color: #ca5b0b; 
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    color: #000;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.itens-cardapio .info .pedir:hover{
-    transform: translateY(-3px);
+.btn-enviar:hover {
+    background-color: #e6670c; /* Um tom ligeiramente mais vivo ao passar o mouse */
+    transform: translateY(-2px); /* Efeito sutil de subida idêntico ao dos seus outros botões */
+    box-shadow: 0 5px 15px rgba(202, 91, 11, 0.4);
 }
 
-
-/* Contatos */
-
-.contatos{
-    width: 100%;
+/* footer */
+footer {
+    width: calc(100vw - 20px); /* Ajustado para bater certinho com a largura do menu (calc(100vw - 20px)) */
     background-color: #1a1a1a;
+    padding: 30px 20px; 
+    margin: 20px 10px; /* Alinhado com as laterais do menu (left: 10px) */
+    border-top: 2px solid #ca5b0b; /* Mudado para o seu laranja padrão */
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-    color: #fff;
-    padding: 2rem 0;
-    gap: 10px;
-}
-.contatos h3{
-    margin: 0;
-    padding-top: -5px;
-    font-size: 1.2rem;
-    font-family: "indie flower";
+    align-items: center;    
+    justify-content: center; 
+    gap: 25px; /* Aumentado o espaço entre o título e os contatos */
 }
 
-.contatos-secao{
+footer h2 {
+    text-align: center;      
+    width: 100%;           
+    margin: 0;              
+    font-size: 1.4rem;      
+    color: #ffffff; 
+    margin-bottom: 5px;         
+}
+
+.footer-info {
+    font-size: 14px; /* Aumentado levemente para melhor leitura */
+    color: var(--text-secondary);  /* Substituído por cor branca para garantir que apareça no fundo escuro */
+    text-align: center;
+    
+    /* ATIVA O FLEXBOX PARA O GAP FUNCIONAR */
     display: flex;
     flex-direction: column; 
+    gap: 5px; 
+}
+
+.footer-copyrigth {
+    display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-.contatos-secao i{
-    margin-right: 0.5rem;
-    padding-left: 15px;
-}
-
-.contatos-secao div{
-   display: flex;
-   
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
 }
