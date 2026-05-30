@@ -5,63 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil - Cantina</title>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
     <header class="header">
-        <div class="container">
-         
-         
+        <div class="header-container">
+            <div class="user-header-info">
+                <div class="profile-img-container">
+                    <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                </div>
+                <div class="user-text">
+                    <h2 id="display-nome">Camilly Iglezias</h2>
+                    <span class="badge-role">Estudante</span>
+                </div>
+            </div>
+            
+            <a href="../index.html">
+                <i class='bx bx-log-out btn-voltar'></i>
+            </a>
         </div>
     </header>
 
     <div class="main-wrapper"> 
-        
-        <aside class="user-sidebar">
-            <div class="profile-img-container">
-                <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
-                <input type="file" id="photo-input" accept="image/*" style="display: none;">
-                <button class="btn-edit-photo" id="btn-foto" onclick="document.getElementById('photo-input').click()" disabled style="opacity: 0.5; cursor: not-allowed;">
-                    <i class='bx bx-camera'></i>
-                </button>
-            </div>
-            <div class="user-profile-info">
-                <h2 id="display-nome">Camilly Iglezias</h2>
-                <span>Estudante</span>
-            </div>
-        </aside>
 
         <main class="profile-content">
-            <form id="form-perfil">
-                   <a href="../index.html"> <i class='bx bx-log-out btn-voltar'></i> </a>
-                   <h1>Meu Perfil</h1>
-                <div class="form-group">
-                    <label for="input-nome">Nome de Usuário</label>   <i class='bx bx-user'></i>
-                    <input type="text" id="input-nome" value="Camilly" disabled required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="input-email">E-mail</label>    <i class='bx bx-envelope'></i>
-                    <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled required>
-                </div>
+            <div class="content-header">
+                <h1><i class='bx bx-cog'></i> Suas    Informações da Conta </h1>
+                <p>Gerencie suas informações de acesso e dados pessoais</p>
+            </div>
 
+            <form id="form-perfil">
                 <div class="form-group">
-                    <label for="input-senha">Sua senha</label>
-                    <div class="password-container">
-                        <input type="password" id="input-senha" value="12345678" placeholder="Digite a nova senha" disabled>   <i class='bx bx-lock'></i>
-                        
+                    <label for="input-nome">Nome de Usuário</label>
+                    <div class="input-icon-wrapper">
+                        <input type="text" id="input-nome" value="Camilly Iglezias"  disabled required>
+                        <i class='bx bx-user'></i>
                     </div>
                 </div>
 
+                <div class="form-group">
+                    <label for="input-nome">Nome Completo  </label>
+                    <div class="input-icon-wrapper">
+                        <input type="text" id="input-nome" value="Camilly Gomes Iglezias" disabled required>
+                        <i class='bx bx-user'></i>
+                    </div>
+                </div>
                 
+                <div class="form-group">
+                    <label for="input-nome">Seu curso</label>
+                    <div class="input-icon-wrapper">
+                        <input type="text" id="input-nome" value="Informatica" disabled required>
+                        <i class='bx bx-pencil'></i>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="input-email">E-mail</label>
+                    <div class="input-icon-wrapper">
+                        <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                </div>
 
-                <button type="submit" id="btn-acao" class="btn-salvar" >Deseja alterar informações?</button>
-
+                <div class="form-group">
+                    <label for="input-senha">Senha de Acesso</label>
+                    <div class="input-icon-wrapper">
+                        <input type="password" id="input-senha" value="12345678" placeholder="Digite a nova senha" disabled>
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                </div>
             </form>
         </main>
 
+        <section class="favorites-profile-content">
+            <div class="content-header">
+                <h1><i class='bx bxs-heart' style="color: var(--accent);"></i> Meus Itens Favoritos</h1>
+                <p>Seus lanches mais amados do cardápio</p>
+            </div>
+
+            <div class="favorites-profile-list">
+                
+                <div class="fav-profile-card">
+                    <img src="../foto/pastel.png"
+                     alt="Pastel de Frango">
+                    <div class="fav-profile-info">
+                        <h3>Pastel de Frango</h3>
+                        <span class="fav-profile-price">R$ 11,00</span>
+                        <p>Pastel de frango desfiado, bacon e catupiry</p>
+                    </div>
+                    <button class="btn-remove-fav" title="Remover dos favoritos">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="fav-profile-card">
+                    <img src="../foto/batata.png"   
+                     alt="Batata Frita">
+                    <div class="fav-profile-info">
+                        <h3>Batata Frita C/ Cheddar</h3>
+                        <span class="fav-profile-price">R$ 15,00</span>
+                        <p>Batata frita, queijo cheddar e bacon</p>
+                    </div>
+                    <button class="btn-remove-fav" title="Remover dos favoritos">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+
+                <div class="fav-profile-card">
+                  <img src="../foto/broni.png"   alt="Brownie"  >
+                   
+                    <div class="fav-profile-info">
+                        <h3>Brownie de Chocolate</h3>
+                        <span class="fav-profile-price">R$ 10,00</span>
+                        <p>Brownie com cobertura de chocolate</p>
+                    </div>
+                    <button class="btn-remove-fav" title="Remover dos favoritos">
+                        <i class="fa-solid fa-heart"></i>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
     </div>
+
+    
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h2> Cantina Digital </h2>
+                            <p> <i class='bx bx-time-five' ></i> De segunda a sexta das 7h as 21h </p>
+                            <p> <i class='bx bx-phone'></i> (99) 99999-9999 </p>
+                            <p> <i class='bx bx-building-house' ></i> Localizada na Etec de Hortolândia </p>
+                        </div>
+                    </div>
+                </footer>
+
+                  <div class="footer-copyrigth">
+                    <p> &copy; 2026 Cantina Digital </p>
+                </div>
+
 
     <script src="script.js"></script>
 </body>

@@ -5,17 +5,22 @@
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --accent: #b36f1d; /* Tom bronze original da cantina */
-    --accent-hover: #27ae60;
+    --accent-hover: #d98324;
+    --admin-blue: #2980b9; /* Cor informativa para botões do admin */
+    --status-success: #2ecc71; /* Verde para itens em estoque */
+    --status-danger: #e74c3c; /* Vermelho para itens esgotados */
 }
 
 body {
-    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(foto/fundo.png);
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(../foto/fundo.png  );
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
 }
 
-/* header  */
+/* ==========================================================================
+   HEADER & CRASHÁS ADMIN
+   ========================================================================== */
 .header {
     background: #1a1a1a;
     padding: 0.8rem 0; 
@@ -44,9 +49,11 @@ body {
     border-radius: 10px;
     text-transform: uppercase;
     font-weight: bold;
-} 
-/*  perfil do usuario */ 
+}
 
+/* ==========================================================================
+   SIDEBAR & PERFIL (ADMINISTRADOR)
+   ========================================================================== */
 .user-sidebar {
     width: 260px;
     height: calc(100vh - 40px); 
@@ -81,7 +88,7 @@ body {
     height: 100px;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 3px solid #ffffff; 
+    border: 3px solid ; /* Borda azul destacando o painel admin */
     box-sizing: border-box;
 }
 
@@ -109,13 +116,17 @@ body {
     font-size: 1.1rem;
 }
 
-.user-profile span {
+.role-admin {
     font-size: 0.8rem;
-    color: #bdc3c7;
-} 
+    color: #6e6c6c;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
-/* navs  */
-
+/* ==========================================================================
+   NAVEGAÇÃO INTERNA
+   ========================================================================== */
 .nav-links {
     list-style: none;
     padding: 0;
@@ -134,7 +145,7 @@ body {
     transition: 0.3s;
 }
 
-.nav-links a:hover {
+.nav-links a:hover, .nav-links a.active {
     background-color: var(--accent);
 }
 
@@ -142,8 +153,8 @@ body {
     color: #ffffff !important;
 }
 
-.logout a:hover {
-    background-color: #bdc3c7;
+.logout:hover {
+    background-color: var(--status-danger) !important;
 }
 
 hr {
@@ -174,19 +185,17 @@ hr {
     display: flex;
     transition: transform 0.3s ease;
 }
+
 .filtros {
-    margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 40px; 
-    padding: 20px 150px;
-    margin-left: 50px;
+    gap: 30px;
+    padding: 20px 10px;
+    margin-left: 150px;
     overflow-x: auto; 
     flex-wrap: nowrap;
     background-color: #1a1a1a;
     border-radius: 15px;
-    -webkit-overflow-scrolling: touch; 
-    margin-bottom: -40px;
 }
 
 .filtro-bnt {
@@ -206,9 +215,8 @@ hr {
     border-color: var(--accent);
 }
 
-/* ==========================================================================
-   CARDÁPIO E ESTRUTURA DE PRODUTOS (DESIGN CORRIGIDO)
-   ========================================================================== */
+/* CARDÁPIO E INFRAESTRUTURA DE PRODUTOS  */
+
 .cardapio {
     display: flex;
     align-items: center;
@@ -217,38 +225,66 @@ hr {
     width: 100%;
 }
 
+.cardapio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 73%;
+    margin-left: 150px;
+}
+
 .cardapio h1 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin: 0;
-    margin-left: 70px;
 }
 
-/* Grid perfeitamente espaçado */
+.btn-novo-item {
+    background-color: #9e6f35   ;
+    color: #fff;
+    border: none;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-novo-item:hover {
+    transform: scale(1.03);
+    background-color: #b36f1d;
+}
+
+/* Layout Grid Organizado */
 .itens-cardapio {
-    width: 95%;
-    max-width: 990px;
-    margin: 80px auto 2rem;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); 
-    justify-content: center;
-    gap: 60px; 
-    border-radius: 25px;
+   width: 95%;
+        max-width: 990px;
+        margin: 80px auto 2rem;
+        
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr); 
+        
+        justify-content: center;
+        gap: 60px; 
+        border-radius: 25px;
 }
 
-/* Cards individuais sem nenhuma borda */
-.itens-cardapio div {
+/* Elementos individuais do cardápio admin */
+.item-admin {
     background-color: #1a1a1a;
     border-radius: 15px;
     overflow: hidden;
-    border: none; 
+    border: 1px solid #2a2d30;
     transition: transform 0.2s ease-in-out;
-    display: flex;
-    flex-direction: column; 
-    height: 100%; 
 }
 
-.itens-cardapio div:hover { 
-    transform: translateY(-4px); 
+.item-admin:hover { 
+    transform: translateY(-4px);
 }
 
 .itens-cardapio img {
@@ -263,11 +299,11 @@ hr {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: center;
     padding: 1rem;
-    flex-grow: 1; 
 }
 
+/* Alinhamento do Título + Estrela de Destaque */
 .itens-cardapio .info .titulo-container {
     display: flex !important;
     flex-direction: row !important;
@@ -276,9 +312,7 @@ hr {
     gap: 8px !important;
     width: 100%;
     margin-bottom: 0.5rem;
-    border: none !important;      
-    box-shadow: none !important;  
-} 
+}
 
 .itens-cardapio .info .titulo-container h3 {
     font-size: 0.9rem;
@@ -289,37 +323,6 @@ hr {
     display: inline-block; 
 }
 
-.itens-cardapio .info .titulo-container .btn-add {
-    background: none !important;
-    border: none !important; 
-    outline: none !important; 
-    box-shadow: none !important; 
-    padding: 0 !important;
-    margin: 0 !important;
-    cursor: pointer;
-    font-size: 1.5rem; 
-    color: #ecf0f1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    line-height: 1;
-}
-
-.itens-cardapio .info h3 {
-    font-size: 0.5rem;
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-    margin-top: 0px;
-}
-
-.itens-cardapio span {
-     display: block;      
-        font-size: 1rem;
-        margin-top: -5px;       
-        margin-bottom: 5px;
-}
-
 .itens-cardapio .info h4 {
     font-family: system-ui, -apple-system, sans-serif;
     font-size: 0.75rem;
@@ -328,50 +331,68 @@ hr {
     text-align: center;
     color: #fff;
     opacity: 0.7;
-    min-height: 35px; 
+    min-height: 35px;
 }
 
-.itens-cardapio .info .pedir {
+/* ==========================================================================
+   AÇÕES DO ADMINISTRADOR (ESTOQUE E EDIÇÃO)
+   ========================================================================== */
+.acoes-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.preco-admin {
+  display: block;      
+        font-size: 1rem;
+        margin-top: -5px;       
+        margin-bottom: 5px;
+}
+
+.status-estoque {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-estoque.em-estoque {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #29a45c;
+}
+
+.status-estoque.esgotado {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--status-danger);
+}
+
+.btn-editar {
     width: 160px;
     height: 32px;
-    margin-top: auto; 
-    background-color: #f7941d;
+    background-color: #b36f1d;
     border: none;
     border-radius: 5px;
     text-transform: uppercase;
     cursor: pointer;
     color: #fff;
     font-weight: bold;
-    transition: transform 0.2s ease;
+    transition: transform 0.2s ease, background-color 0.2s;
 }
 
-.itens-cardapio .info .pedir:hover {
+.btn-editar:hover {
     transform: translateY(-2px);
-}
-
-/* Grid Secundária / Alternativa */
-.grid-produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
-}
-
-.produto-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 15px;
-    transition: transform 0.2s;
-    border: 1px solid #2a2d30;
-}
-
-.produto-card:hover {
-    transform: translateY(-5px);
+   
 }
 
 /* ==========================================================================
-   BOTÕES DE AÇÃO EXTERNOS & MODAIS
+   ALERTA DE PEDIDOS / PAINEL SUPERIOR
    ========================================================================== */
-#btnAbrirCarrinho {
+#btnAbrirPedidos {
     background: var(--accent);
     border: none;
     color: white;
@@ -386,15 +407,19 @@ hr {
     transition: 0.3s ease-in-out;
 }
 
-#btnAbrirCarrinho:hover {
+#btnAbrirPedidos:hover {
     transform: translateY(-3px); 
+    background-color: var(--accent-hover);
 }
 
-.modal-conteudo {
-    background-color: var(--card-bg);
-    color: white;
-    border-radius: 20px;
-    border: 1px solid #444;
+.total-carrinho {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+#faturamento-dia {
+    color: var(--status-success);
+    font-weight: bold;
 }
 
 /* ==========================================================================
@@ -431,7 +456,7 @@ footer h2 {
 .footer-info {
     font-size: 12px;
     color: var(--text-secondary);
-    text-align: center;
+    text-align: center;      
 }
 
 .footer-copyrigth {
@@ -443,11 +468,11 @@ footer h2 {
     color: var(--text-secondary);
 }
 
-/* Animação do botão de Favorito / Destaque */
+/* Animação do botão de Destaque */
 .btn-favorito {
     background: none;     
     border: none;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -456,15 +481,10 @@ footer h2 {
     color: #555;
 }
 
-.btn-favorito.active {
-    background: none;     
-    border: none;
-    animation: puloFavorito 0.3s ease-in-out;
-}
-
 .btn-favorito.active i {
     font-weight: 900;        
-    color: #ef4444;          
+    color: #f1c40f; /* Estrela dourada para itens destacados da gerência */
+    animation: puloFavorito 0.3s ease-in-out;
 }
 
 @keyframes puloFavorito {

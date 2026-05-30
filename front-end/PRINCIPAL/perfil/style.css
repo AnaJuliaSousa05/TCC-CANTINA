@@ -1,196 +1,375 @@
-/* Variáveis que você já possui */
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
 :root {
     --bg-color: #0f1113;
     --card-bg: #1c1f22;
+    --panel-bg: #1a1a1a;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
-    --accent: #b36f1d; 
-    --accent-hover: #27ae60;
+    --accent: #b36f1d;
+    --accent-gradient: linear-gradient(135deg, #b36f1d, #e68a22); 
+    --border-color: #2e3236;
 }
 
-
 body {
-    background-image:  linear-gradient(rgba(34, 33, 33, 0.8)), url(../foto/fundo.png);
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(../foto/fundo.png);
     color: var(--text-primary);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 10px;
+    min-height: 100vh;
 }
 
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 100px;
+    background: var(--panel-bg);
+    padding: 2rem 0px;
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 25px;
+    border-radius: 15px;
 }
 
-.main-wrapper {
+.header-container {
     display: flex;
-    max-width: 900px;
-    margin: 20px auto;
-    gap: 30px;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px; 
+    margin: 0 auto;    
     padding: 0 20px;
-
-}
-
-
-.user-sidebar {
-    width: 300px;
-    background-color: #1a1a1a;
-    border-radius: 20px;
-    padding: 35px 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    
-}
- 
-.profile-img-container {
-     position: relative;
-    width: 120px;  
-    height: 120px;
-   margin: 0 auto 40px; 
-  margin-bottom: 75px !important;
-    display: flex;       
-    justify-content: center;
-    align-items: center;
-}
-
-.profile-img-container img {
-     width: 100px; 
-    height: 100px;
-    border-radius: 50%; 
-    object-fit: cover; 
-    border: 3px solid #ffffff; 
     box-sizing: border-box;
 }
 
-.profile-content .form-group i {
-    position: absolute;
-    right: 15px;         
-    top: 68%;            
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: var(--text-secondary); 
-    pointer-events: none; 
-}
-.btn-edit-photo {
-    position: absolute;
-   bottom: -20px;  
-    right: -20px;
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 35px;
-    height: 35px;
+.user-header-info {
     display: flex;
-    justify-content: center;
     align-items: center;
-    cursor: pointer;
-    transition: 0.3s;
-    flex-direction: column;
-    padding: 0; 
+    gap: 12px;
 }
 
-.btn-edit-photo:hover {
-   
-    transform: scale(1.1);
+.user-header-info i {
+    color: var(--accent);
+    font-size: 1.8rem;
 }
 
-.user-profile-info h2 {
-    margin: 10px 0 5px;
-    font-size: 1.3rem;
+.user-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.user-profile-info span {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-    text-transform: uppercase; /
+.user-text h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
 }
 
-/* Área do Formulário */
-.profile-content {
-    flex: 1; /* Ocupa todo o espaço restante */
-    background-color: #1a1a1a;
+.badge-role {
+    color: var(--accent);
+    background: rgba(179, 111, 29, 0.1);
+    font-size: 0.7rem;
+    padding: 2px 8px;
     border-radius: 20px;
-    padding: 30px;
-    position: relative; 
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
-.profile-content h1{
-    display:flex ;
-    align-items: center;
-    justify-content: center;
-   
-    margin-bottom: 25px;
-}
-.profile-content a {
-    position: absolute;
-    top: 25px;    /* Distância do topo do container */
-    right: 25px;  /* Distância da borda direita */
-    text-decoration: none;
-}
+
 .btn-voltar {
-    color: #ffffff !important; 
-    font-size: 1.5rem;          
-    cursor: pointer;
-    transition: 0.3s ease-in-out;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
 }
-.profile-content a:hover .btn-voltar {
-    transform: scale(1.1);
-    opacity: 0.8;
+
+.btn-voltar:hover {
+    color: var(--text-primary);
 }
+
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;   /* Centraliza o conjunto na tela */
+    align-items: stretch;      /* Garante que as duas caixas tenham a mesma altura */
+    width: 100%;
+    max-width: 1100px;         /* Alinhado com o tamanho do header */
+    margin: 0 auto 40px auto;
+    gap: 30px;                 /* Espaço perfeito entre as duas caixas */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.profile-content {
+    flex: 1;                   /* Divide o espaço em 50% */
+    max-width: 520px;          /* Limite idêntico ao de favoritos */
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+.profile-img-container {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;      /* Impede que o navegador amasse a foto */
+    box-sizing: border-box;
+}
+
+.profile-img-container img {
+    width: 100%;         /* Ocupa exatamente o tamanho do container (65px) */
+    height: 100%;
+    border-radius: 50%; 
+    object-fit: cover; 
+    
+    padding: 2px;
+    background: var(--card-bg);
+    box-sizing: border-box;
+}
+#form-perfil {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+/* ==========================================================================
+   CAIXA 2: ITENS FAVORITOS
+   ========================================================================== */
+.favorites-profile-content {
+    flex: 1;                   /* Divide o espaço em 50% */
+    max-width: 520px;          /* Limite idêntico ao de informações */
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   ELEMENTOS INTERNOS (ESTILIZAÇÃO)
+   ========================================================================== */
+.content-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.content-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.content-header h1 i {
+    color: var(--accent);
+}
+
+.content-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* FORMULÁRIO / INPUTS */
 .form-group {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
-    position: relative;
+    margin-bottom: 18px;
+}
+
+.form-group:last-of-type {
+    margin-bottom: 0;
 }
 
 .form-group label {
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    font-weight: 500;
 }
 
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
 
 .form-group input {
-  width: 100%;
+    width: 100%;
     box-sizing: border-box; 
     background-color: var(--card-bg);
-    border: 1px solid #333;
+    border: 1px solid var(--border-color);
     color: white;
-    padding: 12px;
+    padding: 10px 14px;
     padding-right: 40px;
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: 0.3s;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 
 .form-group input:focus {
     border-color: var(--accent);
+    background-color: #22262a;
     outline: none;
 }
 
-.btn-salvar {
-    background-color: var(--accent);
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 300px;
-    font-size: 1rem;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px auto 0;
+.form-group input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: rgba(15, 17, 19, 0.3);
 }
 
-.btn-salvar:hover {
-   
+.input-icon-wrapper i {
+    position: absolute;
+    right: 14px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+/* LISTA DE FAVORITOS */
+.favorites-profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.fav-profile-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #1f2124;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+    position: relative;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fav-profile-card:hover {
     transform: translateY(-2px);
+    border-color: var(--accent);
+}
+
+.fav-profile-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 1px solid var(--border-color);
+    background: #2c2f32;
+}
+
+.fav-profile-info {
+    flex-grow: 1;
+    padding-right: 35px; 
+}
+
+.fav-profile-info h3 {
+    margin: 0 0 2px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.fav-profile-price {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #e68a22;
+    margin-bottom: 4px;
+}
+
+.fav-profile-info p {
+    margin: 0;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.2;
+}
+
+.btn-remove-fav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 15px;
+    background: none;
+    border: none;
+    color: #ff4757; 
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-remove-fav:hover {
+    transform: translateY(-50%) scale(1.2);
+}
+
+
+footer {
+    width: calc(100% - 40px);
+    background-color: #1a1a1a;
+    padding: 10px 0px;
+    margin: 40px 20px 10px 20px;
+    border-top: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center; 
+    gap: 12px;              
+}
+
+footer h2 {
+    text-align: center;      
+    width: 100%;           
+    margin: 0;              
+    font-size: 1.4rem;      
+    color: #ffffff;          
+}
+
+.footer-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.footer-copyrigth {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+@media (max-width: 950px) {
+    .main-wrapper {
+        flex-direction: column;   /* Empilha uma embaixo da outra no celular */
+        align-items: center;
+        gap: 24px;
+    }
+    
+    .profile-content, 
+    .favorites-profile-content {
+        width: 100%;
+        max-width: 100%;           /* Ocupa a largura total da tela */
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+    .user-text {
+        gap: 8px;
+    }
 }
