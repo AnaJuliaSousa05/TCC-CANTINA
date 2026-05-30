@@ -1,3 +1,6 @@
+/* ==========================================================================
+   CONFIGURAÇÕES GERAIS E RESET
+   ========================================================================== */
 *{ 
     margin: 0;
     padding: 0;
@@ -5,15 +8,16 @@
     font-family: "Poppins", sans-serif;
 }
 
-body{ display: flex;
-justify-content: center;
-align-items: center;
-min-height: 100vh;
-background: url() no-repeat;
-background-position: center;
-background-size: cover;
-
+body { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #111;
+    overflow-x: hidden;
 }
+
+/* Camada de fundo com desfoque (Blur) */
 body::before {
     content: "";
     position: fixed;
@@ -23,92 +27,118 @@ body::before {
     height: 100%;
     background: url('foto/fundo.png') no-repeat;
     background-position: center;
-  background-size: cover;  
+    background-size: cover;  
     filter: blur(4px);   
     z-index: -1; 
     transform: scale(1.1);
 }
-.wrapper {
+
+
+body > .wrapper {
     position: relative;
-    max-width: 420px;
-    background-color: #1a1a1a;
-    color: #fff;
-    border-radius: 10px;
-    padding: 30px 20px;
-    margin: 20px;
-     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
- }
-
-.wrapper:hover{
-    transform:translateY(2px);
-        box-shadow: 0 0px 10px rgb(182, 120, 44);
-}
- .wrapper h1{ 
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     font-size: 36px;
-     color: #b36f1d;
-     text-align: center;
-     margin-top: 15px;
- }
-.wrapper .input-box {
-    position: relative ;
     width: 100%;
-    height: 50px;
-    margin: 30px 0;
- }
+    max-width: 360px; /* Deixa o layout fininho e elegante */
+    background-color: #1a1a1a;
+    color: #fff;    
+    border-radius: 10px;
+    padding: 65px 25px 25px 25px; /* Abre espaço no topo para a imagem circular */
+    margin: 60px 15px 20px 15px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
+body > .wrapper:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(179, 111, 29, 0.4);
+}
+
+
+.wrapper .wrapper {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    box-shadow: none !important;
+    max-width: 100% !important;
+    position: static !important;
+}
+
+/* ==========================================================================
+   FOTO DE PERFIL FLUTUANTE
+   ========================================================================== */
 .wrapper .img-box {
     width: 110px;
     height: 110px;
     background: #1a1a1a;
     border-radius: 50%;
     position: absolute;
-    top: -55px;
+    top: -55px; /* Joga metade do círculo para fora da caixa */
     left: 50%;
     transform: translateX(-50%);
-    margin-bottom: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
- }
+    box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+}
 
- .img-box img { 
+.img-box img { 
     width: 90%;
     height: 90%;
     border-radius: 50%;
     object-fit: contain;
-
- }
-
-.tipo-conta{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-   padding-top: 15px;
-   accent-color:  #b36f1d ;
 }
-.input-box input{
+
+/* ==========================================================================
+   FORMULÁRIO, TÍTULO E CONTAINER DE CAMPOS
+   ========================================================================== */
+.form-box-login h1 { 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 34px;
+    color: #b36f1d;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Container interno das caixas (força alinhamento vertical padrão) */
+#campos-cliente {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* ==========================================================================
+   CAMPOS DE ENTRADA (INPUTS)
+   ========================================================================== */
+.wrapper .input-box {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin-bottom: 20px; /* Mantém um espaço fixo e perfeito entre eles */
+}
+
+.input-box input {
     width: 100%;
     height: 100%;
     background: transparent;
-    border: none;
     outline: none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 40px;
     color: #fff;
     font-size: 16px;
-    padding: 20px 45px 20px 20px; 
-    transform: box-shadow 0.3s ease-in-out;
+    padding: 0 20px; /* Alinhamento do texto interno */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
-.input-box input:hover{ 
- transform: translateY(-1px);
+
+.input-box input:hover,
+.input-box input:focus { 
+    border-color: #b36f1d;
     box-shadow: 0 0px 10px rgb(178, 92, 17);
 }
 
-.input-box input::placeholder{
-    color: #fff;
+.input-box input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
 }
+
 
 .input-box i {
     position: absolute;
@@ -116,119 +146,103 @@ body::before {
     top: 50%;
     transform: translateY(-50%);
     font-size: 20px;
+    color: rgba(255, 255, 255, 0.5);
 }
 
-.wrapper .remember-forgot{
+.wrapper .remember-forgot {
     display: flex;
     justify-content: space-between;
-    font-size: 14.5px;
-    margin: -15px 0 15px;
+    align-items: center;
+    font-size: 13px;
+    margin: 5px 0 25px 0; /* Descolou do input e deu espaço para o botão */
+    width: 100%;
+}
+
+.remember-forgot label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
 
 .remember-forgot label input {
     accent-color: #b36f1d;
-    margin-right: 3px;
+    margin-right: 5px;
 }
 
 .remember-forgot a { 
     color: #fff;
     text-decoration: none;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ;
 }
 
-.remember-forgot a:hover{
+.remember-forgot a:hover {
+    transform: translateZ(-3px);
     text-decoration: underline;
-    display: inline-block;
-    transform: translateY(-2px);
 }
 
-.wrapper .botao{
+/* Botão de Envio */
+.wrapper .botao {
     width: 100%;
     height: 45px;
     background: #b36f1d;
     border: none;
     outline: none;
     border-radius: 40px;
-    margin-top: 15px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .3);
     cursor: pointer;
     font-size: 16px;
     color: #fff;
     font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
 
 .wrapper .botao:hover { 
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-}
-
-.wrapper .registrar { 
-    font-size: 14.5px;
-    text-align: center;
-    margin: 25px 0 15px;
-    
-}
-
-.registrar p a { 
-    color: #fff; 
-    text-decoration: none;
-    font-weight: 600;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.registrar p a:hover{
-    text-decoration: underline;
-    display: inline-block;
     transform: translateY(-2px);
+    background-color: #e68a22;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, .4);
+}
 
+/* Rodapé do Card (Registrar e Voltar) */
+.wrapper .registrar,
+.wrapper .voltar { 
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+}
+
+.wrapper .registrar {
+    margin-bottom: 10px;
 }
 
 .wrapper .voltar {
-     font-size: 13.5px;
-    text-align: center;
-} 
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
 
-.voltar p a {
-    color: #fff;
+.registrar p a, 
+.voltar p a { 
+    color: #b36f1d;
     text-decoration: none;
     font-weight: 600;
-    transition: transform 0.3s ease;
+    transition: text-decoration 0.2s ease;
 }
 
-.voltar p a:hover{
+.registrar p a:hover, 
+.voltar p a:hover {
     text-decoration: underline;
-    display: inline-block;
-    transform: translateY(-2px);
 }
 
-.wrapper .botao:hover { 
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, .2);
-}
-.btn-voltar {
-    position: absolute;
-    top: 20px;   /* Distância do topo */
-    right: 20px; /* Distância da direita */
-    font-size: 20px;
-    color: #fff;
-    cursor: pointer;
-    transition: transform 0.3s ease, color 0.3s ease;
-    z-index: 10; /* Garante que fique em cima de tudo */
-}
-
-.btn-voltar:hover {
-    color: #fff;
-    transform: scale(1.1); 
-}
-
-@media (max-width: 360px) {
-    .wrapper {
-        padding: 20px; 
+/* ==========================================================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
+@media (max-width: 440px) {
+    body > .wrapper {
+        margin: 80px 15px 20px 15px;
+        padding: 65px 20px 20px 20px; 
     }
-    .wrapper h1 {
+    .form-box-login h1 {
         font-size: 28px;
     }
-}
-
+}   
