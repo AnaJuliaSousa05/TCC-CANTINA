@@ -23,7 +23,7 @@
     <header class="header" `oi anna, esse daq é o header, a parte de cima do codigo`> 
         <div class="container">
             <div class="logo">
-                <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo"> Cantina Escolar  <span class="badge-admin">Estudante</span></h3>
+                <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo"> Cantina Escolar</h3>
                 <p> Seja bem vindo(a) a primeira cantina escolar digital!</p>
             </div>
 
@@ -43,7 +43,16 @@
     </header>
     
 
-    <div class="main-wrapper" `oi anna, esse aqui é uma das partes q vc vai mexer, criando a funcao de add foto de perfil`>
+
+
+
+
+
+
+
+
+
+    <div class="main-wrapper" `oi anna, esse aqui é uma das partes q vc vai mexer, criando a funcao de add foto de perfil` >//ok
 
         <nav class="user-sidebar">
             <div class="user-profile">
@@ -64,12 +73,12 @@
                 <li><a href="..//PRINCIPAL/configuracao/index.html"><i class='bx bx-cog'></i> Configurações</a></li>
                 <li><a href="../PRINCIPAL/historico/index.html"><i class='bx bx-receipt'></i> Historico de Pedidos</a></li>
                 <hr>
-                
-                <li><a href="../LOGIN/login.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
+                <hr>
+                <li><a href="../INICIO/index.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
             </ul>
         </nav>
 
-        <section class="cardapio" `oi ana, essa é outra parte p vc mexer, faz um java q ao clicar nesses filtros, so apareca os items de cada tipo e tb faça uma funcao de clica e favoritar dps disso clica no arquivo perfil e configuracao`>
+        <section class="cardapio" `oi ana, essa é outra parte p vc mexer, faz um java q ao clicar nesses filtros, so apareca os items de cada tipo e tb faça uma funcao de clica e favoritar dps disso clica no arquivo perfil e configuracao`>//ok
             <h1>Nosso Cardápio</h1>
             <main class="main-content">
                 <div class="filtros">
@@ -94,14 +103,12 @@
                         </div>
                         <span> R$ 11,00 </span>
                         <button class="btn-favorito" onclick="this.classList.toggle('active')">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+    <i class="fa-regular fa-heart"></i>
+</button>
                         <h4> Pastel de frango desfiado, bacon e catupity </h4>
-                        
-                          <a href="../LOGIN/login.html"> 
+                        <a href="../LOGIN/login.html"> 
                             <button class="pedir"> Pedir agora </button> 
                         </a>
-                
                     </div>
                 </div>
             
@@ -115,9 +122,9 @@
                             </button>
                         </div>
                         <span> R$ 15,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
-                            <i class="fa-regular fa-heart"></i>
-                        </button>
+                    <button class="btn-favorito" onclick="favoritar(this)">
+    <i class="fa-regular fa-heart"></i>
+</button>
                         <h4> Batata frita, queijo cheddar e bacon </h4>
                         <a href="../LOGIN/login.html"> 
                             <button class="pedir"> Pedir agora </button> 
@@ -126,7 +133,7 @@
                 </div>
 
                 <div class="lanche" id="dog">
-                    <img src=   "../PRINCIPAL/foto/cachorooo.png" alt="">
+                    <img src="../PRINCIPAL/foto/cachorooo.png" alt="">
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Cachorro Quente </h3> 
@@ -137,6 +144,7 @@
                         <span> R$ 10,00 </span> 
                         <button class="btn-favorito" onclick="this.classList.toggle('active')">
                             <i class="fa-regular fa-heart"></i>
+                
                         </button>
                         <h4> Pào, salsicha, batata palha, milho, ketchup e mostarda </h4>
                         <a href="../LOGIN/login.html"> 
@@ -291,6 +299,8 @@
                   <div class="footer-copyrigth">
                     <p> &copy; 2026 Cantina Digital </p>
                 </div>
+
+<script src="script.js"></script>
 
     </body>
 </html>
