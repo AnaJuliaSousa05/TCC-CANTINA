@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const bcrypt = require("bcrypt");
 
-console.log("🔥 SERVIDOR ATUALIZADO RODANDO");
+console.log("SERVIDOR ATUALIZADO RODANDO");
 
 
 const db = require("./db/db");
@@ -125,10 +125,15 @@ app.post("/reset-password", async (req, res) => {
 
 //api de produtos
 const produtosRoutes = require("./routes/produtos");
+const pagamentosRoutes = require("./routes/pagamentos");
+const pedidosRoutes = require("./routes/pedidos");
 
 console.log(produtosRoutes);
 
 app.use("/produtos", produtosRoutes);
+app.use("/pagamentos", pagamentosRoutes);
+app.use("/pedidos", pedidosRoutes);
+
 
 //teste
 app.get("/", (req, res) => {

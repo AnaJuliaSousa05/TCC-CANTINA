@@ -36,9 +36,9 @@
                 <div class="profile-img-container">
                     <img src="/LOGIN/foto/teste.png" alt="Foto do Administrador" id="photo-preview">
                     <input type="file" id="photo-input" accept="image/*" style="display: none;">
-                    <button class="btn-edit-photo" onclick="document.getElementById('photo-input').click()">
-                        <i class='bx bx-camera'></i>
-                    </button>
+                    <button type="button" class="btn-edit-photo" title="Alterar foto" aria-label="Alterar foto"
+                    onclick="document.getElementById('photo-input').click()"><i class='bx bx-camera'></i>
+                   </button>
                 </div>
 
                 <h3> Camilly Iglezias</h3>
@@ -74,161 +74,8 @@
                 </div>
             </main>
 
-            <div class="itens-cardapio"> 
-                
-                <div class="item-admin salgados" id="pastel">
-                    <img src="../foto/pastel.png" alt="Pastel de Frango">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Pastel de Frango </h3> 
-                          
-                        </div>
-                        <span class="preco-admin"> R$ 11,00 </span>
-                        <h4> Pastel de frango desfiado, bacon e catupity </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-            
-                <div class="item-admin salgados" id="batata">
-                    <img src="../foto/batata.png" alt="Batata Frita">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Batata Frita C/ Cheddar</h3> 
-                            
-                        </div>
-                        <span class="preco-admin"> R$ 15,00 </span> 
-                        <h4> Batata frita, queijo cheddar e bacon </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-admin lanches" id="dog">
-                    <img src="../foto/cachorooo.png" alt="Cachorro Quente">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Cachorro Quente </h3> 
-                           
-                        </div>
-                        <span class="preco-admin"> R$ 10,00 </span> 
-                        <h4> Pão, salsicha, batata palha, milho, ketchup e mostarda </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div> 
-
-                <div class="item-admin lanches" id="hamburguer">
-                    <img src="../foto/xtudoo.png" alt="X-Tudo">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> X- tudo Completo </h3> 
-                          
-                        </div>
-                        <span class="preco-admin"> R$ 20,00 </span> 
-                        <h4> Pão, 2 carne, queijo, bacon, ovo, tomate e salada </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque esgotado">Esgotado</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div> 
-                
-                <div class="item-admin doces" id="brownie">
-                    <img src="../foto/broni.png" alt="Brownie">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Brownie de Chocolate </h3> 
-                           
-                        </div>
-                        <span class="preco-admin"> R$ 10,00 </span> 
-                        <h4> Brownie com cobertura de chocolate </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="item-admin salgados" id="coxinha">
-                    <img src="../foto/coxinha.png" alt="Coxinha">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Coxinha de Frango </h3> 
-                            
-                        </div>
-                        <span class="preco-admin"> R$ 8,00 </span>
-                        <h4> Coxinha de frango desfiado e requeijão cremoso </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-admin bebidas" id="fanta">
-                    <img src="../foto/fanta.png" alt="Fanta Laranja">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Fanta Laranja </h3> 
-                            
-                        </div>
-                        <span class="preco-admin"> R$ 6,00 </span> 
-                        <h4> 350ml </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-admin bebidas" id="coca-cola">
-                    <img src="../foto/coca.png" alt="Coca-Cola">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Coca-Cola </h3> 
-                           
-                        </div>
-                        <span class="preco-admin"> R$ 7,00 </span>
-                        <h4> 350ml </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="item-admin bebidas" id="guarana">
-                    <img src="../foto/guarana.png" alt="Guaraná Zero">
-                    <div class="info"> 
-                        <div class="titulo-container">
-                            <h3> Guaraná Zero </h3>   
-                        </div>
-                        <span class="preco-admin"> R$ 7,00 </span> 
-                        <h4> 350ml </h4>
-                        
-                        <div class="acoes-admin">
-                            <span class="status-estoque em-estoque">Em Estoque</span>
-                            <button class="btn-editar"> Editar Item </button> 
-                        </div>
-                    </div>
-                </div>
-            </div>   
-        </section>
+            <div class="itens-cardapio" id="lista-produtos"> 
+    
     </div>
 
     <footer class="footer">
@@ -245,6 +92,6 @@
     <div class="footer-copyrigth">
         <p> &copy; 2026 Cantina Digital -  Administrador </p>
     </div>
-
+    <script src="script.js"></script>
 </body>
 </html>

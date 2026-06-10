@@ -5,10 +5,10 @@ const verificarLogin = require("../middleware/auth");
 
 router.get("/", produtoController.listar);
 
-router.post("/", verificarLogin, produtoController.criar);
+router.post("/", produtoController.criar);
 
-router.put("/:id", verificarLogin, produtoController.editar);
+router.put("/:id", produtoController.editar);
 
-router.delete("/:id", verificarLogin, produtoController.deletar);
+router.delete("/:id", produtoController.deletar);
 
 module.exports = router;
