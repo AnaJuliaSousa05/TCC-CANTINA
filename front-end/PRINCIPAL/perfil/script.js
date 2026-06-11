@@ -1,3 +1,18 @@
+document.addEventListener("DOMContentLoaded", () => {
+    // Busca na memória do navegador qual tema foi clicado na config
+    const temaSalvo = localStorage.getItem("tema");
+
+    // Se a pessoa clicou no modo branco, aplica ele aqui também!
+    if (temaSalvo === "claro") {
+        document.body.classList.remove("dark-theme");
+        document.body.classList.add("light-theme");
+    } else {
+        document.body.classList.remove("light-theme");
+        document.body.classList.add("dark-theme");
+    }
+});
+
+
 document.addEventListener('DOMContentLoaded', () => {
     const formPerfil = document.getElementById('form-perfil');
     const btnAcao = document.getElementById('btn-acao');
@@ -69,8 +84,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const reader = new FileReader();
             reader.addEventListener('load', function() {
                 photoPreview.setAttribute('src', this.result);
+                // Opcional: Se o usuário mudar a foto por aqui, também salva na memória
+                localStorage.setItem("fotoPerfil", this.result);
             });
             reader.readAsDataURL(file);
         }
     });
-});
+
+    // ========================================================
+    // ADICIONE ESTA PARTE AQUI PARA CARREGAR A FOTO AUTOMÁTICO
+    // ========================================================
+    const fotoSalva = localStorage.getItem("fotoPerfil");
+    if (fotoSalva) {
+        photoPreview.setAttribute('src', fotoSalva);
+    }
+}); 
+// ==========================================
+// MANTER O TEMA SELECIONADO (ADICIONE ISSO)
+// ==========================================

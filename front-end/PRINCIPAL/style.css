@@ -1,11 +1,16 @@
-/* Variáveis para facilitar a manutenção */
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÕES GERAIS (PADRÃO / ESCURO)
+   ========================================================================== */
 :root {
     --bg-color: #0f1113;
     --card-bg: #1c1f22;
+    --panel-bg: #1a1a1a;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --accent: #b36f1d; /* Tom bronze original da cantina */
     --accent-hover: #27ae60;
+    --accent-gradient: linear-gradient(135deg, #b36f1d, #e68a22); 
+    --border-color: #2e3236;
 }
 
 body {
@@ -13,13 +18,14 @@ body {
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    min-height: 100vh;
 }
 
-/* header  */
+/* Header */
 .header {
-    background: #1a1a1a;
+    background: var(--panel-bg);
     padding: 0.8rem 0; 
-    border-bottom: 1px solid #1a1a1a;
+    border-bottom: 1px solid var(--panel-bg);
     top: 0;
     margin: 20px;
     border-radius: 15px;
@@ -36,7 +42,7 @@ body {
 }
 
 .badge-admin {
-    background-color: #b36f1d;
+    background-color: var(--accent);
     margin-left: 10px;
     color: #fff;
     font-size: 0.7rem;
@@ -45,8 +51,8 @@ body {
     text-transform: uppercase;
     font-weight: bold;
 } 
-/*  perfil do usuario */ 
 
+/* Perfil do Usuário / Sidebar */ 
 .user-sidebar {
     width: 260px;
     height: calc(100vh - 40px); 
@@ -81,7 +87,6 @@ body {
     height: 100px;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 3px solid #ffffff; 
     box-sizing: border-box;
 }
 
@@ -89,7 +94,7 @@ body {
     position: absolute;
     bottom: -20px;  
     right: -20px;
-    background-color: var(--accent);
+    background-color: #e68a22;
     color: white;
     border: none;
     border-radius: 50%;
@@ -111,11 +116,13 @@ body {
 
 .user-profile span {
     font-size: 0.8rem;
-    color: #bdc3c7;
+    color: #6e6c6c;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 } 
 
-/* navs  */
-
+/* Navs */
 .nav-links {
     list-style: none;
     padding: 0;
@@ -174,6 +181,7 @@ hr {
     display: flex;
     transition: transform 0.3s ease;
 }
+
 .filtros {
     margin-top: 10px;
     display: flex;
@@ -190,7 +198,7 @@ hr {
 }
 
 .filtro-bnt {
-    background: var(--card-bg);
+    background: #222222;
     border: 1px solid #444;
     color: white;
     padding: 8px 20px;
@@ -206,8 +214,9 @@ hr {
     border-color: var(--accent);
 }
 
+
 /* ==========================================================================
-   CARDÁPIO E ESTRUTURA DE PRODUTOS (DESIGN CORRIGIDO)
+   CARDÁPIO E ESTRUTURA DE PRODUTOS
    ========================================================================== */
 .cardapio {
     display: flex;
@@ -223,7 +232,6 @@ hr {
     margin-left: 70px;
 }
 
-/* Grid perfeitamente espaçado */
 .itens-cardapio {
     width: 95%;
     max-width: 990px;
@@ -235,7 +243,6 @@ hr {
     border-radius: 25px;
 }
 
-/* Cards individuais sem nenhuma borda */
 .itens-cardapio div {
     background-color: #1a1a1a;
     border-radius: 15px;
@@ -304,20 +311,26 @@ hr {
     justify-content: center;
     line-height: 1;
 }
-
-.itens-cardapio .info h3 {
-    font-size: 0.5rem;
-    color: #fff;
-    text-transform: uppercase;
-    margin-bottom: 0.2rem;
-    margin-top: 0px;
+.btn-remove-carrinho{
+    background: none !important;
+    border: none !important; 
+    outline: none !important; 
+    box-shadow: none !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
-
 .itens-cardapio span {
      display: block;      
-        font-size: 1rem;
-        margin-top: -5px;       
-        margin-bottom: 5px;
+     font-size: 1rem;
+     margin-top: -5px;       
+     margin-bottom: 5px;
 }
 
 .itens-cardapio .info h4 {
@@ -349,30 +362,45 @@ hr {
     transform: translateY(-2px);
 }
 
-/* Grid Secundária / Alternativa */
-.grid-produtos {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px;
+/* ==========================================================================
+   FORMULÁRIO / INPUTS
+   ========================================================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
 }
 
-.produto-card {
-    background: var(--card-bg);
-    border-radius: 15px;
-    padding: 15px;
-    transition: transform 0.2s;
-    border: 1px solid #2a2d30;
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    font-weight: 500;
 }
 
-.produto-card:hover {
-    transform: translateY(-5px);
+.form-group input {
+    width: 100%;
+    box-sizing: border-box; 
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    background-color: #22262a;
+    outline: none;
 }
 
 /* ==========================================================================
    BOTÕES DE AÇÃO EXTERNOS & MODAIS
    ========================================================================== */
 #btnAbrirCarrinho {
-    background: var(--accent);
+    background-color: #e68a22;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -443,7 +471,7 @@ footer h2 {
     color: var(--text-secondary);
 }
 
-/* Animação do botão de Favorito / Destaque */
+/* Botão de Favorito */
 .btn-favorito {
     background: none;     
     border: none;
@@ -467,8 +495,430 @@ footer h2 {
     color: #ef4444;          
 }
 
+/* ==========================================
+   ESTILOS DA JANELA FLUTUANTE DO CARRINHO
+   ========================================== */
+.modal-carrinho {
+    display: none;
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 91, 91, 0); 
+    backdrop-filter: blur(2px); 
+    align-items: center;
+    justify-content: center;
+}
+
+    
+.modal-carrinho.active {
+    display: flex;
+}
+
+.conteudo-modal {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    animation: abrirModal 0.3s ease;
+}
+
+@keyframes abrirModal {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.topo-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e68a22;
+}
+
+.topo-modal h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--text-primary, #fff);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #a0a0a0);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-fechar:hover {
+    color: #ffffff;
+}
+
+
+.lista-itens-carrinho {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 40vh;
+}
+
+
+.item-carrinho {
+    display: flex;
+    flex-direction: column; /* Organiza em linhas: info em cima, obs embaixo */
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 2px solid var(--accent, #b36f1d);
+}
+
+.item-carrinho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.item-carrinho-info h4 {
+    margin: 0 0 5px 0;
+    color: var(--text-primary, #fff);
+}
+
+.item-carrinho-info span {
+    color: #fff;
+    font-weight: bold;
+}
+
+.item-carrinho-controles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-carrinho-controles button {
+    background: #333;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-carrinho-controles button:hover {
+    background: var(--accent, #b36f1d);
+}
+.input-observacao {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 5px;
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-observacao:focus {
+    border-color: var(--accent, #b36f1d);
+}
+
+.input-observacao::placeholder {
+    color: #666;
+}
+.rodape-modal {
+    padding: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.preco-total-modal {
+    color: #ffffff;
+}
+
+.btn-finalizar {
+    background-color: #e68a22;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.btn-finalizar:hover {
+    background-color: #ed8611;
+}
+
+.carrinho-vazio {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 20px 0;
+}
 @keyframes puloFavorito {
     0% { transform: scale(1); }
     50% { transform: scale(1.25); }
     100% { transform: scale(1); }
+}
+
+
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME)
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME)
+   ========================================================================== */
+body.light-theme {
+    --bg-color: #c0baba;
+    --card-bg: #ffffff;
+    --panel-bg: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-color: #dddddd;
+}
+
+body.light-theme {
+    background-image: linear-gradient(rgba(93, 89, 89, 0.4)), url(../PRINCIPAL/foto/bege.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-position: cover;
+}
+
+
+body.light-theme header, 
+body.light-theme .header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.light-theme .user-sidebar {
+    background-color: #f8f8f8;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .user-sidebar a {
+    color: #222222;
+}
+
+/* Garante que o link de logout e o ícone "i" comecem escuros no modo claro */
+body.light-theme .user-sidebar a.logout,
+body.light-theme .user-sidebar a.logout i {
+    color: #222222 !important;
+}
+   
+/* Ao passar o mouse nos tópicos da Sidebar (incluindo o logout e o ícone), o texto fica BRANCO */
+body.light-theme .user-sidebar a:hover,
+body.light-theme .user-sidebar a:hover i {
+    color: #ffffff !important;
+    background-color: var(--accent);
+}
+
+body.light-theme .user-sidebar hr {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Cards e Filtros no Tema Claro */
+body.light-theme .theme-card {
+    background-color: #f8f8f891;
+}
+
+body.light-theme .filtros {
+    background-color: #f8f8f8;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .filtro-bnt {
+    background: #ffffff;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .filtro-bnt.active, 
+body.light-theme .filtro-bnt:hover {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .cardapio h1 {
+    color: #ffffff;
+}
+
+body.light-theme .itens-cardapio div {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+}
+
+body.light-theme .itens-cardapio .info h3,
+body.light-theme .itens-cardapio .info h4,
+body.light-theme .itens-cardapio span {
+    color: #222222;
+}
+
+/* AJUSTADO: Botão de adicionar (+) com a cor escura correta no tema claro */
+body.light-theme .itens-cardapio .info .titulo-container .btn-add {
+    color: #e68a22;
+}
+
+/* CORRIGIDO (Sintaxe corrigida de ligth para light): Botão de remover (-) agora também acompanha a cor escura */
+body.light-theme .itens-cardapio .info .titulo-container .btn-remove-carrinho {
+    color: #e68a22;
+}
+
+/* Inputs do formulário no Tema Claro */
+body.light-theme .form-group input {
+    background-color: #ffffff;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .form-group input:focus {
+    background-color: #f1f1f1;
+    border-color: var(--accent);
+    color: #222222;
+}
+
+body.light-theme .form-group label {
+    color: #444444;
+}
+
+/* Rodapé no Tema Claro */
+body.light-theme footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid var(--border-color);
+    color: #4d4d4e;
+}
+
+body.light-theme footer h2 {
+    color: #4d4d4e;
+}
+
+/* ==========================================================================
+   MODAL DO CARRINHO NO TEMA BRANCO / CLARO (LIGHT THEME)
+   ========================================================================== */
+
+/* Fundo desfocado do modal no Tema Claro */
+body.light-theme .modal-carrinho {
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+/* Caixa flutuante principal no Tema Claro */
+body.light-theme .conteudo-modal {
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho do Modal no Tema Claro */
+body.light-theme .topo-modal {
+    border-bottom: 1px solid #e68a22; 
+}
+
+body.light-theme .topo-modal h2 {
+    color: #222222;
+}
+
+body.light-theme .btn-fechar {
+    color: #666666;
+}
+
+body.light-theme .btn-fechar:hover {
+    color: #222222;
+}
+
+/* Card de cada Produto dentro do Carrinho no Tema Claro */
+body.light-theme .item-carrinho {
+    background: #f8f8f8;
+    border-left: 2px solid #e68a22;
+    border-top: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+body.light-theme .item-carrinho-info h4,
+body.light-theme .item-carrinho-info span,
+body.light-theme .item-carrinho-controles span {
+    color: #222222;
+}
+
+/* Botões de + e - dentro do Modal no Tema Claro */
+body.light-theme .item-carrinho-controles button {
+    background: #e0e0e0;
+    color: #222222;
+}
+
+body.light-theme .item-carrinho-controles button:hover {
+    background: #e68a22;
+    color: #ffffff;
+}
+
+/* Campo de texto de observações extras no Tema Claro */
+body.light-theme .input-observacao {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    color: #222222;
+}
+
+body.light-theme .input-observacao:focus {
+    border-color: #e68a22;
+    background: #fdfdfd;
+}
+
+body.light-theme .input-observacao::placeholder {
+    color: #999999;
+}
+
+body.light-theme .rodape-modal {
+    border-top: 1px solid #e0e0e0;
+}
+
+body.light-theme .total-container {
+    color: #222222;
+}
+
+body.light-theme .preco-total-modal {
+    color: #222222;
+}
+
+body.light-theme .btn-finalizar {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .btn-finalizar:hover {
+    background-color: #ed8611;
+}
+
+body.light-theme .carrinho-vazio {
+    color: #666666;
 }

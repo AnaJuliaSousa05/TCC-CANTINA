@@ -1,123 +1,137 @@
-/* Variáveis para facilitar a manutenção */
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÃO COMPLETA: TEMA ESCURO (PADRÃO SEU)
+   ========================================================================== */
 :root {
     --bg-color: #0f1113;
     --card-bg: #1c1f22;
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
-    --accent: #b36f1d; /* Verde estilo iFood/Cantina */
-    --accent-hover: #27ae60;
+    --accent: #b36f1d; 
+    --accent-hover: #e68a22;
+    --border-color: #333333;
 }
 
 body {
-    background-image:  linear-gradient(rgba(39, 38, 38, 0.8)), url(../foto/fundo.png);
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8)), url(../foto/fundo.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: var(--text-primary);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
+    min-height: 100vh;
 }
 
+/* ==========================================================================
+   ESTILIZAÇÃO DOS COMPONENTES (MODO ESCURO PADRÃO)
+   ========================================================================== */
 
+/* Cabeçalho */
 .header {
     background: #1a1a1a;
-    padding: 0.8rem 0; /* Mantém o preen
+    padding: 0.8rem 0; 
     border-bottom: 1px solid #ff8000;
-    
-    /* Alterações para centralizar perfeitamente */
-    width: calc(100% - 40px); /* Ocupa a tela toda descontando as margens */
-    max-width: 1000px; /* Alinha o limite com o container interno */
-    margin: 20px auto;        /* O 'auto' nas laterais centraliza o bloco na tela */
+    width: calc(100% - 40px); 
+    max-width: 1000px; 
+    margin: 20px auto; 
     border-radius: 15px;
     z-index: 1000;
 }
+
 .header .container {
     display: flex;
-    justify-content: center; /* Muda de space-between para center */
+    justify-content: center; 
     align-items: center;
     max-width: 1200px; 
     margin: 0px auto;    
     padding: 0 20px;
+    position: relative; 
 }
+
 .header h1 {
     font-size: 28px;
     color: #ffffff;
     border-bottom: 1px solid #ce6605;
-    margin-bottom: 25px; 
-    padding-bottom: 10px;
+    margin-bottom: 0; 
+    padding-bottom: 5px;
     text-align: center; 
 }
-.header .container i {
-    width: 50px;
-    color: #cb6906;
-    
- 
-}
-.header img{
-      width: auto;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: space-between;
-    transition: transform 0.3s ease;
-}
-.voltar{
 
-  position: absolute;
-    right: 270px;
-}
 .logo {
     display: flex;
     align-items: center;
     gap: 15px;
 }
-    .btn-voltar {
-        color: #ffffff !important;
-        font-size: 1.4rem;
-        transition: 0.3s ease;
-        display: flex;
-       
-    }
+
+.header img {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Botão Voltar Interno */
+.voltar {
+    position: absolute;
+    left: 20px; 
+}
+
+.btn-voltar {
+    color: #ffffff !important;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+}
 
 .btn-voltar:hover {
-        transform: scale(1.1);
-        
-    }
+    transform: scale(1.1);
+    color: var(--accent-hover) !important;
+}
+
+/* Container do Histórico */
 .historico-pedidos {
-    padding: 30px 0; /* Removeu o padding lateral para não empurrar o container */
+    padding: 30px 0; 
     width: 100%;
     display: flex;
-    justify-content: center; /* Garante que o conteúdo interno fique centralizado */
+    justify-content: center; 
 }
 
 .historico-container {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 25px;
     width: 100%;
     max-width: 800px;
-    margin: 0 auto; /* Centraliza o container principal na tela */
-    padding: 0 20px; /* Adiciona um respiro nas laterais para telas menores (celulares) */
+    margin: 0 auto; 
+    padding: 0 20px; 
     box-sizing: border-box;
 }
 
+/* Cards de Pedidos Antigos */
 .pedido-card {
-    background-color: #ffffff53;
+    background-color: #1a1a1a; 
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
     border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(204, 121, 6, 0.04);
     overflow: hidden;
-    margin: 0; /* Removido o 'margin: 20px' que desalinhava o card dentro do container */
     width: 100%;
-    transition: transform 0.3s ease;
-    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
- .pedido-card:hover{
-       transform: translateY(-3px);
- }
+
+.pedido-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
 .pedido-header {
-    
-    background-color: #1a1a1a;
+    background-color: rgba(255, 255, 255, 0.02);
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .pedido-info-topo {
@@ -135,27 +149,28 @@ body {
 
 .pedido-data {
     font-size: 12px;
-    color: #ffffff;
+    color: var(--text-secondary);
     margin-top: 3px;
 }
 
+/* Status das Cozinhas */
 .status {
     font-size: 12px;
     font-weight: 600;
     padding: 6px 14px;
     border-radius: 50px;
+    color: #ffffff; 
 }
 
 .status-entregue {
     background-color: #2d773f;
-    color: #155724;
 }
 
 .status-preparando {
-    background-color: #a08f57;
-    color: #846300;
+    background-color: #b36f1d;
 }
 
+/* Corpo do Pedido */
 .pedido-corpo {
     padding: 20px;
     display: flex;
@@ -175,14 +190,14 @@ body {
 }
 
 .alimento-preco {
-    color: #fffefe;
+    color: var(--text-secondary);
 }
 
-
+/* Rodapé do Card */
 .pedido-footer {
-    background-color: #ffffff53;
+    background-color: rgba(0, 0, 0, 0.2);
     padding: 15px 20px;
-    border-top: 1px solid #000000;
+    border-top: 1px solid var(--border-color);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -190,7 +205,7 @@ body {
 
 .total-pedido {
     font-size: 14px;
-    color: #ffffff;
+    color: var(--text-secondary);
 }
 
 .total-pedido strong {
@@ -199,10 +214,10 @@ body {
     margin-left: 5px;
 }
 
-/* Botão "Pedir de novo" */
+/* Botão Recomprar */
 .btn-repetir {
     background-color: #ff9008;
-    color: #fff;
+    color: #ffffff;
     border: none;
     padding: 10px 18px;
     border-radius: 8px;
@@ -219,13 +234,109 @@ body {
     transform: translateY(-1px);
 }
 
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME) - ESTILO IGUAL AS OUTRAS ABAS
+   ========================================================================== */
+body.light-theme {
+    background-image: linear-gradient(rgba(93, 89, 89, 0.4)), url(../foto/bege.png);
+    color: #222222;
+}
 
+/* Cabeçalho no Tema Claro */
+body.light-theme .header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dddddd;
+}
+
+body.light-theme .header h1 {
+    color: #ff7700da;
+    border-bottom: 1px solid #e68a22;
+}
+
+body.light-theme .btn-voltar {
+    color: #222222 !important;
+}
+
+/* Cards do Histórico no Tema Claro */
+body.light-theme .pedido-card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-left: 4px solid #e68a22;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .pedido-header {
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #eeeeee;
+}
+
+body.light-theme .pedido-id {
+    color: #222222;
+}
+
+body.light-theme .pedido-data {
+    color: #666666;
+}
+
+body.light-theme .alimento-item {
+    color: #222222;
+}
+
+body.light-theme .alimento-preco {
+    color: #666666;
+}
+
+body.light-theme .pedido-footer {
+    background-color: #f9f9f9;
+    border-top: 1px solid #eeeeee;
+}
+
+body.light-theme .total-pedido {
+    color: #666666;
+}
+
+body.light-theme .total-pedido strong {
+    color: #222222;
+}
+
+body.light-theme .btn-repetir {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .btn-repetir:hover {
+    background-color: #ed8611;
+}
+
+body.light-theme .carrinho-vazio {
+    color: #666666;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (CELULARES)
+   ========================================================================== */
 @media (max-width: 600px) {
+    .header {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+    }
+    
+    .voltar {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
     .pedido-header, .pedido-footer {
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
     }
+    
     .btn-repetir {
         width: 100%;
         justify-content: center;

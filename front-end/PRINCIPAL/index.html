@@ -8,22 +8,12 @@
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Cantina Escolar Digital </title>
-    <link rel="stylesheet" href="style.css">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
 <body>
 
     <header class="header" `oi anna, esse daq é o header, a parte de cima do codigo`> 
         <div class="container">
             <div class="logo">
-                <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo"> Cantina Escolar</h3>
+          <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo" id="logo-cantina"> Cantina Escolar </h3>
                 <p> Seja bem vindo(a) a primeira cantina escolar digital!</p>
             </div>
 
@@ -46,13 +36,7 @@
 
 
 
-
-
-
-
-
-
-    <div class="main-wrapper" `oi anna, esse aqui é uma das partes q vc vai mexer, criando a funcao de add foto de perfil` >//ok
+    <div class="main-wrapper" `oi anna, esse aqui é uma das partes q vc vai mexer, criando a funcao de add foto de perfil` >
 
         <nav class="user-sidebar">
             <div class="user-profile">
@@ -68,17 +52,18 @@
                 <span> Estudante</span>
             </div>
 
-            <ul class="nav-links" >
-                <li><a href="../PRINCIPAL/perfil/index.html"><i class='bx bx-user'></i> Meu Perfil</a></li>
-                <li><a href="..//PRINCIPAL/configuracao/index.html"><i class='bx bx-cog'></i> Configurações</a></li>
-                <li><a href="../PRINCIPAL/historico/index.html"><i class='bx bx-receipt'></i> Historico de Pedidos</a></li>
-                <hr>
-                <hr>
-                <li><a href="../INICIO/index.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
-            </ul>
-        </nav>
+                <ul class="nav-links" >
+                    <li><a href="../PRINCIPAL/perfil/index.html"><i class='bx bx-user'></i> Meu Perfil</a></li>
+                    <li><a href="..//PRINCIPAL/configuracao/index.html"><i class='bx bx-cog'></i> Configurações</a></li>
+                    <li><a href="../PRINCIPAL/historico/index.html"><i class='bx bx-history' ></i>  Historico de pedidos </a></li>
 
-        <section class="cardapio" `oi ana, essa é outra parte p vc mexer, faz um java q ao clicar nesses filtros, so apareca os items de cada tipo e tb faça uma funcao de clica e favoritar dps disso clica no arquivo perfil e configuracao`>//ok
+                
+                    <hr>
+                    <li><a href="../INICIO/index.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
+                </ul>
+            </nav>
+
+        <section class="cardapio" `oi ana, essa é outra parte p vc mexer, faz um java q ao clicar nesses filtros, so apareca os items de cada tipo e tb faça uma funcao de clica e favoritar dps disso clica no arquivo perfil e configuracao`>
             <h1>Nosso Cardápio</h1>
             <main class="main-content">
                 <div class="filtros">
@@ -97,14 +82,17 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Pastel de Frango </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                            <button class="btn-add" onclick="adicionarAoCarrinho('pastel')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button>
+                            <button class="btn-remove-carrinho" onclick="removerDoCarrinho('pastel')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 11,00 </span>
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
-    <i class="fa-regular fa-heart"></i>
-</button>
+                        <button class="btn-favorito" onclick="favoritar(this)">
+                         <i class="fa-regular fa-heart"></i>
+                        </button>
                         <h4> Pastel de frango desfiado, bacon e catupity </h4>
                         <a href="../LOGIN/login.html"> 
                             <button class="pedir"> Pedir agora </button> 
@@ -117,8 +105,11 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Batata Frita C/ Cheddar</h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                            <button class="btn-add" onclick="adicionarAoCarrinho('batata')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button>   
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('batata')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 15,00 </span> 
@@ -137,12 +128,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Cachorro Quente </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('dog')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('dog')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 10,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                      <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                 
                         </button>
@@ -158,12 +152,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> X- tudo Completo </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('hamburguer')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('hamburguer')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 20,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                   <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> Pào, 2 carne, queijo, bacon, ovo, tomate e salada </h4>
@@ -178,12 +175,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Brownie de Chocolate </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                            <button class="btn-add" onclick="adicionarAoCarrinho('brownie')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('brownie')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 10,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                     <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> Brownie com cobertura de chocolate </h4>
@@ -198,12 +198,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Coxinha de Frango </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('coxinha')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('coxinha')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 8,00 </span>
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                       <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> Coxinha de frango desfiado e requeijão cremoso </h4>
@@ -218,12 +221,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Fanta Laranja </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('fanta')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('fanta')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 6,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                    <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> 350ml </h4>
@@ -238,12 +244,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Coca-Cola </h3> 
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('coca-cola')">
+                             <i class='bx bxs-message-square-add'></i>
+                            </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('coca-cola')">
+                            <i class='bx bxs-message-square-minus'></i>
                             </button>
                         </div>
                         <span> R$ 7,00 </span>
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                      <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> 350ml </h4>
@@ -258,12 +267,15 @@
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3> Guaraná Zero </h3>   
-                            <button class="btn-add" onclick="this.classList.toggle('active')">
-                                <i class='bx bxs-message-square-add'></i>
+                           <button class="btn-add" onclick="adicionarAoCarrinho('guarana')">
+                             <i class='bx bxs-message-square-add'></i>
                             </button> 
+                             <button class="btn-remove-carrinho" onclick="removerDoCarrinho('guarana')">
+                            <i class='bx bxs-message-square-minus'></i>
+                            </button>
                         </div>
                         <span> R$ 7,00 </span> 
-                        <button class="btn-favorito" onclick="this.classList.toggle('active')">
+                    <button class="btn-favorito" onclick="favoritar(this)">
                             <i class="fa-regular fa-heart"></i>
                         </button>
                         <h4> 350ml </h4>
@@ -300,6 +312,50 @@
                     <p> &copy; 2026 Cantina Digital </p>
                 </div>
 
+                <div id="modal-carrinho" class="modal-carrinho">
+    <div class="conteudo-modal">
+        <div class="topo-modal">
+            <h2><i class='bx bx-cart' ></i></i> Meu Carrinho</h2>
+            <button id="fechar-carrinho" class="btn-fechar">&times;</button>
+        </div>
+
+        <div id="itens-do-carrinho" class="lista-itens-carrinho"></div>
+
+        <div class="rodape-modal">
+            <div class="total-container">
+                <span>Total:</span>
+                <span class="preco-total-modal">R$ <span id="total-modal">0.00</span></span>
+            </div>
+            <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Pedido</button>
+        </div>
+    </div>
+</div>
+<div id="modal-pagamento" class="modal-carrinho">
+    <div class="conteudo-modal" style="max-width: 400px;">
+        <div class="topo-modal">
+            <h2><i class='bx bx-qr-code'></i> Pagamento via Pix</h2>
+            <button id="fechar-pagamento" class="btn-fechar">&times;</button>
+        </div>
+
+        <div class="rodape-modal" style="gap: 15px; padding: 25px 20px; align-items: center; text-align: center;">
+            <p style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">
+                Valor a pagar: <strong>R$ <span id="total-pagamento-modal">0.00</span></strong>
+            </p>
+
+           <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; margin: 10px 0; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <img src="../PRINCIPAL/foto/pix.png" alt="QR Code Pix Real" style="width: 180px; height: 180px; display: block; object-fit: contain;">
+</div>
+
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 10px 0;">
+                Abra o app do seu banco e escaneie o QR Code acima ou utilize o Pix Copia e Cola abaixo.
+            </p>
+
+            <button class="btn-finalizar" style="background-color: #d57d01; width: 100%;" onclick="processarPagamentoPix()">
+                <i class='bx bx-copy'></i> Copiar Chave e Confirmar
+            </button>
+        </div>
+    </div>
+</div>
 <script src="script.js"></script>
 
     </body>

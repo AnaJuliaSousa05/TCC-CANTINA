@@ -315,7 +315,7 @@ body {
 
 .form-group input:focus {
     border-color: var(--accent);
-    background-color: #22262a;
+    background-color: none;
     outline: none;
 }
 
@@ -398,7 +398,7 @@ footer h2 {
 }
 
 body.light-theme{
-    --bg-color: #f5f5f5;
+    --bg-color: #c0baba;
     --card-bg: #ffffff;
     --panel-bg: #ffffff;
     --text-primary: #222222;
@@ -407,18 +407,29 @@ body.light-theme{
 }
 
 body.light-theme{
-    background-image: none;
-    background-color: #f5f5f5;
+    background-image: linear-gradient(rgba(106, 102, 102, 0.399)), url(../foto/bege.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 10px;
+    min-height: 100vh;
+    
 }
 
 body.light-theme .theme-card{
-    background-color: #f8f8f8;
+    background-color: #f8f8f891;
+
 }
 
 body.light-theme footer{
-    background-color: #ffffff;
+    background-color: #f8f8f8;
+        color: var(--border-color);
+   
+}
+body.light-theme footer h2{
+    color: #4d4d4e;
 }
 
 body.light-theme .form-group input{
-    color: #222;
+    color: #685757;
+    background-color: #f8f8f8;
 }
