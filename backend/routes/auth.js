@@ -1,10 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-const authController = require("../controllers/authController");
+console.log("ARQUIVO AUTH CERTO CARREGADO");
 
-router.post("/register", authController.register);
-router.post("/login", authController.login);
-router.post("/logout", authController.logout);
+router.get("/me", (req, res) => {
+    console.log("ROTA /ME FOI CHAMADA");
+    res.json({
+        teste: "funcionando"
+    });
+});
 
 module.exports = router;

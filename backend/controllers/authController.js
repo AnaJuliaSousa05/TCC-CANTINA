@@ -102,3 +102,48 @@ exports.logout = (req, res) => {
     // JWT não tem sessão no servidor
     return res.send({ msg: "Logout feito (remova o token do front)" });
 };
+
+exports.me = (req, res) => {
+
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+        return res.status(401).json({
+            msg: "Token não enviado"
+        });
+    }
+
+    try {
+
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
+
+        db.query(
+            "SELECT id, nickname, email FROM usuarios WHERE id = ?",
+            [decoded.id],
+            (err, result) => {
+
+                if (err) {
+                    return res.status(500).json({
+                        msg: "Erro no banco"
+                    });
+                }
+
+                if (result.length === 0) {
+                    return res.status(404).json({
+                        msg: "Usuário não encontrado"
+                    });
+                }
+
+                res.json(result[0]);
+            }
+        );
+
+    } catch {
+        return res.status(401).json({
+            msg: "Token inválido"
+        });
+    }
+};

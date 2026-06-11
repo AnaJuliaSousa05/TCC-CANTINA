@@ -27,7 +27,14 @@ app.use(cors({
 
 app.use(express.json());
 
+console.log(require.resolve("./routes/auth"));
+
 app.use("/auth", authRoutes);
+
+app.get("/teste", (req, res) => {
+    res.send("TESTE OK");
+});
+
 
 //config email
 const transporter = nodemailer.createTransport({
