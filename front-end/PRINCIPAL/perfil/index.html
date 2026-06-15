@@ -39,25 +39,25 @@
 
             <form id="form-perfil">
                 <div class="form-group">
-                    <label for="input-nome">Nome de Usuário</label>
+                    <label for="input-username">Nome de Usuário</label>
                     <div class="input-icon-wrapper">
-                        <input type="text" id="input-nome" value="Camilly Iglezias"  disabled required>
+                        <input type="text" id="input-username" value="Camilly Iglezias" disabled>
                         <i class='bx bx-user'></i>
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="input-nome">Nome Completo  </label>
+               <div class="form-group">
+                    <label for="input-fullname">Nome Completo</label>
                     <div class="input-icon-wrapper">
-                        <input type="text" id="input-nome" value="Camilly Gomes Iglezias" disabled required>
+                        <input type="text" id="input-fullname" value="Camilly Gomes Iglezias" disabled>
                         <i class='bx bx-user'></i>
                     </div>
                 </div>
                 
                 <div class="form-group">
-                    <label for="input-nome">Seu curso</label>
+                    <label for="input-curso">Seu curso</label>
                     <div class="input-icon-wrapper">
-                        <input type="text" id="input-nome" value="Informatica" disabled required>
+                        <input type="text" id="input-curso" value="Informatica" disabled>
                         <i class='bx bx-pencil'></i>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label for="input-email">E-mail</label>
                     <div class="input-icon-wrapper">
-                        <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled required>
+                        <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled>
                         <i class='bx bx-envelope'></i>
                     </div>
                 </div>
@@ -86,48 +86,10 @@
                 <p>Seus lanches mais amados do cardápio</p>
             </div>
 
-            <div class="favorites-profile-list">
+           <div id="lista-favoritos-perfil" class="favoritos-grid"></div>
                 
-                <div class="fav-profile-card">
-                    <img src="../foto/pastel.png"
-                     alt="Pastel de Frango">
-                    <div class="fav-profile-info">
-                        <h3>Pastel de Frango</h3>
-                        <span class="fav-profile-price">R$ 11,00</span>
-                        <p>Pastel de frango desfiado, bacon e catupiry</p>
-                    </div>
-                    <button class="btn-remove-fav" title="Remover dos favoritos">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                </div>
 
-                <div class="fav-profile-card">
-                    <img src="../foto/batata.png"   
-                     alt="Batata Frita">
-                    <div class="fav-profile-info">
-                        <h3>Batata Frita C/ Cheddar</h3>
-                        <span class="fav-profile-price">R$ 15,00</span>
-                        <p>Batata frita, queijo cheddar e bacon</p>
-                    </div>
-                    <button class="btn-remove-fav" title="Remover dos favoritos">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                </div>
-
-                <div class="fav-profile-card">
-                  <img src="../foto/broni.png"   alt="Brownie"  >
-                   
-                    <div class="fav-profile-info">
-                        <h3>Brownie de Chocolate</h3>
-                        <span class="fav-profile-price">R$ 10,00</span>
-                        <p>Brownie com cobertura de chocolate</p>
-                    </div>
-                    <button class="btn-remove-fav" title="Remover dos favoritos">
-                        <i class="fa-solid fa-heart"></i>
-                    </button>
-                </div>
-
-            </div>
+              
         </section>
 
     </div>

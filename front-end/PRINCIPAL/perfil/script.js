@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Busca na memória do navegador qual tema foi clicado na config
+    
+    // ==========================================
+    // 1. GERENCIAMENTO DE TEMA
+    // ==========================================
     const temaSalvo = localStorage.getItem("tema");
-
-    // Se a pessoa clicou no modo branco, aplica ele aqui também!
     if (temaSalvo === "claro") {
         document.body.classList.remove("dark-theme");
         document.body.classList.add("light-theme");
@@ -10,95 +11,175 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove("light-theme");
         document.body.classList.add("dark-theme");
     }
-});
+
+    // ==========================================
+    // 2. DICIONÁRIO DE DADOS (Igual ao da página principal)
+    // ==========================================
+    const cardapioPrecos = {
+        "pastel": { nome: "Pastel de Frango", preco: 11.00, foto: "../foto/pastel.png", desc: "Pastel de frango desfiado, bacon e catupiry" },
+        "batata": { nome: "Batata Frita C/ Cheddar", preco: 15.00, foto: "../foto/batata.png", desc: "Batata frita, queijo cheddar e bacon" },
+        "dog": { nome: "Cachorro Quente", preco: 10.00, foto: "../foto/dog.png", desc: "Salsicha, molho especial e batata palha" },
+        "hamburguer": { nome: "X- tudo Completo", preco: 20.00, foto: "../PRINCIPAL/foto/hamburguer.png", desc: "Hambúrguer, ovo, queijo, presunto e salada" },
+        "brownie": { nome: "Brownie de Chocolate", preco: 10.00, foto: "../foto/broni.png", desc: "Brownie com cobertura de chocolate" }, 
+        "coxinha": { nome: "Coxinha de Frango", preco: 8.00, foto: "../PRINCIPAL/foto/coxinha.png", desc: "Coxinha de frango bem recheada" },
+        "fanta": { nome: "Fanta Laranja", preco: 6.00, foto: "../PRINCIPAL/foto/fanta.png", desc: "Lata 350ml" },
+        "coca-cola": { nome: "Coca-Cola", preco: 7.00, foto: "../PRINCIPAL/foto/coca-cola.png", desc: "Lata 350ml" },
+        "guarana": { nome: "Guaraná Zero", preco: 7.00, foto: "../PRINCIPAL/foto/guarana.png", desc: "Lata 350ml" }
+    };
+
+    // ==========================================
+    // 3. RENDERIZADOR DINÂMICO DE FAVORITOS NO PERFIL
+    // ==========================================
+    function carregarFavoritosNoPerfil() {
+        const containerFavoritos = document.getElementById("lista-favoritos-perfil");
+        if (!containerFavoritos) return;
+
+        const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+        containerFavoritos.innerHTML = ""; 
+
+        if (favoritos.length === 0) {
+            containerFavoritos.innerHTML = `<p class="content-header" style="border:none; text-align:center; color:var(--text-secondary);">Você ainda não favoritou nenhum item.</p>`;
+            return;
+        }
+
+        favoritos.forEach(idProduto => {
+            const produto = cardapioPrecos[idProduto];
+            if (produto) {
+                containerFavoritos.innerHTML += `
+                    <div class="fav-profile-card" id="fav-${idProduto}">
+                        <img src="${produto.foto}" alt="${produto.nome}">
+                        <div class="fav-profile-info">
+                            <h3>${produto.nome}</h3>
+                            <span class="fav-profile-price">R$ ${produto.preco.toFixed(2)}</span>
+                            <p>${produto.desc}</p>
+                        </div>
+                        <button class="btn-remove-fav" data-id="${idProduto}" title="Remover dos favoritos">
+                            <i class="fa-solid fa-heart"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        });
+
+        const botoesRemover = containerFavoritos.querySelectorAll(".btn-remove-fav");
+        botoesRemover.forEach(botao => {
+            botao.addEventListener("click", () => {
+                const idParaRemover = botao.dataset.id;
+                removerFavoritoDoPerfil(idParaRemover);
+            });
+        });
+    }
+
+    function removerFavoritoDoPerfil(idProduto) {
+        let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+        favoritos = favoritos.filter(id => id !== idProduto);
+        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        carregarFavoritosNoPerfil();
+    }
+
+    carregarFavoritosNoPerfil();
 
 
-document.addEventListener('DOMContentLoaded', () => {
+    // ==========================================
+    // 5. CONTROLE DO FORMULÁRIO DE PERFIL E INFORMAÇÕES DO USUÁRIO
+    // ==========================================
     const formPerfil = document.getElementById('form-perfil');
-    const btnAcao = document.getElementById('btn-acao');
     const btnFoto = document.getElementById('btn-foto');
     const photoInput = document.getElementById('photo-input');
     const photoPreview = document.getElementById('photo-preview');
-    
-    // Seleciona todos os inputs do formulário
-    const inputs = formPerfil.querySelectorAll('input');
+    const displayNomeHeader = document.getElementById('display-nome'); // Nome no Rosto (Topo)
 
-    // Variável de controle: false significa modo de visualização (travado)
-    let modoEdicao = false;
+    // Elementos dos Inputs do Formulário
+    const inputUsername = document.getElementById('input-username');
+    const inputFullname = document.getElementById('input-fullname');
+    const inputCurso = document.getElementById('input-curso');
+    const inputEmail = document.getElementById('input-email');
+    const inputSenha = document.getElementById('input-senha');
 
-    formPerfil.addEventListener('submit', function(event) {
-        event.preventDefault(); // Impede a página de recarregar instantaneamente
+    // --- CARREGAR DADOS DOS INPUTS SALVOS AO ABRIR A PÁGINA ---
+    const usernameSalvo = localStorage.getItem("username");
+    if (usernameSalvo) {
+        if (displayNomeHeader) displayNomeHeader.textContent = usernameSalvo;
+        if (inputUsername) inputUsername.value = usernameSalvo;
+    }
+    if (localStorage.getItem("fullname") && inputFullname) {
+        inputFullname.value = localStorage.getItem("fullname");
+    }
+    if (localStorage.getItem("curso") && inputCurso) {
+        inputCurso.value = localStorage.getItem("curso");
+    }
+    if (localStorage.getItem("email") && inputEmail) {
+        inputEmail.value = localStorage.getItem("email");
+    }
+    if (localStorage.getItem("senha") && inputSenha) {
+        inputSenha.value = localStorage.getItem("senha");
+    }
 
-        if (!modoEdicao) {
-            // --- PASSO 1: ATIVAR MODO DE EDIÇÃO ---
-            modoEdicao = true;
+    // --- SALVAR INFORMAÇÕES DO FORMULÁRIO ---
+    if (formPerfil) {
+        const inputs = formPerfil.querySelectorAll('input');
+        let modoEdicao = false;
 
-            // ALTERAÇÃO AQUI: Libera APENAS o input de nome e o de e-mail
-            inputs.forEach(input => {
-                if (input.id === 'input-nome' || input.id === 'input-email') {
+        formPerfil.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            if (!modoEdicao) {
+                // Entra em modo de edição e libera os campos
+                modoEdicao = true;
+                inputs.forEach(input => {
                     input.disabled = false;
+                });
+                if(btnFoto) {
+                    btnFoto.disabled = false;
+                    btnFoto.style.opacity = "1";
+                    btnFoto.style.cursor = "pointer";
                 }
-            });
+                if(inputUsername) inputUsername.focus();
+            } else {
+                // Bloqueia e Salva os dados digitados
+                modoEdicao = false;
+                
+                const novoUsername = inputUsername ? inputUsername.value : "";
+                
+                // 1. Atualiza o Rosto/Topo na hora com o novo Username
+                if (displayNomeHeader && novoUsername) displayNomeHeader.textContent = novoUsername;
+                
+                // 2. Salva todas as informações de forma síncrona no LocalStorage
+                if (inputUsername) localStorage.setItem("username", inputUsername.value);
+                if (inputFullname) localStorage.setItem("fullname", inputFullname.value);
+                if (inputCurso) localStorage.setItem("curso", inputCurso.value);
+                if (inputEmail) localStorage.setItem("email", inputEmail.value);
+                if (inputSenha) localStorage.setItem("senha", inputSenha.value);
 
-            // Libera o botão de alterar a foto e volta a opacidade normal
-            btnFoto.disabled = false;
-            btnFoto.style.opacity = "1";
-            btnFoto.style.cursor = "pointer";
+                // Desativa os campos novamente
+                inputs.forEach(input => input.disabled = true);
+                if(btnFoto) {
+                    btnFoto.disabled = true;
+                    btnFoto.style.opacity = "0.5";
+                    btnFoto.style.cursor = "not-allowed";
+                }
+                alert('Informações atualizadas com sucesso!');
+            }
+        });
+    }
 
-            // Foca automaticamente no campo Nome
-            document.getElementById('input-nome').focus();
+    // Controle e upload da foto de perfil
+    if (photoInput && photoPreview) {
+        photoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.addEventListener('load', function() {
+                    photoPreview.setAttribute('src', this.result);
+                    localStorage.setItem("fotoPerfil", this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+    }
 
-            // Altera o texto do botão principal
-            btnAcao.textContent = "Salvar Alterações";
-            btnAcao.style.backgroundColor = "#b36f1d"; 
-
-        } else {
-            // --- PASSO 2: SALVAR INFORMAÇÕES E VOLTAR A TRAVAR ---
-            modoEdicao = false;
-
-            // Atualiza o nome da sidebar em tempo real baseado no input
-            const novoNome = document.getElementById('input-nome').value;
-            document.getElementById('display-nome').textContent = novoNome;
-
-            // Bloqueia todos os inputs novamente
-            inputs.forEach(input => input.disabled = true);
-
-            // Bloqueia o botão da foto de novo
-            btnFoto.disabled = true;
-            btnFoto.style.opacity = "0.5";
-            btnFoto.style.cursor = "not-allowed";
-
-            // Restaura o texto e estilo original do botão
-            btnAcao.textContent = "Deseja alterar informações?";
-            btnAcao.style.backgroundColor = "var(--accent)";
-
-            // Feedback visual de sucesso
-            alert('Informações atualizadas com sucesso!');
-        }
-    });
-
-    // Visualização da imagem assim que o usuário escolhe o arquivo
-    photoInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.addEventListener('load', function() {
-                photoPreview.setAttribute('src', this.result);
-                // Opcional: Se o usuário mudar a foto por aqui, também salva na memória
-                localStorage.setItem("fotoPerfil", this.result);
-            });
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // ========================================================
-    // ADICIONE ESTA PARTE AQUI PARA CARREGAR A FOTO AUTOMÁTICO
-    // ========================================================
     const fotoSalva = localStorage.getItem("fotoPerfil");
-    if (fotoSalva) {
+    if (fotoSalva && photoPreview) {
         photoPreview.setAttribute('src', fotoSalva);
     }
-}); 
-// ==========================================
-// MANTER O TEMA SELECIONADO (ADICIONE ISSO)
-// ==========================================
+});

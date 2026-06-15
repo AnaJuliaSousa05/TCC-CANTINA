@@ -1,5 +1,5 @@
 // ==========================================
-// MANTÉM O TEMA CLARO ATIVO E TROCA OS ÍCONES
+// 1. MANTÉM O TEMA CLARO ATIVO, TROCA OS ÍCONES E ATUALIZA O NOME
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     const temaSalvo = localStorage.getItem("tema");
@@ -20,10 +20,18 @@ document.addEventListener("DOMContentLoaded", () => {
             logoCantina.src = "../PRINCIPAL/foto/icon3.png"; 
         }
     }
+
+    // --- SINCRONIZAÇÃO DO NOME DE USUÁRIO NA HOME ---
+    const nomeDoLocalStorage = localStorage.getItem("username");
+    const displayNomeHome = document.getElementById("nome-usuario-home"); 
+    
+    if (nomeDoLocalStorage && displayNomeHome) {
+        displayNomeHome.textContent = nomeDoLocalStorage;
+    }
 });
 
 // ==========================================
-// CONTROLE DA FOTO DE PERFIL (UPLOAD E CARREGAMENTO)
+// 2. CONTROLE DA FOTO DE PERFIL (UPLOAD E CARREGAMENTO)
 // ==========================================
 const photoInput = document.getElementById("photo-input");
 const photoPreview = document.getElementById("photo-preview");
@@ -54,7 +62,7 @@ window.addEventListener("load", function(){
 });
 
 // ==========================================
-// FUNÇÃO MULTI-USO: FAVORITAR E SALVAR NO LOCALSTORAGE
+// 3. FUNÇÃO MULTI-USO: FAVORITAR E SALVAR NO LOCALSTORAGE
 // ==========================================
 function favoritar(botao){
     botao.classList.toggle("active");
@@ -88,7 +96,7 @@ function favoritar(botao){
 }
 
 // ==========================================
-// FILTROS DAS CATEGORIAS (FRITOS, DOCES, LANCHES, BEBIDAS)
+// 4. FILTROS DAS CATEGORIAS (FRITOS, DOCES, LANCHES, BEBIDAS)
 // ==========================================
 const botoesFiltro = document.querySelectorAll(".filtro-bnt");
 const itens = document.querySelectorAll(".frito, .lanche, .doce, .bebidas");
@@ -125,7 +133,7 @@ botoesFiltro.forEach(botao => {
 });
 
 // ==========================================
-// FILTRO DA CATEGORIA ESPECÍFICA: FAVORITOS
+// 5. FILTRO DA CATEGORIA ESPECÍFICA: FAVORITOS
 // ==========================================
 const botaoFavoritos = document.querySelector('[data-categoria="favoritos"]');
 
@@ -167,18 +175,18 @@ window.addEventListener("load", () => {
 });
 
 // ==========================================
-// SISTEMA DE CARRINHO DE COMPRAS & MODAL FLUTUANTE
+// 6. SISTEMA DE CARRINHO DE COMPRAS & MODAL CORRIGIDO
 // ==========================================
 const cardapioPrecos = {
-    "pastel": { nome: "Pastel de Frango", preco: 11.00 },
-    "batata": { nome: "Batata Frita C/ Cheddar", preco: 15.00 },
-    "dog": { nome: "Cachorro Quente", preco: 10.00 },
-    "hamburguer": { nome: "X- tudo Completo", preco: 20.00 },
-    "brownie": { nome: "Brownie de Chocolate", preco: 10.00 },
-    "coxinha": { nome: "Coxinha de Frango", preco: 8.00 },
-    "fanta": { nome: "Fanta Laranja", preco: 6.00 },
-    "coca-cola": { nome: "Coca-Cola", preco: 7.00 },
-    "guarana": { nome: "Guaraná Zero", preco: 7.00 }
+    "pastel": { nome: "Pastel de Frango", preco: 11.00, foto: "foto/pastel.png" },
+    "batata": { nome: "Batata Frita C/ Cheddar", preco: 15.00, foto: "foto/batata.png" },
+    "dog": { nome: "Cachorro Quente", preco: 10.00, foto: "foto/dog.png" },
+    "hamburguer": { nome: "X- tudo Completo", preco: 20.00, foto: "foto/hamburguer.png" },
+    "brownie": { nome: "Brownie de Chocolate", preco: 10.00, foto: "foto/broni.png" }, 
+    "coxinha": { nome: "Coxinha de Frango", preco: 8.00, foto: "foto/coxinha.png" },
+    "fanta": { nome: "Fanta Laranja", preco: 6.00, foto: "foto/fanta.png" },
+    "coca-cola": { nome: "Coca-Cola", preco: 7.00, foto: "foto/coca-cola.png" },
+    "guarana": { nome: "Guaraná Zero", preco: 7.00, foto: "foto/guarana.png" }
 };
 
 const botaoAbrirCarrinho = document.getElementById("btnAbrirCarrinho"); 
@@ -208,7 +216,7 @@ window.addEventListener("click", (e) => {
 function adicionarAoCarrinho(idProduto) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 
-    if (carrinho[idProduto] && typeof carrinho[idProduto] === 'object') {
+    if (carrinho[idProduto]) {
         carrinho[idProduto].quantidade += 1;
     } else {
         carrinho[idProduto] = {
@@ -229,18 +237,10 @@ function removerDoCarrinho(idProduto) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 
     if (carrinho[idProduto]) {
-        let quantidade = typeof carrinho[idProduto] === 'object' ? carrinho[idProduto].quantidade : carrinho[idProduto];
-        let observacao = typeof carrinho[idProduto] === 'object' ? carrinho[idProduto].observacao : "";
+        carrinho[idProduto].quantidade -= 1;
 
-        quantidade -= 1;
-
-        if (quantidade <= 0) {
+        if (carrinho[idProduto].quantidade <= 0) {
             delete carrinho[idProduto];
-        } else {
-            carrinho[idProduto] = {
-                quantidade: quantidade,
-                observacao: observacao
-            };
         }
 
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
@@ -254,8 +254,7 @@ function removerDoCarrinho(idProduto) {
 
 function salvarObservacao(idProduto, texto) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
-    
-    if (carrinho[idProduto] && typeof carrinho[idProduto] === 'object') {
+    if (carrinho[idProduto]) {
         carrinho[idProduto].observacao = texto;
         localStorage.setItem("carrinho", JSON.stringify(carrinho));
     }
@@ -263,7 +262,6 @@ function salvarObservacao(idProduto, texto) {
 
 function atualizarHeaderCarrinho() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
-    
     let totalItens = 0;
     let valorTotal = 0.00;
 
@@ -271,11 +269,10 @@ function atualizarHeaderCarrinho() {
         const itemDoCarrinho = carrinho[idProduto];
         if (!itemDoCarrinho) continue;
 
-        const quantidade = typeof itemDoCarrinho === 'object' ? itemDoCarrinho.quantidade : Number(itemDoCarrinho);
-        
+        const quantidade = itemDoCarrinho.quantidade;
         if (cardapioPrecos[idProduto] && !isNaN(quantidade)) {
-            totalItens += quantidade;
-            valorTotal += cardapioPrecos[idProduto].preco * quantidade;
+            totalItens += quantidade; // Corrigido aqui de quantity para quantidade
+            valorTotal += cardapioPrecos[idProduto].preco * quantidade; // Corrigido aqui de quantity para quantidade
         }
     }
 
@@ -286,6 +283,9 @@ function atualizarHeaderCarrinho() {
     if (displayTotal) displayTotal.textContent = valorTotal.toFixed(2);
 }
 
+// ==========================================
+// RENDERIZADOR DO CARRINHO (SEM STYLE INLINE PARA NÃO QUEBRAR SEU CSS)
+// ==========================================
 function exibirItensNoCarrinho() {
     const containerItens = document.getElementById("itens-do-carrinho");
     const displayTotalModal = document.getElementById("total-modal");
@@ -302,17 +302,16 @@ function exibirItensNoCarrinho() {
         const itemDoCarrinho = carrinho[idProduto];
         if (!itemDoCarrinho) continue;
 
-        const quantidade = typeof itemDoCarrinho === 'object' ? itemDoCarrinho.quantidade : Number(itemDoCarrinho);
-        const obsAtual = typeof itemDoCarrinho === 'object' ? itemDoCarrinho.observacao : "";
-
+        const quantidade = itemDoCarrinho.quantidade;
+        const obsAtual = itemDoCarrinho.observacao || "";
         const produtoInfo = cardapioPrecos[idProduto];
 
-        if (produtoInfo && !isNaN(quantidade) && quantidade > 0) {
+        if (produtoInfo && quantidade > 0) {
             possuiItens = true;
             const subtotalItem = produtoInfo.preco * quantidade;
             precoTotalGeral += subtotalItem;
 
-            const itemHTML = `
+            containerItens.innerHTML += `
                 <div class="item-carrinho">
                     <div class="item-carrinho-topo">
                         <div class="item-carrinho-info">
@@ -320,24 +319,23 @@ function exibirItensNoCarrinho() {
                             <span>R$ ${produtoInfo.preco.toFixed(2)}</span>
                         </div>
                         <div class="item-carrinho-controles">
-                            <button onclick="alterarQuantidadeModal('${idProduto}', -1)">-</button>
+                            <button onclick="removerDoCarrinho('${idProduto}')">-</button>
                             <span>${quantidade}</span>
-                            <button onclick="alterarQuantidadeModal('${idProduto}', 1)">+</button>
+                            <button onclick="adicionarAoCarrinho('${idProduto}')">+</button>
                         </div>
                     </div>
                     <input type="text" 
-                           class="input-observacao" 
-                           placeholder="Algum detalhe extra? Ex: sem cebola..." 
-                           value="${obsAtual || ''}" 
+                           class="input-observacao"
+                           placeholder="Observação..." 
+                           value="${obsAtual}" 
                            oninput="salvarObservacao('${idProduto}', this.value)">
                 </div>
             `;
-            containerItens.innerHTML += itemHTML;
         }
     }
 
     if (!possuiItens) {
-        containerItens.innerHTML = `<p class="carrinho-vazio" style="text-align:center; color:#aaa;"><i class='bx bx-cart-alt' style='font-size: 2rem;'></i><br>Seu carrinho está vazio.</p>`;
+        containerItens.innerHTML = `<p class="carrinho-vazio">Seu carrinho está vazio.</p>`;
     }
 
     if (displayTotalModal) {
@@ -345,93 +343,23 @@ function exibirItensNoCarrinho() {
     }
 }
 
-function alterarQuantidadeModal(idProduto, valor) {
-    if (valor === 1) {
-        adicionarAoCarrinho(idProduto);
-    } else {
-        removerDoCarrinho(idProduto);
+// ==========================================
+// 7. FUNÇÃO EXCLUSIVA DO BOTÃO "PEDIR AGORA"
+// ==========================================
+function pedirAgoraAoCarrinho(idProduto) {
+    adicionarAoCarrinho(idProduto);
+    
+    if (modalCarrinho) {
+        modalCarrinho.classList.add("active"); 
+        exibirItensNoCarrinho(); 
     }
 }
 
 // ==========================================
-// FUNÇÃO: Enviar pedido / Salvar no Histórico
+// 8. FINALIZAR COMPRA & ENVIAR HISTÓRICO
 // ==========================================
 function finalizarCompra() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
-    
-    if (Object.keys(carrinho).length === 0) {
-        alert("Adicione pelo menos um item antes de finalizar!");
-        return;
-    }
-
-    let resumoPedido = "Resumo do seu Pedido:\n\n";
-    let itensPedido = [];
-    let precoTotalGeral = 0;
-
-    for (const idProduto in carrinho) {
-        const item = carrinho[idProduto];
-        const info = cardapioPrecos[idProduto];
-        if (info && item) {
-            const quantidade = typeof item === 'object' ? item.quantidade : item;
-            const observacao = typeof item === 'object' ? item.observacao : "";
-            const subtotal = info.preco * quantidade;
-            precoTotalGeral += subtotal;
-
-            resumoPedido += `- ${quantidade}x ${info.nome}`;
-            if (observacao && observacao.trim() !== "") {
-                resumoPedido += ` (Obs: "${observacao}")`;
-            }
-            resumoPedido += "\n";
-
-            itensPedido.push({
-                nome: info.nome,
-                quantidade: quantidade,
-                observacao: observacao
-            });
-        }
-    }
-
-    alert(resumoPedido + "\nPedido enviado com sucesso para a cozinha da Cantina!");
-    
-    let historico = JSON.parse(localStorage.getItem("historicoPedidos")) || [];
-    
-    const novoPedidoHistorico = {
-        idPedido: "#" + Math.floor(1000 + Math.random() * 9000), 
-        data: new Date().toLocaleDateString('pt-BR'),
-        hora: new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }),
-        itens: itensPedido,
-        total: precoTotalGeral
-    };
-
-    historico.unshift(novoPedidoHistorico);
-    localStorage.setItem("historicoPedidos", JSON.stringify(historico));
-
-    localStorage.removeItem("carrinho");
-    if (modalCarrinho) modalCarrinho.classList.remove("active");
-    
-    atualizarHeaderCarrinho();
-}
-
-// Inicializa o contador do cabeçalho ao carregar a página
-document.addEventListener("DOMContentLoaded", atualizarHeaderCarrinho);
-// ==========================================
-// CONTROLE E FUNÇÕES DO MODAL DE PIX (COM TRAVA DE SEGURANÇA)
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const modalPagamento = document.getElementById("modal-pagamento");
-    const botaoFecharPagamento = document.getElementById("fechar-pagamento");
-
-    if (botaoFecharPagamento && modalPagamento) {
-        botaoFecharPagamento.addEventListener("click", () => {
-            modalPagamento.classList.remove("active");
-        });
-    }
-});
-
-// PASSO 1: Apenas calcula o valor e abre a tela do Pix (Não envia nada para a cozinha ainda)
-function finalizarCompra() {
-    const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
-    const modalCarrinho = document.getElementById("modal-carrinho");
     const modalPagamento = document.getElementById("modal-pagamento");
     
     if (Object.keys(carrinho).length === 0) {
@@ -441,11 +369,8 @@ function finalizarCompra() {
 
     let precoTotalGeral = 0;
     for (const idProduto in carrinho) {
-        const item = carrinho[idProduto];
-        const info = cardapioPrecos[idProduto];
-        if (info && item) {
-            const quantidade = typeof item === 'object' ? item.quantidade : item;
-            precoTotalGeral += info.preco * quantidade;
+        if (carrinho[idProduto] && cardapioPrecos[idProduto]) {
+            precoTotalGeral += cardapioPrecos[idProduto].preco * carrinho[idProduto].quantidade;
         }
     }
 
@@ -454,12 +379,13 @@ function finalizarCompra() {
         displayTotalPagamento.textContent = precoTotalGeral.toFixed(2);
     }
 
-    // Transiciona de um modal para o outro
     if (modalCarrinho) modalCarrinho.classList.remove("active");
     if (modalPagamento) modalPagamento.classList.add("active");
 }
 
-// PASSO 2: OBRIGATÓRIO - O pedido só é gerado e enviado aqui após a confirmação do pagamento
+// ==========================================
+// 9. PROCESSAR PAGAMENTO PIX E LIMPAR DADOS
+// ==========================================
 function processarPagamentoPix() {
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
     const modalPagamento = document.getElementById("modal-pagamento");
@@ -469,7 +395,6 @@ function processarPagamentoPix() {
         return;
     }
 
-    // Copia a chave Pix fictícia/real para a área de transferência
     const minhaChavePix = "00020101021126580014BR.GOV.BCB.PIX0136e8af626c-89c7-45b4-9798-23ad25721e5e5204000053039865802BR5925roselene gomes iglezias i6009SAO PAULO62080504daqr6304C3AF"; 
     navigator.clipboard.writeText(minhaChavePix);
     alert("Código Pix copiado para a área de transferência com sucesso!");
@@ -482,29 +407,27 @@ function processarPagamentoPix() {
         const item = carrinho[idProduto];
         const info = cardapioPrecos[idProduto];
         if (info && item) {
-            const quantidade = typeof item === 'object' ? item.quantidade : item;
-            const observacao = typeof item === 'object' ? item.observacao : "";
-            const subtotal = info.preco * quantidade;
+            const quantity = item.quantidade;
+            const observacao = item.observacao || "";
+            const subtotal = info.preco * quantity;
             precoTotalGeral += subtotal;
 
-            resumoPedido += `- ${quantidade}x ${info.nome}`;
-            if (observacao && observacao.trim() !== "") {
+            resumoPedido += `- ${quantity}x ${info.nome}`;
+            if (observacao.trim() !== "") {
                 resumoPedido += ` (Obs: "${observacao}")`;
             }
             resumoPedido += "\n";
 
             itensPedido.push({
                 nome: info.nome,
-                quantidade: quantidade,
+                quantidade: quantity,
                 observacao: observacao
             });
         }
     }
 
-    // Exibe a confirmação final na tela
     alert(resumoPedido + `\nTotal Pago: R$ ${precoTotalGeral.toFixed(2)}\n\nO painel da cozinha já recebeu seu pedido!`);
-    
-    // SÓ SALVA NO HISTÓRICO AGORA
+
     let historico = JSON.parse(localStorage.getItem("historicoPedidos")) || [];
     const novoPedidoHistorico = {
         idPedido: "#" + Math.floor(1000 + Math.random() * 9000), 
@@ -517,12 +440,25 @@ function processarPagamentoPix() {
     historico.unshift(novoPedidoHistorico);
     localStorage.setItem("historicoPedidos", JSON.stringify(historico));
 
-    // LIMPA O CARRINHO SÓ DEPOIS QUE PAGOU
     localStorage.removeItem("carrinho");
     
-    // Fecha o modal do Pix
     if (modalPagamento) modalPagamento.classList.remove("active");
     
-    // Reseta os contadores visuais do topo da página
     atualizarHeaderCarrinho();
 }
+
+// ==========================================
+// 10. INICIALIZADOR DE EVENTOS DA PÁGINA
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const modalPagamento = document.getElementById("modal-pagamento");
+    const botaoFecharPagamento = document.getElementById("fechar-pagamento");
+
+    if (botaoFecharPagamento && modalPagamento) {
+        botaoFecharPagamento.addEventListener("click", () => {
+            modalPagamento.classList.remove("active");
+        });
+    }
+
+    atualizarHeaderCarrinho();
+});
