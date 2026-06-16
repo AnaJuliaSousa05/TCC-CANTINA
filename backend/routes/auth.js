@@ -1,13 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-console.log("ARQUIVO AUTH CERTO CARREGADO");
+const authController = require("../controllers/authController");
 
-router.get("/me", (req, res) => {
-    console.log("ROTA /ME FOI CHAMADA");
-    res.json({
-        teste: "funcionando"
-    });
-});
+router.post("/register", authController.register);
+router.post("/login", authController.login);
+router.post("/logout", authController.logout);
+router.get("/me", authController.me);
+router.put("/perfil", authController.updateProfile);
 
 module.exports = router;

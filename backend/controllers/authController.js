@@ -1,6 +1,7 @@
 const db = require("../db/db");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+console.log("AUTHCONTROLLER CARREGADO");
 
 const saltRounds = 10;
 
@@ -52,6 +53,11 @@ exports.register = (req, res) => {
 // ======================
 exports.login = (req, res) => {
 
+
+    console.log("=================================");
+    console.log("SERVIDOR TESTE 123");
+    console.log("=================================");
+
     console.log("LOGIN CHAMADO");
     console.log(req.body);
     
@@ -64,19 +70,23 @@ exports.login = (req, res) => {
             if (err) return res.status(500).send(err);
 
             if (result.length === 0) {
-                return res.send({ msg: "Usuário não encontrado" });
+                return res.status(401).send({
+                 msg: "Usuário não encontrado"
+                    });
             }
 
             const user = result[0];
 
             bcrypt.compare(password, user.password, (error, match) => {
-                if (error) return res.status(500).send(error);
-
+                    if (error) return res.status(500).send(error);
                 if (!match) {
-                    return res.send({ msg: "Senha incorreta" });
-                }
+            console.log("ENTROU NO BLOCO SENHA INCORRETA");
 
-                // 🔥 AQUI entra o JWT (no lugar da session)
+              return res.status(401).json({
+                msg: "Senha incorreta"
+               });
+             }
+                //  AQUI entra o JWT (no lugar da session)
                 const token = jwt.sign(
                     {
                         id: user.id,
@@ -85,12 +95,15 @@ exports.login = (req, res) => {
                     process.env.JWT_SECRET,
                     { expiresIn: "1h" }
                 );
-
+                console.log("USER COMPLETO:", user);
+                console.log("NICKNAME BANCO:", user.nickname);
                 return res.send({
                     msg: "Usuario logado com sucesso",
                     token: token,
-                    role: user.role
-                });
+                    role: user.role,
+                    nickname: user.nickname
+             })
+                
             });
         }
     );
@@ -137,13 +150,113 @@ exports.me = (req, res) => {
                     });
                 }
 
-                res.json(result[0]);
+                return res.json(result[0]);
             }
         );
 
-    } catch {
+    } catch (err) {
+
         return res.status(401).json({
             msg: "Token inválido"
         });
+
+    }
+};
+
+// ======================
+// UPDATE PROFILE
+// ======================
+exports.updateProfile = async (req, res) => {
+   console.log("ENTROU NO UPDATE");
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+        return res.status(401).json({
+            msg: "Token não enviado"
+        });
+    }
+
+    try {
+
+        const decoded = jwt.verify(
+            token,
+            process.env.JWT_SECRET
+        );
+
+        const { nickname, email, password } = req.body;
+
+        if (!nickname || !email) {
+            return res.status(400).json({
+                msg: "Nickname e email são obrigatórios"
+            });
+        }
+
+        if (password && password.trim() !== "") {
+
+            const senhaHash = await bcrypt.hash(
+                password,
+                saltRounds
+            );
+
+            db.query(
+                `UPDATE usuarios
+                 SET nickname = ?, email = ?, password = ?
+                 WHERE id = ?`,
+                [
+                    nickname,
+                    email,
+                    senhaHash,
+                    decoded.id
+                ],
+                (err) => {
+
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            msg: "Erro ao atualizar"
+                        });
+                    }
+
+                    return res.json({
+                        msg: "Perfil atualizado"
+                    });
+                }
+            );
+
+        } else {
+
+            db.query(
+                `UPDATE usuarios
+                 SET nickname = ?, email = ?
+                 WHERE id = ?`,
+                [
+                    nickname,
+                    email,
+                    decoded.id
+                ],
+                (err) => {
+
+                    if (err) {
+                        console.log(err);
+                        return res.status(500).json({
+                            msg: "Erro ao atualizar"
+                        });
+                    }
+
+                    return res.json({
+                        msg: "Perfil atualizado"
+                    });
+                }
+            );
+        }
+
+    } catch (err) {
+
+        console.log(err);
+
+        return res.status(401).json({
+            msg: "Token inválido"
+        });
+
     }
 };

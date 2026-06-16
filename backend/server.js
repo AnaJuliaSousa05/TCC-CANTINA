@@ -12,7 +12,7 @@ const db = require("./db/db");
 
 const app = express();
 
-console.log("🚀 SERVIDOR CERTO AQUI");
+console.log("SERVIDOR CERTO AQUI");
 
 //configurações
 const authRoutes = require("./routes/auth");
@@ -34,6 +34,11 @@ app.use("/auth", authRoutes);
 app.get("/teste", (req, res) => {
     res.send("TESTE OK");
 });
+
+app.put("/testeput", (req, res) => {
+    res.send("PUT FUNCIONOU");
+});
+
 
 
 //config email
