@@ -324,34 +324,6 @@ body {
     background-color: var(--accent-hover);
 }
 
-/* Ajusta o rodapé do card para alinhar o preço e o botão */
-.order-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 15px;
-}
-
-/* Estilização do botão concluir */
-.btn-concluir {
-    background-color: #e68a22; /* Verde */
-    color: white;
-    border: none;
-    padding: 8px 55px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: background 0.2s ease;
-}
-
-/* Efeito de hover (passar o mouse) */
-.btn-concluir:hover {
-    background-color: #ff7700; /* Verde mais escuro */
-}
 /* ==========================================================================
    RESPONSIVIDADE
    ========================================================================== */

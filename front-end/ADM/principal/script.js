@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const role = localStorage.getItem("role");
 
     if (nomeAdmin) {
-        nomeAdmin.textContent = nickname || "Administrador";
+        nomeAdmin.textContent = nickname || "ADMINISTRADOR";
     }
 
     if (cargoAdmin) {

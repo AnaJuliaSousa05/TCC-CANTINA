@@ -71,24 +71,29 @@ body {
     text-align: center;
     margin-bottom: 30px;
 }
-
+.user-profile h3{
+    color: #c7c7c7;
+}
 .profile-img-container {
+    
     position: relative;
     width: 120px;  
     height: 120px;
     margin: 0 auto 40px; 
-    margin-bottom: 45px !important;
+    margin-top: 35px;
+    margin-bottom: 35px !important;
     display: flex;       
     justify-content: center;
     align-items: center;
 }
 
 .profile-img-container img {
-    width: 100px; 
-    height: 100px;
+
+    width: 130px; 
+    height: 130px;
     border-radius: 50%; 
     object-fit: cover; 
-    border: 3px solid ; /* Borda azul destacando o painel admin */
+    border: 1px solid #ec8200 ; /* Borda azul destacando o painel admin */
     box-sizing: border-box;
 }
 
@@ -130,6 +135,7 @@ body {
 .nav-links {
     list-style: none;
     padding: 0;
+    margin-top: 50px;
 }
 
 .nav-links li {
@@ -185,21 +191,23 @@ hr {
     display: flex;
     transition: transform 0.3s ease;
 }
-
 .filtros {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 30px;
-    padding: 20px 10px;
-    margin-left: 150px;
+    gap: 40px; 
+    padding: 20px 150px;
+    margin-left: 50px;
     overflow-x: auto; 
     flex-wrap: nowrap;
     background-color: #1a1a1a;
     border-radius: 15px;
+    -webkit-overflow-scrolling:touch; 
+    margin-bottom: -40px;
 }
 
 .filtro-bnt {
-    background: var(--card-bg);
+    background: #222222;
     border: 1px solid #444;
     color: white;
     padding: 8px 20px;
@@ -211,9 +219,11 @@ hr {
 }
 
 .filtro-bnt.active, .filtro-bnt:hover {
-    background: var(--accent);
+    background: #ec8200;
     border-color: var(--accent);
 }
+
+
 
 /* CARDÁPIO E INFRAESTRUTURA DE PRODUTOS  */
 
@@ -230,7 +240,7 @@ hr {
     align-items: center;
     justify-content: space-between;
     width: 73%;
-    margin-left: 150px;
+    margin-left: 400px;
 }
 
 .cardapio h1 {
@@ -239,9 +249,10 @@ hr {
 }
 
 .btn-novo-item {
-    background-color: #9e6f35   ;
+    background-color: #ec8200   ;
     color: #fff;
     border: none;
+    margin-right: 70px;
     margin-top: 5px;
     margin-bottom: 5px;
     padding: 10px 20px;
@@ -256,7 +267,7 @@ hr {
 
 .btn-novo-item:hover {
     transform: scale(1.03);
-    background-color: #b36f1d;
+    
 }
 
 /* Layout Grid Organizado */
@@ -393,7 +404,7 @@ hr {
    ALERTA DE PEDIDOS / PAINEL SUPERIOR
    ========================================================================== */
 #btnAbrirPedidos {
-    background: var(--accent);
+    background: #ec8200;
     border: none;
     color: white;
     padding: 10px 20px;
@@ -409,7 +420,7 @@ hr {
 
 #btnAbrirPedidos:hover {
     transform: translateY(-3px); 
-    background-color: var(--accent-hover);
+
 }
 
 .total-carrinho {

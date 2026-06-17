@@ -19,12 +19,12 @@
             </div>
 
             <div class="carrinho-info">
-                <button id="btnAbrirPedidos">
+              <a href="../pendente/index.html">  <button id="btnAbrirPedidos">
                     <i class='bx bx-bell'></i>
                     <span id="contador-pedidos">3</span>
                     <span class="carrinho-texto">Novos Pedidos</span>
                 </button>
-                
+                </a>
             </div>
         </div>
     </header>
@@ -34,11 +34,9 @@
         <nav class="user-sidebar">
             <div class="user-profile">
                 <div class="profile-img-container">
-                    <img src="/LOGIN/foto/teste.png" alt="Foto do Administrador" id="photo-preview">
+                    <img src="../foto/teste.png" alt="Foto do Administrador" id="photo-preview">
                     <input type="file" id="photo-input" accept="image/*" style="display: none;">
-                    <button type="button" class="btn-edit-photo" title="Alterar foto" aria-label="Alterar foto"
-                    onclick="document.getElementById('photo-input').click()"><i class='bx bx-camera'></i>
-                   </button>
+                   
                 </div>
 
                 <h3 id="nome-admin"></h3>
@@ -48,10 +46,10 @@
             <ul class="nav-links">
 
     
-                <li><a href="../ADMIN/pedidos/index.html"><i class='bx bx-list-check'></i> Pedidos Pendentes</a></li>
-                <li><a href="../ADMIN/pedidos/index.html"><i class='bx bx-list-check'></i> Pedidos Conluídos   </a></li>
-                  <li><a href="../ADMIN/pedidos/index.html"><i class='bx bx-list-check'></i> Pedidos do Dia</a></li>
-
+                <li><a href="../pendente/index.html"><i class='bx bx-list-check'></i> Pedidos Pendentes</a></li>
+                <li><a href="../concluido/index.html"><i class='bx bx-list-check'></i> Pedidos Conluídos   </a></li>
+                 
+                
                 <hr>
                 <li><a href="../INICIO/index.html" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
             </ul>
