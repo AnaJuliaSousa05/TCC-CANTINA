@@ -89,9 +89,9 @@ window.addEventListener("load", function(){
 
     if(fotoSalva && photoPreview){
         photoPreview.src = fotoSalva;
-    } else if (photoPreview) {
-        photoPreview.src = "/LOGIN/foto/teste.png";
-    }
+   } else if (photoPreview) {
+    photoPreview.src = "../PRINCIPAL/foto/icon3.png";
+}
 });
 
 // ==========================================
@@ -269,7 +269,7 @@ function atualizarHeaderCarrinho() {
 
         const quantidade = itemDoCarrinho.quantidade;
         if (cardapioPrecos[idProduto] && !isNaN(quantidade)) {
-            totalItens += quantidade; 
+            totalItens += quantidade; // CORRIGIDO: Era aqui que estava "quantity" e quebrava tudo!
             valorTotal += cardapioPrecos[idProduto].preco * quantidade; 
         }
     }
@@ -308,7 +308,8 @@ function exibirItensNoCarrinho() {
 
         if (produtoInfo && quantidade > 0) {
             possuiItens = true;
-            const subtotalItem = produtoInfo.preco * quantity;
+            // CORRIGIDO: mudado de "quantity" para "quantidade" para evitar falha no subtotal
+            const subtotalItem = produtoInfo.preco * quantidade;
             precoTotalGeral += subtotalItem;
 
             containerItens.innerHTML += `
@@ -451,12 +452,12 @@ function processarPagamentoPix() {
         const item = carrinho[idProduto];
         const info = cardapioPrecos[idProduto];
         if (info && item) {
-            const quantity = item.quantidade;
+            const quantidade = item.quantidade;
             const observacao = item.observacao || "";
-            const subtotal = info.preco * quantity;
+            const subtotal = info.preco * quantidade;
             precoTotalGeral += subtotal;
 
-            resumoPedido += `- ${quantity}x ${info.nome}`;
+            resumoPedido += `- ${quantidade}x ${info.nome}`;
             if (observacao.trim() !== "") {
                 resumoPedido += ` (Obs: "${observacao}")`;
             }
@@ -464,7 +465,7 @@ function processarPagamentoPix() {
 
             itensPedido.push({
                 nome: info.nome,
-                quantidade: quantity,
+                quantidade: quantidade,
                 observacao: observacao
             });
         }
@@ -509,7 +510,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// 11. SISTEMA DINÂMICO: INTEGRAÇÃO COM A API (CORRIGIDO SEM LOOP ONERROR)
+// 11. SISTEMA DINÂMICO: INTEGRAÇÃO COM A API (CORRIGIDO PARA EXIBIR IMAGENS DO ADMIN)
 // ==========================================
 const API_URL = "http://localhost:5000/produtos";
 
@@ -541,15 +542,19 @@ async function carregarCardapioUsuario() {
                 classeCategoria = "bebidas";
             }
 
-            // TRATAMENTO SEGURO DA IMAGEM: Removemos o atributo 'onerror' que gerava o loop infinito
+            // TRATAMENTO SEGURO DA IMAGEM
             let fotoProduto = produto.imagem;
             if (!fotoProduto || fotoProduto === "sem-imagem.png" || fotoProduto.trim() === "") {
-                fotoProduto = "icon3.png"; // Usa o ícone padrão que já existe no seu projeto
+                fotoProduto = "icon3.png"; 
             }
+
+            // CORREÇÃO ESSENCIAL: Verifica se a string já é o Base64 enviado pelo Admin (começa com data:).
+            // Se for Base64, injeta direto. Se for um arquivo local, adiciona o caminho da pasta.
+            const urlFinalImagem = fotoProduto.startsWith("data:") ? fotoProduto : `../PRINCIPAL/foto/${fotoProduto}`;
 
             containerCardapio.innerHTML += `
                 <div class="${classeCategoria}" id="${produto.id}">
-                    <img src="../PRINCIPAL/foto/${fotoProduto}" alt="${produto.nome}">
+                    <img src="${urlFinalImagem}" alt="${produto.nome}">
                     <div class="info"> 
                         <div class="titulo-container">
                             <h3>${produto.nome}</h3> 
