@@ -22,19 +22,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // --- SINCRONIZAÇÃO DO NOME DE USUÁRIO NA HOME ---
-    const nomeDoLocalStorage = localStorage.getItem("username");
-    const displayNomeHome = document.getElementById("nome-usuario-home"); 
-    
+    const nomeDoLocalStorage = localStorage.getItem("nickname");
+    const roleDoLocalStorage = localStorage.getItem("role");
+
+    const displayNomeHome = document.getElementById("nome-usuario-home");
+    const displayCargo = document.getElementById("cargo-usuario");
+
     if (nomeDoLocalStorage && displayNomeHome) {
         displayNomeHome.textContent = nomeDoLocalStorage;
+    }
+
+    if (roleDoLocalStorage && displayCargo) {
+        displayCargo.textContent =
+            roleDoLocalStorage === "admin"
+                ? "ADMINISTRADOR"
+                : "ESTUDANTE";
     }
 });
 
 // ==========================================
-// 2. CONTROLE DA FOTO DE PERFIL (UPLOAD E CARREGAMENTO)
+// 2. CONTROLE DA FOTO DE PERFIL (UPLOAD, COMPRESSÃO E CARREGAMENTO)
 // ==========================================
 const photoInput = document.getElementById("photo-input");
 const photoPreview = document.getElementById("photo-preview");
+
+const usuarioLogado = localStorage.getItem("nickname") || "comum";
+const chaveFotoUsuario = `fotoPerfil_${usuarioLogado}`;
 
 if (photoInput) {
     photoInput.addEventListener("change", function(){
@@ -44,8 +57,26 @@ if (photoInput) {
             const reader = new FileReader();
 
             reader.onload = function(e){
-                photoPreview.src = e.target.result;
-                localStorage.setItem("fotoPerfil", e.target.result);
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+                    
+                    canvas.width = 150;
+                    canvas.height = 150;
+                    
+                    ctx.drawImage(img, 0, 0, 150, 150);
+                    
+                    const fotoCompactada = canvas.toDataURL('image/jpeg', 0.7);
+
+                    if (photoPreview) {
+                        photoPreview.src = fotoCompactada;
+                    }
+                    
+                    localStorage.setItem(chaveFotoUsuario, fotoCompactada);
+                };
             }
 
             reader.readAsDataURL(file);
@@ -54,10 +85,12 @@ if (photoInput) {
 }
 
 window.addEventListener("load", function(){
-    const fotoSalva = localStorage.getItem("fotoPerfil");
+    const fotoSalva = localStorage.getItem(chaveFotoUsuario);
 
     if(fotoSalva && photoPreview){
         photoPreview.src = fotoSalva;
+    } else if (photoPreview) {
+        photoPreview.src = "/LOGIN/foto/teste.png";
     }
 });
 
@@ -96,86 +129,49 @@ function favoritar(botao){
 }
 
 // ==========================================
-// 4. FILTROS DAS CATEGORIAS (FRITOS, DOCES, LANCHES, BEBIDAS)
+// 4 e 5. FILTROS DAS CATEGORIAS (CORRIGIDO PARA FUNCIONAR DINAMICAMENTE)
 // ==========================================
-const botoesFiltro = document.querySelectorAll(".filtro-bnt");
-const itens = document.querySelectorAll(".frito, .lanche, .doce, .bebidas");
-
-botoesFiltro.forEach(botao => {
-    botao.addEventListener("click", () => {
-        botoesFiltro.forEach(btn => btn.classList.remove("active"));
-        if (botaoFavoritos) botaoFavoritos.classList.remove("active");
-        
-        botao.classList.add("active");
-        const category = botao.dataset.categoria;
-
-        itens.forEach(item => {
-            if (category === "todos") {
-                item.style.display = "flex";
-            }
-            else if (category === "salgados" && item.classList.contains("frito")) {
-                item.style.display = "flex";
-            }
-            else if (category === "lanches" && item.classList.contains("lanche")) {
-                item.style.display = "flex";
-            }
-            else if (category === "doces" && item.classList.contains("doce")) {
-                item.style.display = "flex";
-            }
-            else if (category === "bebidas" && item.classList.contains("bebidas")) {
-                item.style.display = "flex";
-            }
-            else {
-                item.style.display = "none";
-            }
-        });
+function configurarEventosFiltros() {
+    const botoesFiltro = document.querySelectorAll(".filtro-bnt");
+    
+    botoesFiltro.forEach(botao => {
+        botao.replaceWith(botao.cloneNode(true)); // Remove listeners antigos para evitar duplicações
     });
-});
 
-// ==========================================
-// 5. FILTRO DA CATEGORIA ESPECÍFICA: FAVORITOS
-// ==========================================
-const botaoFavoritos = document.querySelector('[data-categoria="favoritos"]');
+    const novosBotoes = document.querySelectorAll(".filtro-bnt");
 
-if (botaoFavoritos) {
-    botaoFavoritos.addEventListener("click", () => {
-        botoesFiltro.forEach(btn => {
-            btn.classList.remove("active");
-        });
+    novosBotoes.forEach(botao => {
+        botao.addEventListener("click", () => {
+            novosBotoes.forEach(btn => btn.classList.remove("active"));
+            botao.classList.add("active");
 
-        botaoFavoritos.classList.add("active");
-        const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+            const category = botao.dataset.categoria;
+            const itens = document.querySelectorAll(".frito, .lanche, .doce, .bebidas");
+            const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
-        itens.forEach(item => {
-            if(favoritos.includes(item.id)){
-                item.style.display = "flex"; 
-            } else {
-                item.style.display = "none";
-            }
+            itens.forEach(item => {
+                if (category === "todos") {
+                    item.style.display = "flex";
+                } else if (category === "favoritos" && favoritos.includes(item.id)) {
+                    item.style.display = "flex";
+                } else if (category === "salgados" && item.classList.contains("frito")) {
+                    item.style.display = "flex";
+                } else if (category === "lanches" && item.classList.contains("lanche")) {
+                    item.style.display = "flex";
+                } else if (category === "doces" && item.classList.contains("doce")) {
+                    item.style.display = "flex";
+                } else if (category === "bebidas" && item.classList.contains("bebidas")) {
+                    item.style.display = "flex";
+                } else {
+                    item.style.display = "none";
+                }
+            });
         });
     });
 }
 
-window.addEventListener("load", () => {
-    const favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-    const botoesFavorito = document.querySelectorAll(".btn-favorito");
-
-    botoesFavorito.forEach(botao => {
-        const item = botao.closest("[id]");
-
-        if(item && favoritos.includes(item.id)){
-            botao.classList.add("active");
-            const icone = botao.querySelector("i");
-
-            icone.classList.remove("fa-regular");
-            icone.classList.add("fa-solid");
-            icone.style.color = "red";
-        }
-    });
-});
-
 // ==========================================
-// 6. SISTEMA DE CARRINHO DE COMPRAS & MODAL CORRIGIDO
+// 6. SISTEMA DE CARRINHO DE COMPRAS & MODAL
 // ==========================================
 const cardapioPrecos = {
     "pastel": { nome: "Pastel de Frango", preco: 11.00, foto: "foto/pastel.png" },
@@ -261,6 +257,8 @@ function salvarObservacao(idProduto, texto) {
 }
 
 function atualizarHeaderCarrinho() {
+    Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
+
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
     let totalItens = 0;
     let valorTotal = 0.00;
@@ -271,8 +269,8 @@ function atualizarHeaderCarrinho() {
 
         const quantidade = itemDoCarrinho.quantidade;
         if (cardapioPrecos[idProduto] && !isNaN(quantidade)) {
-            totalItens += quantidade; // Corrigido aqui de quantity para quantidade
-            valorTotal += cardapioPrecos[idProduto].preco * quantidade; // Corrigido aqui de quantity para quantidade
+            totalItens += quantidade; 
+            valorTotal += cardapioPrecos[idProduto].preco * quantidade; 
         }
     }
 
@@ -284,9 +282,11 @@ function atualizarHeaderCarrinho() {
 }
 
 // ==========================================
-// RENDERIZADOR DO CARRINHO (SEM STYLE INLINE PARA NÃO QUEBRAR SEU CSS)
+// RENDERIZADOR DO CARRINHO 
 // ==========================================
 function exibirItensNoCarrinho() {
+    Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
+
     const containerItens = document.getElementById("itens-do-carrinho");
     const displayTotalModal = document.getElementById("total-modal");
     
@@ -308,7 +308,7 @@ function exibirItensNoCarrinho() {
 
         if (produtoInfo && quantidade > 0) {
             possuiItens = true;
-            const subtotalItem = produtoInfo.preco * quantidade;
+            const subtotalItem = produtoInfo.preco * quantity;
             precoTotalGeral += subtotalItem;
 
             containerItens.innerHTML += `
@@ -358,9 +358,9 @@ function pedirAgoraAoCarrinho(idProduto) {
 // ==========================================
 // 8. FINALIZAR COMPRA & ENVIAR HISTÓRICO
 // ==========================================
-function finalizarCompra() {
+async function finalizarCompra() {
+    Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
-    const modalPagamento = document.getElementById("modal-pagamento");
     
     if (Object.keys(carrinho).length === 0) {
         alert("Adicione pelo menos um item antes de finalizar!");
@@ -368,25 +368,69 @@ function finalizarCompra() {
     }
 
     let precoTotalGeral = 0;
+    let itensPedido = [];
+
     for (const idProduto in carrinho) {
         if (carrinho[idProduto] && cardapioPrecos[idProduto]) {
             precoTotalGeral += cardapioPrecos[idProduto].preco * carrinho[idProduto].quantidade;
+            
+            itensPedido.push({
+                produto_id: idProduto,
+                quantidade: carrinho[idProduto].quantidade,
+                observacao: carrinho[idProduto].observacao || ""
+            });
         }
     }
 
-    const displayTotalPagamento = document.getElementById("total-pagamento-modal");
-    if (displayTotalPagamento) {
-        displayTotalPagamento.textContent = precoTotalGeral.toFixed(2);
-    }
+    try {
+        const respostaPedido = await fetch("http://localhost:5000/pedidos/criar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                valor_total: precoTotalGeral,
+                itens: itensPedido,
+                nickname: localStorage.getItem("nickname")
+            })
+        });
 
-    if (modalCarrinho) modalCarrinho.classList.remove("active");
-    if (modalPagamento) modalPagamento.classList.add("active");
+        const dadosPedidoSalvo = await respostaPedido.json();
+        const pedidoId = dadosPedidoSalvo.id || dadosPedidoSalvo.pedido_id || dadosPedidoSalvo.insertId;
+
+        if (!pedidoId) {
+            console.error("Resposta do servidor de pedidos:", dadosPedidoSalvo);
+            alert("Erro ao registrar o pedido no servidor.");
+            return;
+        }
+
+        const respostaPagamento = await fetch("http://localhost:5000/pagamentos/criar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ pedido_id: pedidoId })
+        });
+
+        const dadosPagamento = await respostaPagamento.json();
+
+        if (dadosPagamento.init_point) {
+            alert("Pedido gerado com sucesso! Redirecionando para a tela de pagamento...");
+            localStorage.removeItem("carrinho");
+            atualizarHeaderCarrinho();
+            window.location.href = dadosPagamento.init_point;
+        } else {
+            console.error("Resposta do pagamento:", dadosPagamento);
+            alert("Erro ao gerar o link de pagamento.");
+        }
+
+    } catch (erro) {
+        console.error("Erro na integração do fluxo de pagamento:", erro);
+        alert("Não foi possível conectar ao servidor backend.");
+    }
 }
 
 // ==========================================
 // 9. PROCESSAR PAGAMENTO PIX E LIMPAR DADOS
 // ==========================================
 function processarPagamentoPix() {
+    Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
     const modalPagamento = document.getElementById("modal-pagamento");
     
@@ -448,7 +492,7 @@ function processarPagamentoPix() {
 }
 
 // ==========================================
-// 10. INICIALIZADOR DE EVENTOS DA PÁGINA
+// 10. INICIALIZADOR DE EVENTOS DA PÁGINA (UNIFICADO)
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
     const modalPagamento = document.getElementById("modal-pagamento");
@@ -461,4 +505,109 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     atualizarHeaderCarrinho();
+    carregarCardapioUsuario();
 });
+
+// ==========================================
+// 11. SISTEMA DINÂMICO: INTEGRAÇÃO COM A API (CORRIGIDO SEM LOOP ONERROR)
+// ==========================================
+const API_URL = "http://localhost:5000/produtos";
+
+async function carregarCardapioUsuario() {
+    try {
+        const respuesta = await fetch(API_URL);
+        const produtos = await respuesta.json();
+
+        const containerCardapio = document.getElementById("lista-cardapio-usuario");
+        if (!containerCardapio) return;
+
+        containerCardapio.innerHTML = ""; 
+
+        if (produtos.length === 0) {
+            containerCardapio.innerHTML = `<p style="color: var(--text-secondary); text-align: center; width: 100%;">Nenhum item disponível no momento.</p>`;
+            return;
+        }
+
+        produtos.forEach(produto => {
+            let classeCategoria = "lanche"; 
+            const desc = (produto.descricao || "").toLowerCase();
+            const nome = (produto.nome || "").toLowerCase();
+
+            if (desc.includes("pastel") || desc.includes("frito") || desc.includes("coxinha") || nome.includes("batata")) {
+                classeCategoria = "frito";
+            } else if (desc.includes("doce") || desc.includes("chocolate") || desc.includes("brownie")) {
+                classeCategoria = "doce";
+            } else if (desc.includes("ml") || desc.includes("suco") || desc.includes("refrigerante") || desc.includes("coca") || desc.includes("fanta") || desc.includes("guarana")) {
+                classeCategoria = "bebidas";
+            }
+
+            // TRATAMENTO SEGURO DA IMAGEM: Removemos o atributo 'onerror' que gerava o loop infinito
+            let fotoProduto = produto.imagem;
+            if (!fotoProduto || fotoProduto === "sem-imagem.png" || fotoProduto.trim() === "") {
+                fotoProduto = "icon3.png"; // Usa o ícone padrão que já existe no seu projeto
+            }
+
+            containerCardapio.innerHTML += `
+                <div class="${classeCategoria}" id="${produto.id}">
+                    <img src="../PRINCIPAL/foto/${fotoProduto}" alt="${produto.nome}">
+                    <div class="info"> 
+                        <div class="titulo-container">
+                            <h3>${produto.nome}</h3> 
+                            <button class="btn-add" onclick="adicionarAoCarrinhoDinamicico(${produto.id}, '${produto.nome}', ${produto.preco})">
+                                <i class='bx bxs-message-square-add'></i>
+                            </button>
+                            <button class="btn-remove-carrinho" onclick="removerDoCarrinhoDinamico(${produto.id})">
+                                <i class='bx bxs-message-square-minus'></i>
+                            </button>
+                        </div>
+                        <span>R$ ${parseFloat(produto.preco).toFixed(2).replace('.', ',')}</span>
+                        <button class="btn-favorito" onclick="favoritar(this)">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+                        <h4>${produto.descricao}</h4>
+                        <a href="#"> 
+                           <button class="pedir" onclick="pedirAgoraDinamico(${produto.id}, '${produto.nome}', ${produto.preco})">Pedir agora</button>
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Inicializa os filtros somente APÓS os elementos da API serem criados na tela
+        configurarEventosFiltros();
+
+    } catch (erro) {
+        console.error("Erro ao carregar o cardápio:", erro);
+        const containerCardapio = document.getElementById("lista-cardapio-usuario");
+        if (containerCardapio) {
+            containerCardapio.innerHTML = `<p style="color: red; text-align: center; width: 100%;">Erro ao carregar o cardápio. Certifique-se de que o servidor está online.</p>`;
+        }
+    }
+}
+
+// ==========================================
+// 12. ADAPTADORES DE PERSISTÊNCIA DA API
+// ==========================================
+function adicionarAoCarrinhoDinamicico(id, nome, preco) {
+    cardapioPrecos[id] = { nome: nome, preco: parseFloat(preco) };
+    
+    let precosSalvos = JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {};
+    precosSalvos[id] = { nome: nome, preco: parseFloat(preco) };
+    localStorage.setItem("cardapioPrecosSalvos", JSON.stringify(precosSalvos));
+
+    adicionarAoCarrinho(id);
+}
+
+function removerDoCarrinhoDinamico(id) {
+    removerDoCarrinho(id);
+}
+
+function pedirAgoraDinamico(id, nome, preco) {
+    cardapioPrecos[id] = { nome: nome, preco: parseFloat(preco) };
+    
+    let precosSalvos = JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {};
+    precosSalvos[id] = { nome: nome, preco: parseFloat(preco) };
+    localStorage.setItem("cardapioPrecosSalvos", JSON.stringify(precosSalvos));
+
+    pedirAgoraAoCarrinho(id);
+}

@@ -97,23 +97,43 @@ document.addEventListener("DOMContentLoaded", () => {
     const inputSenha = document.getElementById('input-senha');
 
     // --- CARREGAR DADOS DOS INPUTS SALVOS AO ABRIR A PÁGINA ---
-    const usernameSalvo = localStorage.getItem("username");
-    if (usernameSalvo) {
-        if (displayNomeHeader) displayNomeHeader.textContent = usernameSalvo;
-        if (inputUsername) inputUsername.value = usernameSalvo;
+    const token = localStorage.getItem("token");
+
+if (token) {
+
+    try {
+
+        const res = await fetch(
+            "http://localhost:5000/auth/me",
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        const user = await res.json();
+
+        console.log("USUARIO:", user);
+
+        if (displayNomeHeader) {
+            displayNomeHeader.textContent = user.nickname;
+        }
+
+        if (inputUsername) {
+            inputUsername.value = user.nickname;
+        }
+
+        if (inputEmail) {
+            inputEmail.value = user.email;
+        }
+
+    } catch (err) {
+
+        console.error("ERRO AO BUSCAR USUÁRIO:", err);
+
     }
-    if (localStorage.getItem("fullname") && inputFullname) {
-        inputFullname.value = localStorage.getItem("fullname");
-    }
-    if (localStorage.getItem("curso") && inputCurso) {
-        inputCurso.value = localStorage.getItem("curso");
-    }
-    if (localStorage.getItem("email") && inputEmail) {
-        inputEmail.value = localStorage.getItem("email");
-    }
-    if (localStorage.getItem("senha") && inputSenha) {
-        inputSenha.value = localStorage.getItem("senha");
-    }
+}
 
     // --- SALVAR INFORMAÇÕES DO FORMULÁRIO ---
     if (formPerfil) {
@@ -145,12 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (displayNomeHeader && novoUsername) displayNomeHeader.textContent = novoUsername;
                 
                 // 2. Salva todas as informações de forma síncrona no LocalStorage
-                if (inputUsername) localStorage.setItem("username", inputUsername.value);
-                if (inputFullname) localStorage.setItem("fullname", inputFullname.value);
-                if (inputCurso) localStorage.setItem("curso", inputCurso.value);
-                if (inputEmail) localStorage.setItem("email", inputEmail.value);
-                if (inputSenha) localStorage.setItem("senha", inputSenha.value);
-
+                
                 // Desativa os campos novamente
                 inputs.forEach(input => input.disabled = true);
                 if(btnFoto) {

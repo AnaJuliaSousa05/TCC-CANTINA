@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+
     //login
+
     const formLogin = document.getElementById('LoginUsuarios');
       
     if (formLogin) {
@@ -19,16 +21,39 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                  
 
-                const data = await res.json();
+                
+              const data = await res.json();
+              console.log("STATUS:", res.status);
+              console.log("RES.OK:", res.ok);
+              console.log("DADOS:", data);
 
-                if (res.ok) {
-                    alert(data.msg || "Login feito com sucesso!");
-                    localStorage.setItem("token", data.token);
-                    window.location.href = "/front-end/INICIO/index.html";
+              
+            console.log("NICKNAME:", data.nickname);
+            console.log("ROLE:", data.role);
+              if (data.token) {
+                  alert(data.msg || "Login feito com sucesso!");
+              
+                  localStorage.setItem("token", data.token);
+                  localStorage.setItem("nickname", data.nickname);
+                  localStorage.setItem("role", data.role);
+              
+                  if (data.role === "admin") {
+              
+                      window.location.href =
+                      "/front-end/ADM/principal/index.html";
+              
+                  } else {
+              
+                      window.location.href =
+                      "/front-end/PRINCIPAL/index.html";
+              
+                  }
 
-                } else {
-                    alert(data.msg || "Erro no login");
-                }
+
+              } else {
+                  alert(data.msg || "Erro no login");
+              }
+
 
             } catch (erro) {
                 console.error("ERRO LOGIN:", erro);
@@ -36,6 +61,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+
+
+    document.addEventListener("DOMContentLoaded", () => {
+
+    const nomeUsuario = document.getElementById("nome-usuario-home");
+    const cargoUsuario = document.getElementById("cargo-usuario");
+
+    const nickname = localStorage.getItem("nickname");
+    const role = localStorage.getItem("role");
+
+    console.log("Nickname salvo:", nickname);
+    console.log("Role salvo:", role);
+
+    if (nomeUsuario) nomeUsuario.textContent = nickname;
+    if (cargoUsuario) cargoUsuario.textContent = role;
+});
+
 
   //registro
     const formRegistro = document.getElementById('registrarUsuarios');
@@ -62,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 const data = await res.json();
-
+               
                 if (res.ok) {
                     alert("Conta criada com sucesso!");
 
