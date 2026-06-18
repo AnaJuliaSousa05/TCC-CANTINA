@@ -1,8 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // LOGIN
-    const formLogin = document.getElementById('LoginUsuarios');
+    // --- PROTEÇÃO DA TELA DE LOGIN ---
+    // Se o usuário já tiver um token e tentar entrar na página de login/registro, ele é mandado de volta
+    const tokenAtivo = localStorage.getItem("token");
+    const roleAtivo = localStorage.getItem("role");
+    
+    // Verifica se estamos na página de login ou registro (ajuste o nome do arquivo se necessário)
+    const naPaginaDeLogin = window.location.pathname.includes("login") || window.location.pathname.includes("INICIO");
 
+    if (tokenAtivo && naPaginaDeLogin) {
+        if (roleAtivo === "admin") {
+            window.location.replace("/front-end/ADM/principal/index.html");
+        } else {
+            window.location.replace("/front-end/PRINCIPAL/index.html");
+        }
+        return; // Para a execução do resto do script
+    }
+
+    // --- EXIBIR DADOS DO USUÁRIO NA HOME ---
+    const nomeUsuario = document.getElementById("nome-usuario-home");
+    const cargoUsuario = document.getElementById("cargo-usuario");
+
+    const nickname = localStorage.getItem("nickname");
+    const role = localStorage.getItem("role");
+
+    console.log("Nickname salvo:", nickname);
+    console.log("Role salvo:", role);
+
+    if (nomeUsuario) nomeUsuario.textContent = nickname;
+    if (cargoUsuario) cargoUsuario.textContent = role;
+
+
+    // --- LOGIN ---
+    const formLogin = document.getElementById('LoginUsuarios');
+      
     if (formLogin) {
         formLogin.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -11,58 +42,79 @@ document.addEventListener('DOMContentLoaded', () => {
             const senha = document.getElementById('senhaLogin').value;
 
             try {
-                const res = await fetch('http://127.0.0.1:5000/login', {
+                const res = await fetch('http://localhost:5000/auth/login', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password: senha }),
-                    credentials: 'include'
                 });
-
+                 
                 const data = await res.json();
+                console.log("STATUS:", res.status);
+                console.log("RES.OK:", res.ok);
+                console.log("DADOS:", data);
 
-                alert(data.msg);
+                console.log("NICKNAME:", data.nickname);
+                console.log("ROLE:", data.role);
+                
+                if (data.token) {
+                    alert(data.msg || "Login feito com sucesso!");
+                
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("nickname", data.nickname);
+                    localStorage.setItem("role", data.role);
+                
+                    if (data.role === "admin") {
+                        window.location.href = "/front-end/ADM/principal/index.html";
+                    } else {
+                        window.location.href = "/front-end/PRINCIPAL/index.html";
+                    }
 
-                if (data.msg === "Usuario logado com sucesso") {
-                    window.location.href = "/dashboard.html"; // ou sua página
+                } else {
+                    alert(data.msg || "Erro no login");
                 }
 
-            } catch (err) {
-                console.error("ERRO LOGIN:", err);
-                alert("Erro ao logar");
+            } catch (erro) {
+                console.error("ERRO LOGIN:", erro);
+                alert("Erro ao conectar com o servidor");
             }
         });
     }
 
-    // REGISTRO
+
+    // --- REGISTRO ---
     const formRegistro = document.getElementById('registrarUsuarios');
 
     if (formRegistro) {
         formRegistro.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const nickname = document.getElementById('nickname').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const nicknameReg = document.getElementById('nickname').value;
+            const emailReg = document.getElementById('email').value;
+            const passwordReg = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-
-            if (password !== confirmPassword) {
+            
+            console.log("passei aquii no registro");
+            
+            if (passwordReg !== confirmPassword) {
                 alert("As senhas não coincidem!");
                 return;
             }
 
             try {
-                const res = await fetch('http://127.0.0.1:5000/register', {
+                const res = await fetch('http://localhost:5000/auth/register', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nickname, email, password }),
-                    credentials: 'include'
+                    body: JSON.stringify({ nickname: nicknameReg, email: emailReg, password: passwordReg })
                 });
 
                 const data = await res.json();
-
-                alert(data.msg);
-
-                if (res.ok) formRegistro.reset();
+               
+                if (res.ok) {
+                    alert("Conta criada com sucesso!");
+                    window.location.href = "/front-end/INICIO/index.html";
+                } else {
+                    alert(data.msg || "Erro ao cadastrar");
+                }
 
             } catch (err) {
                 console.error("ERRO REGISTER:", err);
@@ -71,34 +123,50 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // DASHBOARD TESTE
+
+    // --- DASHBOARD ---
     const btnDashboard = document.getElementById('btnDashboard');
 
     if (btnDashboard) {
         btnDashboard.addEventListener('click', async () => {
-            const res = await fetch('http://127.0.0.1:5000/dashboard', {
-                method: 'GET',
-                credentials: 'include'
-            });
+            try {
+                const res = await fetch('http://localhost:5000/auth/dashboard', {
+                    method: 'GET',
+                });
 
-            const text = await res.text();
-            alert(text);
+                const text = await res.text();
+                alert(text);
+
+            } catch (err) {
+                console.error("ERRO DASHBOARD:", err);
+            }
         });
     }
 
-    // LOGOUT
+
+    // --- LOGOUT ---
     const btnLogout = document.getElementById('btnLogout');
 
     if (btnLogout) {
         btnLogout.addEventListener('click', async () => {
-            await fetch('http://127.0.0.1:5000/logout', {
-                method: 'GET',
-                credentials: 'include'
-            });
+            try {
+                await fetch('http://localhost:5000/auth/logout', {
+                    method: 'GET'
+                });
 
-            alert("Logout feito");
-            window.location.href = "/login.html";
+                alert("Logout feito");
+
+                // CRUCIAL: Limpa TODAS as credenciais do front-end
+                localStorage.clear(); 
+
+                // Redireciona substituindo o histórico para não conseguir clicar na seta "Voltar"
+                window.location.replace("/login.html"); 
+
+            } catch (err) {
+                console.log(err);
+                alert("Erro ao fazer logout");
+            }
         });
     }
 
-});
+}); // Fim do DOMContentLoaded principal

@@ -1,0 +1,514 @@
+/* Variáveis para facilitar a manutenção */
+.bnt-excluir{
+    color: #29a45c;
+}
+:root {
+    --bg-color: #0f1113;
+    --card-bg: #1c1f22;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #b36f1d; /* Tom bronze original da cantina */
+    --accent-hover: #d98324;
+    --admin-blue: #2980b9; /* Cor informativa para botões do admin */
+    --status-success: #2ecc71; /* Verde para itens em estoque */
+    --status-danger: #e74c3c; /* Vermelho para itens esgotados */
+}
+
+body {
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(../foto/fundo.png  );
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/* ==========================================================================
+   HEADER & CRASHÁS ADMIN
+   ========================================================================== */
+.header {
+    background: #1a1a1a;
+    padding: 0.8rem 0; 
+    border-bottom: 1px solid #1a1a1a;
+    top: 0;
+    margin: 20px;
+    border-radius: 15px;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0px auto;    
+    padding: 0 20px;
+}
+
+.badge-admin {
+    background-color: #b36f1d;
+    margin-left: 10px;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   SIDEBAR & PERFIL (ADMINISTRADOR)
+   ========================================================================== */
+.user-sidebar {
+    width: 260px;
+    height: calc(100vh - 40px); 
+    margin: 20px;              
+    margin-left: 60px;
+    border-radius: 20px;        
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.user-profile h3{
+    color: #c7c7c7;
+}
+.profile-img-container {
+    
+    position: relative;
+    width: 120px;  
+    height: 120px;
+    margin: 0 auto 40px; 
+    margin-top: 35px;
+    margin-bottom: 35px !important;
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img-container img {
+
+    width: 130px; 
+    height: 130px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    border: 1px solid #ec8200 ; /* Borda azul destacando o painel admin */
+    box-sizing: border-box;
+}
+
+.btn-edit-photo {
+    position: absolute;
+    bottom: -20px;  
+    right: -20px;
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    flex-direction: column;
+    padding: 0; 
+}
+
+.user-profile h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.role-admin {
+    font-size: 0.8rem;
+    color: #6e6c6c;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ==========================================================================
+   NAVEGAÇÃO INTERNA
+   ========================================================================== */
+.nav-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 50px;
+}
+
+.nav-links li {
+    margin: 15px 0;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    background-color: var(--accent);
+}
+
+.logout {
+    color: #ffffff !important;
+}
+
+.logout:hover {
+    background-color: var(--status-danger) !important;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+/* ==========================================================================
+   LOGOTIPO & FILTROS
+   ========================================================================== */
+.logo h3 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+}
+
+.logo p {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.logo img {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    transition: transform 0.3s ease;
+}
+.filtros {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    padding: 20px 150px;
+    margin-left: 50px;
+    overflow-x: auto; 
+    flex-wrap: nowrap;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    -webkit-overflow-scrolling:touch; 
+    margin-bottom: -40px;
+}
+
+.filtro-bnt {
+    background: #222222;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.filtro-bnt.active, .filtro-bnt:hover {
+    background: #ec8200;
+    border-color: var(--accent);
+}
+
+
+
+/* CARDÁPIO E INFRAESTRUTURA DE PRODUTOS  */
+
+.cardapio {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.cardapio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 73%;
+    margin-left: 400px;
+}
+
+.cardapio h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+}
+
+.btn-novo-item {
+    background-color: #ec8200   ;
+    color: #fff;
+    border: none;
+    margin-right: 70px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: 0.2s ease-in-out;
+}
+
+.btn-novo-item:hover {
+    transform: scale(1.03);
+    
+}
+
+/* Layout Grid Organizado */
+.itens-cardapio {
+   width: 95%;
+        max-width: 990px;
+        margin: 80px auto 2rem;
+        
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr); 
+        
+        justify-content: center;
+        gap: 60px; 
+        border-radius: 25px;
+}
+
+/* Elementos individuais do cardápio admin */
+.item-admin {
+    background-color: #1a1a1a;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 1px solid #2a2d30;
+    transition: transform 0.2s ease-in-out;
+    
+    /* ADICIONE ESTAS TRÊS LINHAS ABAIXO */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza a imagem e o bloco de informações horizontalmente */
+}
+
+.item-admin:hover { 
+    transform: translateY(-4px);
+}
+
+.itens-cardapio img {
+    width: 170px;            /* Controla a largura ideal da imagem dentro do card */
+    height: 170px;          /* Altura controlada */
+    object-fit: cover;      /* Preenche o espaço cortando proporcionalmente se necessário */
+    border-radius: 4px;    /* Deixa as bordinhas da imagem arredondadas e bonitas */
+    margin-top: 25px;       /* CRUCIAL: Empurra a imagem para baixo, tirando do topo do card */
+    display: block; 
+}
+
+.itens-cardapio .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+/* Alinhamento do Título + Estrela de Destaque */
+.itens-cardapio .info .titulo-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.itens-cardapio .info .titulo-container h3 {
+    font-size: 0.9rem;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 !important; 
+    padding: 0 !important;
+    display: inline-block; 
+}
+
+.itens-cardapio .info h4 {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    text-transform: none;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+    opacity: 0.7;
+    min-height: 35px;
+}
+
+/* ==========================================================================
+   AÇÕES DO ADMINISTRADOR (ESTOQUE E EDIÇÃO)
+   ========================================================================== */
+.acoes-admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: auto;
+}
+
+.preco-admin {
+  display: block;      
+        font-size: 1rem;
+        margin-top: -5px;       
+        margin-bottom: 5px;
+}
+
+.status-estoque {
+    font-size: 0.75rem;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.status-estoque.em-estoque {
+    background-color: rgba(46, 204, 113, 0.2);
+    color: #29a45c;
+}
+
+.status-estoque.esgotado {
+    background-color: rgba(231, 76, 60, 0.2);
+    color: var(--status-danger);
+}
+
+.btn-editar {
+    width: 160px;
+    height: 32px;
+    background-color: #b36f1d;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.2s ease, background-color 0.2s;
+}
+
+.btn-editar:hover {
+    transform: translateY(-2px);
+   
+}
+
+/* ==========================================================================
+   ALERTA DE PEDIDOS / PAINEL SUPERIOR
+   ========================================================================== */
+#btnAbrirPedidos {
+    background: #ec8200;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+#btnAbrirPedidos:hover {
+    transform: translateY(-3px); 
+
+}
+
+.total-carrinho {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+#faturamento-dia {
+    color: var(--status-success);
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   ESTRUTURA GERAL DA INTERFACE & FOOTER
+   ========================================================================== */
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+footer {
+    width: calc(100% - 40px);
+    background-color: #1a1a1a;
+    padding: 20px 0; 
+    margin: 40px 20px 10px 20px;
+    border-top: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center; 
+    gap: 12px;              
+}
+
+footer h2 {
+    text-align: center;      
+    width: 100%;           
+    margin: 0;              
+    font-size: 1.4rem;      
+    color: #ffffff;          
+}
+
+.footer-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;      
+}
+
+.footer-copyrigth {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Animação do botão de Destaque */
+.btn-favorito {
+    background: none;     
+    border: none;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    color: #555;
+}
+
+.btn-favorito.active i {
+    font-weight: 900;        
+    color: #f1c40f; /* Estrela dourada para itens destacados da gerência */
+    animation: puloFavorito 0.3s ease-in-out;
+}
+
+@keyframes puloFavorito {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}

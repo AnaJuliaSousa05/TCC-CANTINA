@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Cantina</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    
+    <header class="header">
+        <div class="header-container">
+            <div class="user-header-info">
+                <div class="profile-img-container">
+                    <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                </div>
+                <div class="user-text">
+                    <h2 id="display-nome">Camilly Iglezias</h2>
+                    <span class="badge-role" id="display-role">Estudante</span>
+                </div>
+            </div>
+            
+            <a href="../index.html">
+                <i class='bx bx-log-out btn-voltar'></i>
+            </a>
+        </div>
+    </header>
+
+    <div class="main-wrapper"> 
+
+        <main class="profile-content">
+            <div class="content-header">
+                <h1><i class='bx bx-cog'></i> Configurações da Conta</h1>
+                <p>Gerencie suas informações de acesso e dados pessoais</p>
+            </div>
+
+            <form id="form-perfil">
+                <div class="form-group">
+                    <label for="input-username">Nome de Usuário</label>
+                    <div class="input-icon-wrapper">
+                        <input type="text" id="input-username" value="Camilly Iglezias" disabled required>
+                        <i class='bx bx-user'></i>
+                    </div>
+                </div>
+
+                
+                <div class="form-group">
+                    <label for="input-email">E-mail</label>
+                    <div class="input-icon-wrapper">
+                        <input type="email" id="input-email" value="camillyiglezias@gmail.com" disabled required>
+                        <i class='bx bx-envelope'></i>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="input-senha">Senha de Acesso</label>
+                    <div class="input-icon-wrapper">
+                        <input type="password" id="input-senha" value="12345678" placeholder="Digite a nova senha" disabled>
+                        <i class='bx bx-lock-alt'></i>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" id="btn-editar-info" class="btn-editar">
+                        <i class='bx bx-edit-alt'></i> Alterar Informações
+                    </button>
+                </div>
+            </form>
+        </main>
+
+        <section class="theme-profile-content">
+            <div class="content-header">
+                <h1><i class='bx bx-palette'></i> Aparência do Sistema</h1>
+                <p>Escolha o seu tema visual preferido para a navegação</p>
+            </div>
+
+            <div class="theme-options-container">
+                
+                <div class="theme-card active" id="theme-light">
+                    <div class="theme-icon-preview light-bg">
+                        <i class='bx bx-sun'></i>
+                    </div>
+                    <div class="theme-info">
+                        <h3>Tema Claro</h3>
+                        <p>Visual limpo, ideal para ambientes bem iluminados.</p>
+                    </div>
+                </div>
+
+                <div class="theme-card" id="theme-dark">
+                    <div class="theme-icon-preview dark-bg">
+                        <i class='bx bx-moon'></i>
+                    </div>
+                    <div class="theme-info">
+                        <h3>Tema Escuro</h3>
+                        <p>Visual escuro, ideal padrão do nosso sistema.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h2>Cantina Digital</h2>
+                <p><i class='bx bx-time-five'></i> De segunda a sexta das 7h as 21h</p>
+                <p><i class='bx bx-phone'></i> (99) 99999-9999</p>
+                <p><i class='bx bx-building-house'></i> Localizada na Etec de Hortolândia</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="footer-copyrigth">
+        <p>&copy; 2026 Cantina Digital</p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

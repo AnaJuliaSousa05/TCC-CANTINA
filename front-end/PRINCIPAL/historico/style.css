@@ -1,0 +1,344 @@
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÃO COMPLETA: TEMA ESCURO (PADRÃO SEU)
+   ========================================================================== */
+:root {
+    --bg-color: #0f1113;
+    --card-bg: #1c1f22;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #b36f1d; 
+    --accent-hover: #e68a22;
+    --border-color: #333333;
+}
+
+body {
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8)), url(../foto/fundo.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   ESTILIZAÇÃO DOS COMPONENTES (MODO ESCURO PADRÃO)
+   ========================================================================== */
+
+/* Cabeçalho */
+.header {
+    background: #1a1a1a;
+    padding: 0.8rem 0; 
+    border-bottom: 1px solid #ff8000;
+    width: calc(100% - 40px); 
+    max-width: 1000px; 
+    margin: 20px auto; 
+    border-radius: 15px;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0px auto;    
+    padding: 0 20px;
+    position: relative; 
+}
+
+.header h1 {
+    font-size: 28px;
+    color: #ffffff;
+    border-bottom: 1px solid #ce6605;
+    margin-bottom: 0; 
+    padding-bottom: 5px;
+    text-align: center; 
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.header img {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+/* Botão Voltar Interno */
+.voltar {
+    position: absolute;
+    left: 20px; 
+}
+
+.btn-voltar {
+    color: #ffffff !important;
+    font-size: 1.4rem;
+    text-decoration: none;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.btn-voltar:hover {
+    transform: scale(1.1);
+    color: var(--accent-hover) !important;
+}
+
+/* Container do Histórico */
+.historico-pedidos {
+    padding: 30px 0; 
+    width: 100%;
+    display: flex;
+    justify-content: center; 
+}
+
+.historico-container {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto; 
+    padding: 0 20px; 
+    box-sizing: border-box;
+}
+
+/* Cards de Pedidos Antigos */
+.pedido-card {
+    background-color: #1a1a1a; 
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pedido-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.pedido-header {
+    background-color: rgba(255, 255, 255, 0.02);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.pedido-info-topo {
+    display: flex;
+    flex-direction: column;
+}
+
+.pedido-id {
+    font-weight: 700;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.pedido-data {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-top: 3px;
+}
+
+/* Status das Cozinhas */
+.status {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    color: #ffffff; 
+}
+
+.status-entregue {
+    background-color: #2d773f;
+}
+
+.status-preparando {
+    background-color: #b36f1d;
+}
+
+/* Corpo do Pedido */
+.pedido-corpo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.alimento-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #ffffff;
+}
+
+.alimento-nome {
+    font-weight: 500;
+}
+
+.alimento-preco {
+    color: var(--text-secondary);
+}
+
+/* Rodapé do Card */
+.pedido-footer {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 15px 20px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-pedido {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.total-pedido strong {
+    font-size: 18px;
+    color: #ffffff;
+    margin-left: 5px;
+}
+
+/* Botão Recomprar */
+.btn-repetir {
+    background-color: #ff9008;
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-repetir:hover {
+    background-color: #db8924;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME) - ESTILO IGUAL AS OUTRAS ABAS
+   ========================================================================== */
+body.light-theme {
+    background-image: linear-gradient(rgba(93, 89, 89, 0.4)), url(../foto/bege.png);
+    color: #222222;
+}
+
+/* Cabeçalho no Tema Claro */
+body.light-theme .header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #dddddd;
+}
+
+body.light-theme .header h1 {
+    color: #ff7700da;
+    border-bottom: 1px solid #e68a22;
+}
+
+body.light-theme .btn-voltar {
+    color: #222222 !important;
+}
+
+/* Cards do Histórico no Tema Claro */
+body.light-theme .pedido-card {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-left: 4px solid #e68a22;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .pedido-header {
+    background-color: #fdfdfd;
+    border-bottom: 1px solid #eeeeee;
+}
+
+body.light-theme .pedido-id {
+    color: #222222;
+}
+
+body.light-theme .pedido-data {
+    color: #666666;
+}
+
+body.light-theme .alimento-item {
+    color: #222222;
+}
+
+body.light-theme .alimento-preco {
+    color: #666666;
+}
+
+body.light-theme .pedido-footer {
+    background-color: #f9f9f9;
+    border-top: 1px solid #eeeeee;
+}
+
+body.light-theme .total-pedido {
+    color: #666666;
+}
+
+body.light-theme .total-pedido strong {
+    color: #222222;
+}
+
+body.light-theme .btn-repetir {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .btn-repetir:hover {
+    background-color: #ed8611;
+}
+
+body.light-theme .carrinho-vazio {
+    color: #666666;
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE (CELULARES)
+   ========================================================================== */
+@media (max-width: 600px) {
+    .header {
+        width: calc(100% - 20px);
+        margin: 10px auto;
+    }
+    
+    .voltar {
+        position: static;
+        margin-bottom: 10px;
+    }
+
+    .header .container {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .pedido-header, .pedido-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    
+    .btn-repetir {
+        width: 100%;
+        justify-content: center;
+    }
+}

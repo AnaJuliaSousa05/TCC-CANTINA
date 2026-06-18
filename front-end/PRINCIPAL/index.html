@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Cantina Escolar Digital </title>
+      <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header" `oi anna, esse daq é o header, a parte de cima do codigo`> 
+        <div class="container">
+            <div class="logo">
+          <h3><img src="../PRINCIPAL/foto/icon3.png" alt="Logo" id="logo-cantina"> Cantina Escolar </h3>
+                <p> Seja bem vindo(a) a primeira cantina escolar digital!</p>
+            </div>
+
+
+
+            <div class="carrinho-info">
+                <button id="btnAbrirCarrinho">
+                    <i class='bx bx-cart'></i>
+                    <span id="contador-carrinho">0</span>
+                    <span class="carrinho-texto">Carrinho</span>
+                </button>
+                <div class="total-carrinho">
+                    Total: R$ <span id="total-carrinho">0.00</span>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+
+
+
+
+    <div class="main-wrapper" `oi anna, esse aqui é uma das partes q vc vai mexer, criando a funcao de add foto de perfil` >
+
+        <nav class="user-sidebar">
+            <div class="user-profile">
+                <div class="profile-img-container">
+                    <img src="/LOGIN/foto/teste.png" alt="Foto de Perfil" id="photo-preview">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                    <button class="btn-edit-photo" onclick="document.getElementById('photo-input').click()">
+                        <i class='bx bx-camera'></i>
+                    </button>
+                </div>
+                <h3 id="nome-usuario-home"></h3>
+                <span id="cargo-usuario"></span>
+                
+            </div>
+
+                <ul class="nav-links" >
+                    <li><a href="../PRINCIPAL/perfil/index.html"><i class='bx bx-user'></i> Meu Perfil</a></li>
+                    <li><a href="..//PRINCIPAL/configuracao/index.html"><i class='bx bx-cog'></i> Configurações</a></li>
+                    <li><a href="../PRINCIPAL/historico/index.html"><i class='bx bx-history' ></i>  Historico de pedidos </a></li>
+
+                
+                    <hr>
+                    <li><a href="javascript:void(0);" id="btnLogout" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
+                </ul>
+            </nav>
+
+        <section class="cardapio" `oi ana, essa é outra parte p vc mexer, faz um java q ao clicar nesses filtros, so apareca os items de cada tipo e tb faça uma funcao de clica e favoritar dps disso clica no arquivo perfil e configuracao`>
+            <h1>Nosso Cardápio</h1>
+            <main class="main-content">
+                <div class="filtros">
+                    <button class="filtro-bnt active" data-categoria="todos">Todas</button>
+                    <button class="filtro-bnt" data-categoria="favoritos">Favoritos</button>
+                    <button class="filtro-bnt" data-categoria="salgados">Fritos</button>
+                    <button class="filtro-bnt" data-categoria="doces">Doces</button>
+                    <button class="filtro-bnt" data-categoria="lanches">Lanches</button>
+                    <button class="filtro-bnt" data-categoria="bebidas">Bebidas</button>
+                </div>
+            </main>
+
+        <div class="itens-cardapio" id="lista-cardapio-usuario"> 
+           <p style="color: var(--text-secondary); text-align: center; width: 100%;">Carregando cardápio...</p>
+        </div> 
+        </section>
+    </div>
+<body>
+     </section>
+
+       
+
+    </div>
+
+</div>
+
+
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h2> Cantina Digital </h2>
+                            <p> <i class='bx bx-time-five' ></i> De segunda a sexta das 7h as 21h </p>
+                            <p> <i class='bx bx-phone'></i> (99) 99999-9999 </p>
+                            <p> <i class='bx bx-building-house' ></i> Localizada na Etec de Hortolândia </p>
+                        </div>
+                    </div>
+                </footer>
+
+                  <div class="footer-copyrigth">
+                    <p> &copy; 2026 Cantina Digital </p>
+                </div>
+
+                <div id="modal-carrinho" class="modal-carrinho">
+    <div class="conteudo-modal">
+        <div class="topo-modal">
+            <h2><i class='bx bx-cart' ></i></i> Meu Carrinho</h2>
+            <button id="fechar-carrinho" class="btn-fechar">&times;</button>
+        </div>
+
+        <div id="itens-do-carrinho" class="lista-itens-carrinho"></div>
+
+        <div class="rodape-modal">
+            <div class="total-container">
+                <span>Total:</span>
+                <span class="preco-total-modal">R$ <span id="total-modal">0.00</span></span>
+            </div>
+            <button class="btn-finalizar" onclick="finalizarCompra()">Finalizar Pedido</button>
+        </div>
+    </div>
+</div>
+<div id="modal-pagamento" class="modal-carrinho">
+    <div class="conteudo-modal" style="max-width: 400px;">
+        <div class="topo-modal">
+            <h2><i class='bx bx-qr-code'></i> Pagamento via Pix</h2>
+            <button id="fechar-pagamento" class="btn-fechar">&times;</button>
+        </div>
+
+        <div class="rodape-modal" style="gap: 15px; padding: 25px 20px; align-items: center; text-align: center;">
+            <p style="margin: 0; font-size: 1.1rem; color: var(--text-primary);">
+                Valor a pagar: <strong>R$ <span id="total-pagamento-modal">0.00</span></strong>
+            </p>
+
+           <div style="background-color: #ffffff; padding: 15px; border-radius: 10px; margin: 10px 0; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1);">
+    <img src="../PRINCIPAL/foto/pix.png" alt="QR Code Pix Real" style="width: 180px; height: 180px; display: block; object-fit: contain;">
+</div>
+
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin: 0 0 10px 0;">
+                Abra o app do seu banco e escaneie o QR Code acima ou utilize o Pix Copia e Cola abaixo.
+            </p>
+
+            <button class="btn-finalizar" style="background-color: #d57d01; width: 100%;" onclick="processarPagamentoPix()">
+                <i class='bx bx-copy'></i> Copiar Chave e Confirmar
+            </button>
+        </div>
+    </div>
+</div>
+<script src="script.js"></script>
+
+    </body>
+</html>

@@ -1,0 +1,928 @@
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÕES GERAIS (PADRÃO / ESCURO)
+   ========================================================================== */
+:root {
+    --bg-color: #0f1113;
+    --card-bg: #1c1f22;
+    --panel-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #b36f1d; /* Tom bronze original da cantina */
+    --accent-hover: #27ae60;
+    --accent-gradient: linear-gradient(135deg, #b36f1d, #e68a22); 
+    --border-color: #2e3236;
+}
+
+body {
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(foto/fundo.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Header */
+.header {
+    background: var(--panel-bg);
+    padding: 0.8rem 0; 
+    border-bottom: 1px solid var(--panel-bg);
+    top: 0;
+    margin: 20px;
+    border-radius: 15px;
+    z-index: 1000;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; 
+    margin: 0px auto;    
+    padding: 0 20px;
+}
+
+.badge-admin {
+    background-color: var(--accent);
+    margin-left: 10px;
+    color: #fff;
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+} 
+
+/* Perfil do Usuário / Sidebar */ 
+.user-sidebar {
+    width: 260px;
+    height: calc(100vh - 40px); 
+    margin: 20px;              
+    margin-left: 60px;
+    border-radius: 20px;        
+    background-color: #1a1a1a;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-profile {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.profile-img-container {
+    position: relative;
+    width: 120px;  
+    height: 120px;
+    margin: 0 auto 40px; 
+    margin-bottom: 45px !important;
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-img-container img {
+    width: 100px; 
+    height: 100px;
+    border-radius: 50%; 
+    object-fit: cover; 
+    box-sizing: border-box;
+}
+
+.btn-edit-photo {
+    position: absolute;
+    bottom: -20px;  
+    right: -20px;
+    background-color: #e68a22;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.3s;
+    flex-direction: column;
+    padding: 0; 
+}
+
+.user-profile h3 {
+    margin: 5px 0;
+    font-size: 1.1rem;
+}
+
+.user-profile span {
+    font-size: 0.8rem;
+    color: #6e6c6c;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+} 
+
+/* Navs */
+.nav-links {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links li {
+    margin: 15px 0;
+}
+
+.nav-links a {
+    color: #ecf0f1;
+    text-decoration: none;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    background-color: var(--accent);
+}
+
+.logout {
+    color: #ffffff !important;
+}
+
+.logout a:hover {
+    background-color: #bdc3c7;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid #333;
+    margin: 20px 0;
+}
+
+/* ==========================================================================
+   LOGOTIPO & FILTROS
+   ========================================================================== */
+.logo h3 {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 1rem;
+}
+
+.logo p {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.logo img {
+    width: auto;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    transition: transform 0.3s ease;
+}
+
+.filtros {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 40px; 
+    padding: 20px 150px;
+    margin-left: 50px;
+    overflow-x: auto; 
+    flex-wrap: nowrap;
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    -webkit-overflow-scrolling:touch; 
+    margin-bottom: -40px;
+}
+
+.filtro-bnt {
+    background: #222222;
+    border: 1px solid #444;
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+    flex-shrink: 0;
+}
+
+.filtro-bnt.active, .filtro-bnt:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+
+/* ==========================================================================
+   CARDÁPIO E ESTRUTURA DE PRODUTOS
+   ========================================================================== */
+.cardapio {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.cardapio h1 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 0;
+    margin-left: 70px;
+}
+
+.itens-cardapio {
+    width: 95%;
+    max-width: 990px;
+    margin: 80px auto 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    justify-content: center;
+    gap: 60px; 
+    border-radius: 25px;
+}
+
+/* Modificado para alinhar os elementos internamente no centro horizontal */
+.itens-cardapio div {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    overflow: hidden;
+    border: none; 
+    transition: transform 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column; 
+    align-items: center;    /* ADICIONADO: Centraliza a imagem e os textos horizontalmente */
+    height: 100%; 
+}
+
+.itens-cardapio div:hover { 
+    transform: translateY(-4px); 
+}
+
+/* Modificado para desgrudar do topo e ter tamanho adequado e harmonioso */
+.itens-cardapio img {
+    width: 200px;           /* ADICIONADO: Largura controlada para não esmagar nas bordas */
+    height: 150px;          /* Altura proporcional e fixa */
+    object-fit: cover;      /* Garante o preenchimento correto sem distorcer o alimento */
+    border-radius: 12px;    /* Arredonda os 4 cantos da imagem de forma suave */
+    margin-top: 25px;       /* ADICIONADO: Cria o espaço perfeito no topo do card */
+    display: block; 
+}
+
+.itens-cardapio .info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1rem;
+    flex-grow: 1; 
+    width: 100%;            /* Garante que o bloco de informações ocupe a largura total interna */
+    box-sizing: border-box;
+}
+
+.itens-cardapio .info .titulo-container {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border: none !important;      
+    box-shadow: none !important;  
+} 
+
+.itens-cardapio .info .titulo-container h3 {
+    font-size: 0.9rem;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 0 !important; 
+    padding: 0 !important;
+    display: inline-block; 
+}
+
+.itens-cardapio .info .titulo-container .btn-add {
+    background: none !important;
+    border: none !important; 
+    outline: none !important; 
+    box-shadow: none !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.btn-remove-carrinho{
+    background: none !important;
+    border: none !important; 
+    outline: none !important; 
+    box-shadow: none !important; 
+    padding: 0 !important;
+    margin: 0 !important;
+    cursor: pointer;
+    font-size: 1.5rem; 
+    color: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+.itens-cardapio span {
+     display: block;      
+     font-size: 1rem;
+     margin-top: -5px;       
+     margin-bottom: 5px;
+}
+
+.itens-cardapio .info h4 {
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 0.75rem;
+    text-transform: none;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: #fff;
+    opacity: 0.7;
+    min-height: 35px; 
+}
+
+.itens-cardapio .info .pedir {
+    width: 160px;
+    height: 32px;
+    margin-top: auto; 
+    background-color: #f7941d;
+    border: none;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.itens-cardapio .info .pedir:hover {
+    transform: translateY(-2px);
+}
+/* ==========================================================================
+   FORMULÁRIO / INPUTS
+   ========================================================================== */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box; 
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    background-color: #22262a;
+    outline: none;
+}
+
+/* ==========================================================================
+   BOTÕES DE AÇÃO EXTERNOS & MODAIS
+   ========================================================================== */
+#btnAbrirCarrinho {
+    background-color: #e68a22;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 5px;
+    transition: 0.3s ease-in-out;
+}
+
+#btnAbrirCarrinho:hover {
+    transform: translateY(-3px); 
+}
+
+.modal-conteudo {
+    background-color: var(--card-bg);
+    color: white;
+    border-radius: 20px;
+    border: 1px solid #444;
+}
+
+/* ==========================================================================
+   ESTRUTURA GERAL DA INTERFACE & FOOTER
+   ========================================================================== */
+.main-wrapper {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+footer {
+    width: calc(100% - 40px);
+    background-color: #1a1a1a;
+    padding: 20px 0; 
+    margin: 40px 20px 10px 20px;
+    border-top: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center; 
+    gap: 12px;              
+}
+
+footer h2 {
+    text-align: center;      
+    width: 100%;           
+    margin: 0;              
+    font-size: 1.4rem;      
+    color: #ffffff;          
+}
+
+.footer-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.footer-copyrigth {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* Botão de Favorito */
+.btn-favorito {
+    background: none;     
+    border: none;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+    color: #555;
+}
+
+.btn-favorito.active {
+    background: none;     
+    border: none;
+    animation: puloFavorito 0.3s ease-in-out;
+}
+
+.btn-favorito.active i {
+    font-weight: 900;        
+    color: #ef4444;          
+}
+
+/* ==========================================
+   ESTILOS DA JANELA FLUTUANTE DO CARRINHO
+   ========================================== */
+.modal-carrinho {
+    display: none;
+    position: fixed;
+    z-index: 2000; 
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(96, 91, 91, 0);
+    align-items: center;
+    justify-content: center;
+}
+
+    
+.modal-carrinho.active {
+    display: flex;
+}
+
+.conteudo-modal {
+    background-color: #1a1a1a;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 450px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    animation: abrirModal 0.3s ease;
+}
+
+@keyframes abrirModal {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.topo-modal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e68a22;
+}
+
+.topo-modal h2 {
+    margin: 0;
+    font-size: 1.3rem;
+    color: var(--text-primary, #fff);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-fechar {
+    background: none;
+    border: none;
+    color: var(--text-secondary, #a0a0a0);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-fechar:hover {
+    color: #ffffff;
+}
+
+
+.lista-itens-carrinho {
+    padding: 20px;
+    overflow-y: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-height: 40vh;
+}
+
+
+.item-carrinho {
+    display: flex;
+    flex-direction: column; /* Organiza em linhas: info em cima, obs embaixo */
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 2px solid var(--accent, #b36f1d);
+}
+
+.item-carrinho-topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.item-carrinho-info h4 {
+    margin: 0 0 5px 0;
+    color: var(--text-primary, #fff);
+}
+
+.item-carrinho-info span {
+    color: #fff;
+    font-weight: bold;
+}
+
+.item-carrinho-controles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.item-carrinho-controles button {
+    background: #333;
+    border: none;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.item-carrinho-controles button:hover {
+    background: var(--accent, #b36f1d);
+}
+.input-observacao {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 5px;
+    color: #fff;
+    font-size: 0.85rem;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-observacao:focus {
+    border-color: var(--accent, #b36f1d);
+}
+
+.input-observacao::placeholder {
+    color: #666;
+}
+.rodape-modal {
+    padding: 20px;
+    border-top: 1px solid #333;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.preco-total-modal {
+    color: #ffffff;
+}
+
+.btn-finalizar {
+    background-color: #e68a22;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+}
+
+.btn-finalizar:hover {
+    background-color: #ed8611;
+}
+
+.carrinho-vazio {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 20px 0;
+}
+@keyframes puloFavorito {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+
+
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME)
+/* ==========================================================================
+   CONFIGURAÇÃO COMPLETA: TEMA BRANCO / CLARO (LIGHT THEME)
+   ========================================================================== */
+body.light-theme {
+    --bg-color: #c0baba;
+    --card-bg: #ffffff;
+    --panel-bg: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-color: #dddddd;
+}
+
+body.light-theme {
+    background-image: linear-gradient(rgba(93, 89, 89, 0.4)), url(../PRINCIPAL/foto/bege.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    min-height: 100vh;
+    background-position: cover;
+}
+
+
+body.light-theme header, 
+body.light-theme .header {
+    background-color: #f8f8f8;
+    border-bottom: 1px solid var(--border-color);
+}
+
+body.light-theme .user-sidebar {
+    background-color: #f8f8f8;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .user-sidebar a {
+    color: #222222;
+}
+
+/* Garante que o link de logout e o ícone "i" comecem escuros no modo claro */
+body.light-theme .user-sidebar a.logout,
+body.light-theme .user-sidebar a.logout i {
+    color: #222222 !important;
+}
+   
+/* Ao passar o mouse nos tópicos da Sidebar (incluindo o logout e o ícone), o texto fica BRANCO */
+body.light-theme .user-sidebar a:hover,
+body.light-theme .user-sidebar a:hover i {
+    color: #ffffff !important;
+    background-color: var(--accent);
+}
+
+body.light-theme .user-sidebar hr {
+    border-top: 1px solid var(--border-color);
+}
+
+/* Cards e Filtros no Tema Claro */
+body.light-theme .theme-card {
+    background-color: #f8f8f891;
+}
+
+body.light-theme .filtros {
+    background-color: #f8f8f8;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .filtro-bnt {
+    background: #ffffff;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .filtro-bnt.active, 
+body.light-theme .filtro-bnt:hover {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .cardapio h1 {
+    color: #ffffff;
+}
+
+body.light-theme .itens-cardapio div {
+    background-color: #f8f8f8;
+    border: 1px solid #e0e0e0;
+}
+
+body.light-theme .itens-cardapio .info h3,
+body.light-theme .itens-cardapio .info h4,
+body.light-theme .itens-cardapio span {
+    color: #222222;
+}
+
+/* AJUSTADO: Botão de adicionar (+) com a cor escura correta no tema claro */
+body.light-theme .itens-cardapio .info .titulo-container .btn-add {
+    color: #e68a22;
+}
+
+/* CORRIGIDO (Sintaxe corrigida de ligth para light): Botão de remover (-) agora também acompanha a cor escura */
+body.light-theme .itens-cardapio .info .titulo-container .btn-remove-carrinho {
+    color: #e68a22;
+}
+
+/* Inputs do formulário no Tema Claro */
+body.light-theme .form-group input {
+    background-color: #ffffff;
+    color: #222222;
+    border: 1px solid var(--border-color);
+}
+
+body.light-theme .form-group input:focus {
+    background-color: #f1f1f1;
+    border-color: var(--accent);
+    color: #222222;
+}
+
+body.light-theme .form-group label {
+    color: #444444;
+}
+
+/* Rodapé no Tema Claro */
+body.light-theme footer {
+    background-color: #f8f8f8;
+    border-top: 1px solid var(--border-color);
+    color: #4d4d4e;
+}
+
+body.light-theme footer h2 {
+    color: #4d4d4e;
+}
+
+/* ==========================================================================
+   MODAL DO CARRINHO NO TEMA BRANCO / CLARO (LIGHT THEME)
+   ========================================================================== */
+
+/* Fundo desfocado do modal no Tema Claro */
+body.light-theme .modal-carrinho {
+    background-color: rgba(0, 0, 0, 0.4); 
+}
+
+/* Caixa flutuante principal no Tema Claro */
+body.light-theme .conteudo-modal {
+    background-color: #ffffff;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Cabeçalho do Modal no Tema Claro */
+body.light-theme .topo-modal {
+    border-bottom: 1px solid #e68a22; 
+}
+
+body.light-theme .topo-modal h2 {
+    color: #222222;
+}
+
+body.light-theme .btn-fechar {
+    color: #666666;
+}
+
+body.light-theme .btn-fechar:hover {
+    color: #222222;
+}
+
+/* Card de cada Produto dentro do Carrinho no Tema Claro */
+body.light-theme .item-carrinho {
+    background: #f8f8f8;
+    border-left: 2px solid #e68a22;
+    border-top: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+body.light-theme .item-carrinho-info h4,
+body.light-theme .item-carrinho-info span,
+body.light-theme .item-carrinho-controles span {
+    color: #222222;
+}
+
+/* Botões de + e - dentro do Modal no Tema Claro */
+body.light-theme .item-carrinho-controles button {
+    background: #e0e0e0;
+    color: #222222;
+}
+
+body.light-theme .item-carrinho-controles button:hover {
+    background: #e68a22;
+    color: #ffffff;
+}
+
+/* Campo de texto de observações extras no Tema Claro */
+body.light-theme .input-observacao {
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    color: #222222;
+}
+
+body.light-theme .input-observacao:focus {
+    border-color: #e68a22;
+    background: #fdfdfd;
+}
+
+body.light-theme .input-observacao::placeholder {
+    color: #999999;
+}
+
+body.light-theme .rodape-modal {
+    border-top: 1px solid #e0e0e0;
+}
+
+body.light-theme .total-container {
+    color: #222222;
+}
+
+body.light-theme .preco-total-modal {
+    color: #222222;
+}
+
+body.light-theme .btn-finalizar {
+    background-color: #e68a22;
+    color: #ffffff;
+}
+
+body.light-theme .btn-finalizar:hover {
+    background-color: #ed8611;
+}
+
+body.light-theme .carrinho-vazio {
+    color: #666666;
+}

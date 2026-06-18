@@ -1,67 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Aba de REGISTRO </title>
-    <link rel="stylesheet" href="style.css">
-     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-</head>
-<body>
-      <div class="wrapper">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar-se - Cantina Escolar </title>
 
-        <div class="img-box"> 
-            <img src="foto/teste.png" alt="icon">
+  <link rel="stylesheet" href="style.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="img-box">
+      <img src="foto/teste.png" alt="icon">
+    </div>
+
+    <div class="form-box-login">
+
+      <form id="registrarUsuarios">
+
+        <h1>Registrar-se</h1>
+
+        <div class="input-box">
+          <input type="text" id="nickname" placeholder="Digite seu nome de usuário" required>
+          <i class='bx bx-user'></i>
         </div>
 
-            <div class="wrapper">
+        <div class="input-box">
+          <input type="email" id="email" placeholder="Digite seu email" required>
+          <i class='bx bx-envelope'></i>
+        </div>
 
-              <div class="form-box-login">
+        <div class="input-box">
+          <input type="password" id="password" placeholder="Digite sua senha" required>
+          <i class='bx bx-lock'></i>
+        </div>
 
-        <form id="registrarUsuarios">
-            <h1> Registrar-se </h1>
-            <div class="input-box"> 
-                <input type="text" id="nickname" placeholder="Digite seu nome de usuário"  required> 
-                <i class='bx bx-user'></i>
-            </div>
+        <div class="input-box">
+          <input type="password" id="confirmPassword" placeholder="Confirme sua senha" required>
+          <i class='bx bx-lock'></i>
+        </div>
 
-             <div class="input-box"> 
-                <input type="email" id="email" placeholder=" Digite seu email" required> 
-                <i class='bx bx-envelope'></i>
-            </div>
-
-            <div class="input-box"> 
-                <input type="password" id="password" placeholder= "Digite sua senha" required> 
-                <i class='bx bx-lock'></i>
-            </div>
-
-            
-            <div class="input-box"> 
-                <input type="password" id="confirmPassword" placeholder= "Confirme sua senha" required> 
-                <i class='bx bx-lock'></i>
-            </div>
-
-            <div class="remember-forgot">
+        <div class="remember-forgot">
           <label>
-            <input type="checkbox" required> Eu aceito os <A href="https://www.jusbrasil.com.br/artigos/aspectos-basicos-sobre-termos-e-condicoes/20491">  termos e condições </A> </label>
+            <input type="checkbox" required>
+            Eu aceito os <a href="#">termos e condições</a>
+          </label>
         </div>
 
         <div class="registrar">
           <p>Já possui uma conta? <a href="../LOGIN/login.html">Faça login</a></p>
         </div>
 
-            <div> <button type="submit" class="botao"> Registrar-se </button> </div>
+        <button type="submit" class="botao">Registrar-se</button>
 
-             <div class="voltar">
-            <p> Deseja voltar? <a href="../LOGIN/login.html">  Clique aqui </a></p>    
-            </div>
-            
-         </form> 
-             </div> 
-
-            
-    
-          <script src="/front-end/script.js"></script>
+        <div class="voltar">
+          <p>Deseja voltar? <a href="../LOGIN/login.html">Clique aqui</a></p>
         </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <script src="../script.js"></script>
+
 </body>
 </html>

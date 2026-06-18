@@ -1,0 +1,435 @@
+/* ==========================================================================
+   VARIÁVEIS E CONFIGURAÇÕES GERAIS
+   ========================================================================== */
+:root {
+    --bg-color: #0f1113;
+    --card-bg: #1c1f22;
+    --panel-bg: #1a1a1a;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #b36f1d;
+    --accent-gradient: linear-gradient(135deg, #b36f1d, #e68a22); 
+    --border-color: #2e3236;
+}
+
+body {
+    background-image: linear-gradient(rgba(39, 38, 38, 0.8), rgba(39, 38, 38, 0.8)), url(../foto/fundo.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 10px;
+    min-height: 100vh;
+}
+
+.header {
+    background: var(--panel-bg);
+    padding: 2rem 0px;
+    border-bottom: 1px solid var(--accent);
+    margin-bottom: 25px;
+    border-radius: 15px;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px; 
+    margin: 0 auto;    
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.user-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-header-info i {
+    color: var(--accent);
+    font-size: 1.8rem;
+}
+
+.user-text {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-text h2 {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.badge-role {
+    color: var(--accent);
+    background: rgba(179, 111, 29, 0.1);
+    font-size: 0.7rem;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.btn-voltar {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    transition: color 0.2s ease;
+}
+
+.btn-voltar:hover {
+    color: var(--text-primary);
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: center;   /* Centraliza o conjunto na tela */
+    align-items: stretch;      /* Garante que as duas caixas tenham a mesma altura */
+    width: 100%;
+    max-width: 1100px;         /* Alinhado com o tamanho do header */
+    margin: 0 auto 40px auto;
+    gap: 30px;                 /* Espaço perfeito entre as duas caixas */
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.profile-content {
+    flex: 1;                   /* Divide o espaço em 50% */
+    max-width: 520px;          /* Limite idêntico ao de aparência */
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   FOTO DE PERFIL (AJUSTADA PARA O HEADER)
+   ========================================================================== */
+.profile-img-container {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    display: flex;       
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;      /* Impede que o navegador amasse a foto */
+    box-sizing: border-box;
+}
+
+.profile-img-container img {
+    width: 100%;         /* Ocupa exatamente o tamanho do container (65px) */
+    height: 100%;
+    border-radius: 50%; 
+    object-fit: cover; 
+    
+    padding: 2px;
+    background: var(--card-bg);
+    box-sizing: border-box;
+}
+
+#form-perfil {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between; /* Ajustado para empurrar o botão para baixo */
+}
+
+/* ==========================================================================
+   NOVO: BOTÃO DE ALTERAR INFORMAÇÕES
+   ========================================================================== */
+.form-actions {
+    margin-top: 25px;
+}
+
+.btn-editar {
+    width: 100%;
+    background: var(--accent-gradient);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s ease, transform 0.1s ease;
+}
+
+.btn-editar:hover {
+    opacity: 0.9;
+}
+
+.btn-editar:active {
+    transform: scale(0.98);
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, #2ed573, #1e90ff) !important; /* Cor verde/azul para quando for salvar */
+}
+
+
+.theme-profile-content {
+    flex: 1;                   /* Divide o espaço em 50% */
+    max-width: 520px;          /* Limite idêntico ao de informações */
+    background-color: var(--panel-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.theme-options-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.theme-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #1f2124;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, 
+}
+
+.theme-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(179, 111, 29, 0.5);
+}
+
+.theme-card.active {
+    border-color: var(--accent);
+    
+}
+
+.theme-icon-preview {
+    width: 45px;
+    height: 45px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.light-bg {
+    background-color: #ffffffe2;
+    color: #ffb300;
+    border: 1px solid #ddd;
+}
+
+.dark-bg {
+    background-color: #0f1113;
+    color: #b36f1d;
+    border: 1px solid #2e3236;
+}
+
+.theme-info{flex-grow: 1; }
+
+.theme-info h3 {
+    margin: 0 0 4px 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.theme-info p {
+    margin: 0;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+
+.content-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+}
+
+.content-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 6px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.content-header h1 i {
+    color: var(--accent);
+}
+
+.content-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
+/* FORMULÁRIO / INPUTS */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+
+.input-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.form-group input {
+    width: 100%;
+    box-sizing: border-box; 
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 10px 14px;
+    padding-right: 40px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+    background-color: none;
+    outline: none;
+}
+
+.form-group input:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: rgba(15, 17, 19, 0.3);
+}
+
+.input-icon-wrapper i {
+    position: absolute;
+    right: 14px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   RODAPÉ
+   ========================================================================== */
+footer {
+    width: calc(100% - 40px);
+    background-color: #1a1a1a;
+    padding: 10px 0px;
+    margin: 40px 20px 10px 20px;
+    border-top: 1px solid #333;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: center; 
+    gap: 12px;              
+}
+
+footer h2 {
+    text-align: center;      
+    width: 100%;           
+    margin: 0;              
+    font-size: 1.4rem;      
+    color: #ffffff;          
+}
+
+.footer-info {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.footer-copyrigth {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-bottom: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+
+@media (max-width: 950px) {
+    .main-wrapper {
+        flex-direction: column;  
+        align-items: center;
+        gap: 24px;
+    }
+    
+    .profile-content, 
+    .theme-profile-content {
+        width: 100%;
+        max-width: 100%;           
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        margin: 10px;
+    }
+    .user-text {
+        gap: 8px;
+    }
+}
+
+body.light-theme{
+    --bg-color: #c0baba;
+    --card-bg: #ffffff;
+    --panel-bg: #ffffff;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-color: #dddddd;
+}
+
+body.light-theme{
+    background-image: linear-gradient(rgba(106, 102, 102, 0.399)), url(../foto/bege.png);
+    color: var(--text-primary);
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+    margin: 10px;
+    min-height: 100vh;
+    
+}
+
+body.light-theme .theme-card{
+    background-color: #f8f8f891;
+
+}
+
+body.light-theme footer{
+    background-color: #f8f8f8;
+        color: var(--border-color);
+   
+}
+body.light-theme footer h2{
+    color: #4d4d4e;
+}
+
+body.light-theme .form-group input{
+    color: #685757;
+    background-color: #f8f8f8;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Administrador - Cantina</title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h2> <a href="../foto/icon3.png"> </a> <span>Administrador</span></h2>
+            </div>
+            <nav class="menu">
+                <a href="../pendente/index.html" class="active"><i class="fa-solid fa-clock"></i> Pedidos Pendentes</a>
+                <a href="../concluido/index.html"><i class="fa-solid fa-circle-check"></i> Pedidos Concluídos</a>
+            </nav>
+            <div class="user-logout">
+                <a href="../principal/index.html" class="btn-logout"> <i class='bx bx-log-out btn-voltar'></i> </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <div class="title-section">
+                    <h1>Pedidos Pendentes</h1>
+                </div>
+                <div class="counter-badge">
+    <span id="qtd-pendentes">3</span> Pedidos aguardando
+</div>
+            </header>
+
+            <section class="orders-grid">
+                
+                <div class="order-card alert" data-id="1024">
+                    <div class="order-header">
+                        <span class="order-id">#1024</span>
+                        <span class="order-time"><i class="fa-regular fa-clock"></i> Há 5 min</span>
+                    </div>
+                    <div class="order-body">
+                        <h3>Júliano Cesar</h3>
+                        <p class="user-info"><i class="fa-solid fa-graduation-cap"></i> Estudante - Informática</p>
+                        <hr>
+                        <ul class="items-list">
+                            <li><span>1x</span> Coxinha de Frango</li>
+                            <li><span>1x</span> Fanta Laranja 300ml</li>
+                        </ul>
+                    </div>
+                    <div class="order-footer">
+                        <div class="total-price">Total: R$ 14,00</div>
+                        <button class="btn-concluir"><i class="fa-solid fa-check"></i> Concluir</button>
+                    </div>
+                </div>
+
+                <div class="order-card" data-id="1023">
+                    <div class="order-header">
+                        <span class="order-id">#1023</span>
+                        <span class="order-time"><i class="fa-regular fa-clock"></i> Há 12 min</span>
+                    </div>
+                    <div class="order-body">
+                        <h3>Anna Clara</h3>
+                        <p class="user-info"><i class="fa-solid fa-graduation-cap"></i> Estudante - Nutrição</p>
+                        <hr>
+                        <ul class="items-list">
+                            <li><span>2x</span> X-Tudo Completo</li>
+                            <li><span>1x</span> Guaraná Zero</li>
+                        </ul>
+                        <div class="order-obs">
+                            <strong>Obs:</strong> Sem tomate nos lanches.
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div class="total-price">Total: R$ 47,00</div>
+                        <button class="btn-concluir"><i class="fa-solid fa-check"></i> Concluir</button>
+                    </div>
+                </div>
+
+                <div class="order-card" data-id="1022">
+                    <div class="order-header">
+                        <span class="order-id">#1022</span>
+                        <span class="order-time"><i class="fa-regular fa-clock"></i> Há 18 min</span>
+                    </div>
+                    <div class="order-body">
+                        <h3> Camilly Gomes</h3>
+                        <p class="user-info"><i class="fa-solid fa-graduation-cap"></i> Estudante - Informática</p>
+                        <hr>
+                        <ul class="items-list">
+                            <li><span>1x</span> Batata Frita C/ Cheddar</li>
+                            <li><span>1x</span> Brownie de Chocolate </li>
+                            <li><span>1x</span> Fanta Laranja </li>
+                        </ul>
+                    </div>
+                    <div class="order-footer">
+                        <div class="total-price">Total: R$ 31,00</div>
+                        <button class="btn-concluir"><i class="fa-solid fa-check"></i> Concluir</button>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+    </div>
+
+    <script src="pendentes.js"></script>
+</body>
+</html>

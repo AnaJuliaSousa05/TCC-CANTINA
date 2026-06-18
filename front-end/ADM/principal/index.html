@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Painel Administrativo - Cantina Escolar Digital </title>
+    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header"> 
+        <div class="container">
+            <div class="logo">
+                <h3><img src="../foto/icon3.png" alt="Logo"> Cantina Escolar <span class="badge-admin">Admin</span></h3>
+                <p>Seja bem vindo(a) ao Painel de Controle e Gerenciamento de Cardápio</p>
+            </div>
+
+            <div class="carrinho-info">
+              <a href="../pendente/index.html">  <button id="btnAbrirPedidos">
+                    <i class='bx bx-bell'></i>
+                    <span id="contador-pedidos">3</span>
+                    <span class="carrinho-texto">Novos Pedidos</span>
+                </button>
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <div class="main-wrapper">
+
+        <nav class="user-sidebar">
+            <div class="user-profile">
+                <div class="profile-img-container">
+                    <img src="../foto/teste.png" alt="Foto do Administrador" id="photo-preview">
+                    <input type="file" id="photo-input" accept="image/*" style="display: none;">
+                </div>
+
+                <h3 id="nome-admin"></h3>
+                <span id="cargo-admin" class="role-admin"></span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="../pendente/index.html"><i class='bx bx-list-check'></i> Pedidos Pendentes</a></li>
+                <li><a href="../concluido/index.html"><i class='bx bx-list-check'></i> Pedidos Concluídos   </a></li>
+                <hr>
+               <li><a href="javascript:void(0);" id="btnLogout" class="logout"><i class='bx bx-log-out'></i> Sair</a></li>
+            </ul>
+        </nav>
+
+        <section class="cardapio">
+            <div class="cardapio-header">
+                <h1>Gerenciamento de Cardápio</h1>
+                <button class="btn-novo-item"><i class='bx bx-plus'></i> Adicionar Novo Item</button>
+                <input type="file" id="input-imagem-produto" accept="image/*" style="display: none;">
+            </div>
+            
+            <main class="main-content">
+                <div class="filtros">
+                    <button class="filtro-bnt active" data-categoria="todos">Todos</button>
+                    <button class="filtro-bnt" data-categoria="favoritos">Mais Vendidos</button>
+                    <button class="filtro-bnt" data-categoria="salgados">Fritos</button>
+                    <button class="filtro-bnt" data-categoria="doces">Doces</button>
+                    <button class="filtro-bnt" data-categoria="lanches">Lanches</button>
+                    <button class="filtro-bnt" data-categoria="bebidas">Bebidas</button>
+                </div>
+            </main>
+
+            <div class="itens-cardapio" id="lista-produtos"> 
+                </div>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-info">
+                <h2> Cantina Digital </h2>
+                <p> <i class='bx bx-time-five' ></i> De segunda a sexta das 7h as 21h </p>
+                <p> <i class='bx bx-phone'></i> (99) 99999-9999 </p>
+                <p> <i class='bx bx-building-house' ></i> Localizada na Etec de Hortolândia </p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="footer-copyrigth">
+        <p> &copy; 2026 Cantina Digital - Administrador </p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

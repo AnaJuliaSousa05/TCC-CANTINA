@@ -6,176 +6,106 @@
     <title> Tela Inicial </title>
     <link rel="stylesheet" href="style.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-
 </head>
 <body>
-<header class="content"> 
-
+    <header class="content"> 
         <div class="logo"> 
-            <img src="/TCC - FOODETEC/INICIO/foto/icon3.png" alt="Logo da cantina"> 
-            <h3>  </h3>
+            <img src="../PRINCIPAL/foto/icon3.png" alt="Logo da cantina"> 
+            <h3>  Appetite ACSA </h3>
         </div>
-        
         
         <nav class="navigation"> 
             <ul class="list-menu"> 
-                <li><a href="#"> Home </a></li>
-                <li><a href="#"> Sobre nós </a></li>
-                <li><a href="#"> Contatos</a></li>
-                <li><a href="#">  Cardapio</a> </li>
+                <li><a href="#first-section"> Home </a></li>
+                  <li><a href="#sugestoes"> Sugestões  </a></li>
+                <li><a href="#sobre-nos"> Sobre nós </a></li>
+              
                 <li><a href="../login/login.html"> Login </a></li>
-                 <i class='bx bx-cart'></i>
+                <li> 
                 </li>
             </ul>
         </nav>
     </header>
 
-    <section class="first-section">
-        <div class="conteudo-principal">
-            <h1> Seu lanche a um clique de distância.</h1>
-            <h2> Vem pra cantina! </h2>
+        <section class="first-section" id="first-section">
+            <div class="conteudo-principal">
+             <h1>A tecnologia transformando a sua cantina.</h1>
+        <h2>Mais agilidade, menos filas e apenas um clique.</h2>
+            </div>
+        </section>
+
+    <section class="sugestoes" id="sugestoes">
+        <div class="container-sugestoes">
+            <h3> Sua opinião é muito importante para nós! </h3>
+            <p>Deixe sua sugestão ou crítica para melhorarmos o funcionamento da nossa cantina.</p>
+
+            <form action="#" method="POST" class="form-feedback">
+                <div class="input-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+                </div>
+
+              
+
+                <div class="input-group">
+                    <label for="tipo">Tipo de Mensagem:</label>
+                    <select id="tipo" name="tipo" required>
+                        <option value="" disabled selected>Selecione uma opção...</option>
+                        <option value="sugestao">Sugestão de melhoria</option>
+                        <option value="critica">Crítica</option>
+                        <option value="elogio">Elogio</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="mensagem">Sua Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem" rows="6" placeholder="Escreva aqui detalhadamente..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-enviar">Enviar Feedback</button>
+            </form>
         </div>
     </section>
 
-    <section class="sobre-nos" id="sobrenos">
+    <section class="sobre-nos" id="sobre-nos">
         <div class="main"> 
             <div class="contentsobre">
-            <h2> Sobre nós </h2>
-            <p>
-                Lorem ipsum dolor sit amet 
-                consectetur adipisicing elit.
-                 Ducimus, molestiae a tempora facere
-                  blanditiis voluptate. Obcaecati ducimus, 
-                  dolore, nobis esse sint neque soluta consequatur
-                   est, impedit vitae nam provident tenetur? Lorem ipsum dolor sit 
-                   amet, consectetur adipisicing elit. Quasi harum rem voluptatem voluptate
-                   ! Hic, sunt quos sapiente facere
-                    aliquid ea nisi. Vero repellat temporibus placeat impedit odio assumenda aspe
-                    riores eveniet?Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                     Maiores, deleniti perspiciatis. Est dolorum ab, fuga dolores, mollitia dolore optio 
-                     velit dolor at tenetur expedita 
-                    praesentium fugiat consectetur facere, similique maiores?
-                    Lorem ipsum dolor sit amet consectetur
-                     adipisicing elit. Harum est reiciendis
-                      veritatis tempora eaque quidem laudantium,
-                       esse facilis quibusdam quod tempore dicta amet commodi velit
-                        eius labore earum ducimus aliquam!
-                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Minus 
-                        cupiditate provident fugit recusandae illum magnam placeat suscipit voluptas 
-                        accusantium quae cumque officiis tenetur dolorum 
-                        quos, exercitationem nam! Vitae, tempora corporis?
-            </p>
+                <h2> Sobre nós </h2>
+                <p>
+                    Somos um grupo de quatro mulheres desenvolvedoras que decidimos transformar
+                    a vivência do ambiente escolar em solução tecnológica para o nosso TCC.
+                    Ao observarmos os problemas reais enfrentados diariamente 
+                    nas cantinas, identificamos a necessidade urgente de um sistema que 
+                    otimizasse essa gestão. Nosso projeto consiste em um site intuitivo 
+                    desenhado para eliminar filas, facilitar o controle de pedidos e 
+                    modernizar o atendimento. Unindo o olhar feminino à tecnologia, 
+                    buscamos entregar uma ferramenta prática que resolva dificuldades 
+                    sistêmicas e melhore a rotina de alunos e funcionários através de uma 
+                    gestão mais inteligente e ágil.
+                </p>
             </div>
             <div class="img-nosso"></div>
-            <img src="/TCC - FOODETEC/INICIO/foto/amgs.webp" alt="Foto nossa">
+            <img src="../INICIO/foto/nois2.png" alt="Foto nossa">
         </div>
     </section>
 
-    <section class="cardapio" id="cardapio">
-        <h3> Venha conhecer um pouco do nosso cardapio </h3>
-        <div class="itens-cardapio"> 
-            <div class="frango">
-                <img src="/TCC - FOODETEC/INICIO/foto/pastel.png" alt="">
-                <div class="info"> 
-                    <h3> Pastel  - <span> R$ 11,00 </span> </h3>
-                    <h4> Pastel de frango desfiado, bacon e catupity </h4>
-                    <a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
-                </div>
-            </div>
-        
+   
+                <footer class="footer">
+                    <div class="container">
+                        <div class="footer-info">
+                            <h2> Cantina Digital </h2>
+                            <p> <i class='bx bx-time-five' ></i> De segunda a sexta das 7h as 21h </p>
+                            <p> <i class='bx bx-phone'></i> (99) 99999-9999 </p>
+                            <p> <i class='bx bx-building-house' ></i> Localizada na Etec de Hortolândia </p>
+                        </div>
+                    </div>
+                </footer>
 
-            <div class="batata">
-                <img src="/TCC - FOODETEC/INICIO/foto/batata.png" alt="">
-                <div class="info"> 
-                    <h3> Batata Frita - <span> R$ 15,00 </span> </h3>
-                    <h4> Batata frita, queijo cheddar e bacon </h4>
-                   <a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
-                </div>
-            </div>
-
-
-            <div class="dog">
-                <img src="/TCC - FOODETEC/INICIO/foto/cachorroquente.png" alt="">
-                <div class="info"> 
-                    <h3>  Cachorro Quente   - <span> R$ 10,00 </span> </h3>
-                    <h4> Pào, salsicha, batata palha, milho, ketchup e mostarda </h4>
-                    <a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
+                  <div class="footer-copyrigth">
+                    <p> &copy; 2026 Cantina Digital </p>
                 </div>
 
-        </div>
 
-            <div class="hamburgue">
-                <img src="/TCC - FOODETEC/INICIO/foto/xtudoo.png" alt="">
-                <div class="info"> 
-                    <h3> X- tudo - <span> R$ 20,00 </span> </h3>
-                    <h4> Pào, 2 carne, queijo, bacon, ovo, tomate e salada  </h4>
-                    <a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
-                </div>
-            </div>
-
-            <div class="Refrigerante">
-                <img src="/TCC - FOODETEC/INICIO/foto/cocaa.png" alt="">
-                <div class="info"> 
-                    <h3> Coca Cola <span> R$ 7,00 </span> </h3>
-                    <h4> 350ml  </h4>
-                   <a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
-                </div>
-            </div>
-        
-            <div class="Refrigerante">
-                <img src="/TCC - FOODETEC/INICIO/foto/fanta.png" alt="">
-                <div class="info"> 
-                    <h3> Fanta  Laranja - <span> R$ 6,00 </span> </h3>
-                    <h4> 350ml</h4>
-<a href="../LOGIN/login.html"> 
-                     <button class="pedir"> Pedir agora </button> 
-                    </a>
-                   
-                </div>
-            </div>
-    
-</div>
-    </section>
-
-
-    <section class="contatos" id="contatos">
-        <h3> Contatos </h3>3
-        <div class="contatos-secao"> 
-        <div> 
-          <i class='bx bxs-phone'></i>
-            <span>(19) 97404-2800 - Back-End</span>
-         -   <i class='bx bxs-envelope' ></i>
-            <span> anajulia@gmail.com</span>
-        </div>
-
-         <div> 
-          <i class='bx bxs-phone'></i>
-            <span>(19) 97404-2800 - Front-End </span> 
-           -    <i class='bx bxs-envelope' ></i>
-            <span>camillyiglezias@gmail.com</span>
-        </div>
-
-         <div id="email"> 
-          <i class='bx bxs-envelope' ></i>
-            <span>cantinaescolar@gmail.com</span>
-        </div>
-        </div>
-    </section>
-<script src="/front-end/script.js"></script>
+    <script src="/front-end/script.js"></script>
 </body>
 </html>
