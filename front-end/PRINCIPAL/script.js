@@ -1,6 +1,4 @@
-// ==========================================
-// 1. MANTÉM O TEMA CLARO ATIVO, TROCA OS ÍCONES E ATUALIZA O NOME
-// ==========================================
+// mantem tema claro e escuro
 document.addEventListener("DOMContentLoaded", () => {
 
     if (!localStorage.getItem("token")) {
@@ -46,9 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// ==========================================
-// 2. CONTROLE DA FOTO DE PERFIL (HOME - CORRIGIDO DE VEZ)
-// ==========================================
+// controle da foto de perfil
 function sincronizarFotoPerfilHome() {
     const photoPreviewHome = document.getElementById("photo-preview");
     const photoInputHome = document.getElementById("photo-input");
@@ -113,9 +109,7 @@ if (photoInputHome) {
 document.addEventListener("DOMContentLoaded", sincronizarFotoPerfilHome);
 window.addEventListener("load", sincronizarFotoPerfilHome);
 
-// ==========================================
-// 3. FUNÇÃO MULTI-USO: FAVORITAR E SALVAR NO LOCALSTORAGE
-// ==========================================
+// função multiuso
 function favoritar(botao){
     botao.classList.toggle("active");
     const icone = botao.querySelector("i");
@@ -147,9 +141,7 @@ function favoritar(botao){
     localStorage.setItem("favoritos", JSON.stringify(favoritos));
 }
 
-// ==========================================
-// 4 e 5. FILTROS DAS CATEGORIAS (CORRIGIDO PARA FUNCIONAR DINAMICAMENTE)
-// ==========================================
+// filtros das categorias dinamico
 function configurarEventosFiltros() {
     const botoesFiltro = document.querySelectorAll(".filtro-bnt");
     
@@ -189,9 +181,7 @@ function configurarEventosFiltros() {
     });
 }
 
-// ==========================================
-// 6. SISTEMA DE CARRINHO DE COMPRAS & MODAL
-// ==========================================
+// sistema carrinho
 const cardapioPrecos = {
     "pastel": { nome: "Pastel de Frango", preco: 11.00, foto: "foto/pastel.png" },
     "batata": { nome: "Batata Frita C/ Cheddar", preco: 15.00, foto: "foto/batata.png" },
@@ -300,9 +290,7 @@ function atualizarHeaderCarrinho() {
     if (displayTotal) displayTotal.textContent = valorTotal.toFixed(2);
 }
 
-// ==========================================
-// RENDERIZADOR DO CARRINHO 
-// ==========================================
+//renderizar carrinho
 function exibirItensNoCarrinho() {
     Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
 
@@ -363,9 +351,7 @@ function exibirItensNoCarrinho() {
     }
 }
 
-// ==========================================
-// 7. FUNÇÃO EXCLUSIVA DO BOTÃO "PEDIR AGORA"
-// ==========================================
+//pedir agora
 function pedirAgoraAoCarrinho(idProduto) {
     adicionarAoCarrinho(idProduto);
     
@@ -375,9 +361,7 @@ function pedirAgoraAoCarrinho(idProduto) {
     }
 }
 
-// ==========================================
-// 8. FINALIZAR COMPRA & ENVIAR HISTÓRICO
-// ==========================================
+//finalizar compra e enviar historico
 async function finalizarCompra() {
     Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
@@ -446,9 +430,7 @@ async function finalizarCompra() {
     }
 }
 
-// ==========================================
-// 9. PROCESSAR PAGAMENTO PIX E LIMPAR DADOS
-// ==========================================
+//processar paagmento
 function processarPagamentoPix() {
     Object.assign(cardapioPrecos, JSON.parse(localStorage.getItem("cardapioPrecosSalvos")) || {});
     const carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
@@ -511,9 +493,7 @@ function processarPagamentoPix() {
     atualizarHeaderCarrinho();
 }
 
-// ==========================================
-// 10. INICIALIZADOR DE EVENTOS DA PÁGINA (UNIFICADO)
-// ==========================================
+//inicializador de eventos
 document.addEventListener("DOMContentLoaded", () => {
     const modalPagamento = document.getElementById("modal-pagamento");
     const botaoFecharPagamento = document.getElementById("fechar-pagamento");
@@ -528,9 +508,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarCardapioUsuario();
 });
 
-// ==========================================
-// 11. SISTEMA DINÂMICO: INTEGRAÇÃO COM A API (CORRIGIDO PARA EXIBIR IMAGENS DO ADMIN)
-// ==========================================
+//sistema dinamico
 const API_URL = "http://localhost:5000/produtos";
 
 async function carregarCardapioUsuario() {
@@ -567,8 +545,6 @@ async function carregarCardapioUsuario() {
                 fotoProduto = "icon3.png"; 
             }
 
-            // CORREÇÃO ESSENCIAL: Verifica se a string já é o Base64 enviado pelo Admin (começa com data:).
-            // Se for Base64, injeta direto. Se for um arquivo local, adiciona o caminho da pasta.
             const urlFinalImagem = fotoProduto.startsWith("data:") ? fotoProduto : `../PRINCIPAL/foto/${fotoProduto}`;
 
             containerCardapio.innerHTML += `
@@ -609,9 +585,7 @@ async function carregarCardapioUsuario() {
     }
 }
 
-// ==========================================
-// 12. ADAPTADORES DE PERSISTÊNCIA DA API
-// ==========================================
+// adptador persistencia api
 function adicionarAoCarrinhoDinamicico(id, nome, preco) {
     cardapioPrecos[id] = { nome: nome, preco: parseFloat(preco) };
     
@@ -655,8 +629,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             alert("Sessão encerrada com sucesso!");
 
-            // 🔥 CORREÇÃO CRUCIAL: Em vez de usar localStorage.clear(), 
-            // removemos apenas o que pertence à SESSÃO ATUAL, preservando as fotos!
+            
             localStorage.removeItem("token");
             localStorage.removeItem("carrinho");
             // Se houver outras informações temporárias da sessão, remova-as individualmente aqui.

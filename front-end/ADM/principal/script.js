@@ -10,9 +10,7 @@ if (!token || role !== "admin") {
 }
 
 
-// ==========================================
-// 1. CARREGAR PRODUTOS (MOVIDO PARA O TOPO)
-// ==========================================
+//carregar produtos 
 async function carregarProdutos() {
     try {
         const resposta = await fetch(API_URL);
@@ -58,9 +56,7 @@ async function carregarProdutos() {
     }
 }
 
-// ==========================================
-// FUNÇÃO AUXILIAR: COMPRIMIR IMAGEM (BASE64)
-// ==========================================
+//comprimir img
 function processarArquivoImagem(file) {
     return new Promise((resolve) => {
         if (!file) {
@@ -90,9 +86,7 @@ function processarArquivoImagem(file) {
     });
 }
 
-// ==========================================
-// INICIALIZAÇÃO E DADOS DO PERFIL ADMIN
-// ==========================================
+// inicialização adm 
 document.addEventListener("DOMContentLoaded", () => {
     const nomeAdmin = document.getElementById("nome-admin");
     const cargoAdmin = document.getElementById("cargo-admin");
@@ -107,9 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
     carregarProdutos();
 });
 
-// ==========================================
-// CADASTRAR NOVO PRODUTO
-// ==========================================
+//cadastrar um novo produto
 const btnNovo = document.querySelector(".btn-novo-item");
 const inputImagemProduto = document.getElementById("input-imagem-produto");
 
@@ -171,9 +163,7 @@ if (btnNovo && inputImagemProduto) {
     });
 }
 
-// ==========================================
-// EDITAR PRODUTO
-// ==========================================
+//editar um produto
 async function editarProduto(id) {
     const nome = prompt("Novo nome:");
     if (nome === null) return; 
@@ -244,9 +234,7 @@ async function editarProduto(id) {
     }
 }
 
-// ==========================================
-// EXCLUIR PRODUTO
-// ==========================================
+//excluir um produto
 async function excluirProduto(id) {
     const confirmar = confirm("Deseja realmente excluir este produto?");
     if (!confirmar) return;
@@ -265,9 +253,7 @@ async function excluirProduto(id) {
     }
 }
 
-// ==========================================
-// FOTO DE PERFIL DO ADMIN (LOCALSTORAGE)
-// ==========================================
+//foto de perfil adm
 const photoInput = document.getElementById("photo-input");
 const photoPreview = document.getElementById("photo-preview");
 const usuarioLogado = localStorage.getItem("nickname") || "comum";

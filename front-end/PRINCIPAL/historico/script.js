@@ -1,6 +1,4 @@
-// ==========================================================================
-// temas
-// ==========================================================================
+//temas
 document.addEventListener("DOMContentLoaded", () => {
     const temaSalvo = localStorage.getItem("tema");
     const logoCantina = document.getElementById("logo-cantina");
@@ -24,9 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
     exibirHistoricoPedidos();
 });
 
-// ==========================================================================
-// 2. CONFIGURAÇÃO DOS CLIQUES (Protegido contra erros em outras abas)
-// ==========================================================================
+//cofing click
 const temaClaro = document.getElementById("theme-light");
 const temaEscuro = document.getElementById("theme-dark");
 
@@ -49,9 +45,7 @@ if (temaClaro && temaEscuro) {
     });
 }
 
-// ==========================================================================
-// 3. FUNÇÃO: Puxar os dados do localStorage e desenhar os Cards na Tela
-// ==========================================================================
+//localstorage função
 function exibirHistoricoPedidos() {
     const containerHistorico = document.getElementById("lista-historico");
     if (!containerHistorico) return;
@@ -114,9 +108,7 @@ function exibirHistoricoPedidos() {
     containerHistorico.innerHTML = htmlFinal;
 }
 
-// ==========================================================================
-// 4. FUNÇÃO: "Pedir de novo" 
-// ==========================================================================
+//pedir novamente
 function repetirPedido(itensDoPedido) {
     let carrinho = JSON.parse(localStorage.getItem("carrinho")) || {};
 

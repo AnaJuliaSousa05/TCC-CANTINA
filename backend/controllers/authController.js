@@ -5,9 +5,7 @@ console.log("AUTHCONTROLLER CARREGADO");
 
 const saltRounds = 10;
 
-// ======================
-// REGISTER
-// ======================
+//registro 
 exports.register = (req, res) => {
     const { email, password, nickname } = req.body;
 
@@ -48,9 +46,7 @@ exports.register = (req, res) => {
     );
 };
 
-// ======================
-// LOGIN
-// ======================
+//login
 exports.login = (req, res) => {
 
 
@@ -163,9 +159,7 @@ exports.me = (req, res) => {
     }
 };
 
-// ======================
-// UPDATE PROFILE
-// ======================
+//update no perfil
 exports.updateProfile = async (req, res) => {
    console.log("ENTROU NO UPDATE");
     const token = req.headers.authorization?.split(" ")[1];

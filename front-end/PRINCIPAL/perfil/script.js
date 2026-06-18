@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     
-    // ==========================================
-    // 1. GERENCIAMENTO DE TEMA
-    // ==========================================
+//gerenciamento do tema
     const temaSalvo = localStorage.getItem("tema");
     if (temaSalvo === "claro") {
         document.body.classList.remove("dark-theme");
@@ -12,9 +10,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         document.body.classList.add("dark-theme");
     }
 
-    // ==========================================
-    // 2. RENDERIZADOR DINÂMICO DE FAVORITOS (CORRIGIDO PARA BASE64)
-    // ==========================================
+    //pedidos favoritos
     async function carregarFavoritosNoPerfil() {
         const containerFavoritos = document.getElementById("lista-favoritos-perfil");
         if (!containerFavoritos) return;
@@ -107,9 +103,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     carregarFavoritosNoPerfil();
 
-    // ==========================================
-    // 3. CARREGAR INFORMAÇÕES E FOTO (CORRIGIDO PARA SINCRONIA)
-    // ==========================================
+  //carregar foto
     const displayNomeHeader = document.getElementById('display-nome'); 
     const displayRole = document.querySelector(".badge-role");
     const inputUsername = document.getElementById('input-username');
