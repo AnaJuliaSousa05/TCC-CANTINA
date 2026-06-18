@@ -1,5 +1,15 @@
 const API_URL = "http://localhost:5000/produtos";
 
+
+const token = localStorage.getItem("token");
+const role = localStorage.getItem("role");
+
+if (!token || role !== "admin") {
+    alert("Acesso restrito!");
+    window.location.replace("/login.html");
+}
+
+
 // ==========================================
 // 1. CARREGAR PRODUTOS (MOVIDO PARA O TOPO)
 // ==========================================
@@ -287,3 +297,25 @@ if (photoInput) {
         }
     });
 }
+
+const btnLogout = document.getElementById('btnLogout');
+    if (btnLogout) {
+        btnLogout.addEventListener('click', async () => {
+            try {
+                // Avisa o servidor que o ADM deslogou
+                await fetch('http://localhost:5000/auth/logout', {
+                    method: 'GET'
+                });
+            } catch (err) {
+                console.log("Servidor offline, limpando dados locais...", err);
+            }
+
+            alert("Sessão do Administrador encerrada!");
+
+            // Limpa o Token e o Role ("admin") do LocalStorage
+            localStorage.clear(); 
+
+            // Redireciona o ADM expulso para a tela inicial/login
+            window.location.replace("/front-end/INICIO/index.html"); 
+        });
+    }

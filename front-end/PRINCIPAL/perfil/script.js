@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
         try {
-            // Busca a lista atualizada de produtos da API
             const resposta = await fetch("http://localhost:5000/produtos");
             const produtosAPI = await resposta.json();
             
@@ -40,14 +39,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 if (produto) {
                     possuiFavoritosExibidos = true;
                     
-                    // Tratamento seguro contra imagens vazias ou nulas
                     let fotoProduto = produto.imagem;
                     if (!fotoProduto || fotoProduto === "sem-imagem.png" || fotoProduto.trim() === "") {
                         fotoProduto = "icon3.png"; 
                     }
 
-                    // CORREÇÃO CRUCIAL: Se a string começar com data:, ela já é o Base64 puro.
-                    // Se não começar, aí sim nós adicionamos o caminho da pasta local.
                     const urlFinalImagem = fotoProduto.startsWith("data:") ? fotoProduto : `../PRINCIPAL/foto/${fotoProduto}`;
 
                     containerFavoritos.innerHTML += `
@@ -70,7 +66,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 containerFavoritos.innerHTML = `<p style="text-align:center; color:var(--text-secondary); grid-column: 1/-1; padding: 20px;">Você ainda não favoritou nenhum item.</p>`;
             }
 
-            // Evento para remover dos favoritos direto pela tela de perfil
             const botoesRemover = containerFavoritos.querySelectorAll(".btn-remove-fav");
             botoesRemover.forEach(botao => {
                 botao.addEventListener("click", () => {
@@ -110,11 +105,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         carregarFavoritosNoPerfil();
     }
 
-    // Inicializa a renderização dos favoritos
     carregarFavoritosNoPerfil();
 
     // ==========================================
-    // 3. CARREGAR INFORMAÇÕES DO USUÁRIO (APENAS VISUALIZAÇÃO)
+    // 3. CARREGAR INFORMAÇÕES E FOTO (CORRIGIDO PARA SINCRONIA)
     // ==========================================
     const displayNomeHeader = document.getElementById('display-nome'); 
     const displayRole = document.querySelector(".badge-role");
@@ -141,20 +135,22 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
                 if (inputUsername) inputUsername.value = user.nickname || "";
                 if (inputEmail) inputEmail.value = user.email || "";
+
+                // 🔥 Garante que o nickname local está atualizado com o banco
+                localStorage.setItem("nickname", user.nickname);
+
+                // 🔥 BUSCA A FOTO BASEADA NO NOME RETORNADO DIRETAMENTE DO BANCO
+                const fotoSalva = localStorage.getItem(`fotoPerfil_${user.nickname}`);
+
+                if (fotoSalva && photoPreview) {
+                    photoPreview.src = fotoSalva;
+                } else if (photoPreview) {
+                    // Fallback idêntico às outras telas para não quebrar o layout
+                    photoPreview.src = "../PRINCIPAL/foto/icon3.png";
+                }
             }
         } catch (err) {
             console.error("ERRO AO BUSCAR USUÁRIO NO PERFIL:", err);
         }
-    }
-
-    // Carrega a foto de perfil baseada na regra de login da Home
-    const usuarioLogado = localStorage.getItem("nickname") || "comum";
-    const chaveFotoUsuario = `fotoPerfil_${usuarioLogado}`;
-    const fotoSalva = localStorage.getItem(chaveFotoUsuario);
-
-    if (fotoSalva && photoPreview) {
-        photoPreview.src = fotoSalva;
-    } else if (photoPreview) {
-        photoPreview.src = "/LOGIN/foto/teste.png";
     }
 });

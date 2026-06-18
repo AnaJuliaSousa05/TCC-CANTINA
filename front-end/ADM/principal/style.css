@@ -1,4 +1,7 @@
 /* Variáveis para facilitar a manutenção */
+.bnt-excluir{
+    color: #29a45c;
+}
 :root {
     --bg-color: #0f1113;
     --card-bg: #1c1f22;
@@ -288,10 +291,15 @@ hr {
 /* Elementos individuais do cardápio admin */
 .item-admin {
     background-color: #1a1a1a;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
     border: 1px solid #2a2d30;
     transition: transform 0.2s ease-in-out;
+    
+    /* ADICIONE ESTAS TRÊS LINHAS ABAIXO */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza a imagem e o bloco de informações horizontalmente */
 }
 
 .item-admin:hover { 
@@ -299,10 +307,11 @@ hr {
 }
 
 .itens-cardapio img {
-    width: 100%;
-    height: 160px;
-    object-fit: contain;
-    border-radius: 10px 10px 0 0;
+    width: 170px;            /* Controla a largura ideal da imagem dentro do card */
+    height: 170px;          /* Altura controlada */
+    object-fit: cover;      /* Preenche o espaço cortando proporcionalmente se necessário */
+    border-radius: 4px;    /* Deixa as bordinhas da imagem arredondadas e bonitas */
+    margin-top: 25px;       /* CRUCIAL: Empurra a imagem para baixo, tirando do topo do card */
     display: block; 
 }
 

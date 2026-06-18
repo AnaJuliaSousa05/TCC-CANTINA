@@ -1,8 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- PROTEÇÃO DA TELA DE LOGIN ---
+    // Se o usuário já tiver um token e tentar entrar na página de login/registro, ele é mandado de volta
+    const tokenAtivo = localStorage.getItem("token");
+    const roleAtivo = localStorage.getItem("role");
+    
+    // Verifica se estamos na página de login ou registro (ajuste o nome do arquivo se necessário)
+    const naPaginaDeLogin = window.location.pathname.includes("login") || window.location.pathname.includes("INICIO");
 
-    //login
+    if (tokenAtivo && naPaginaDeLogin) {
+        if (roleAtivo === "admin") {
+            window.location.replace("/front-end/ADM/principal/index.html");
+        } else {
+            window.location.replace("/front-end/PRINCIPAL/index.html");
+        }
+        return; // Para a execução do resto do script
+    }
 
+    // --- EXIBIR DADOS DO USUÁRIO NA HOME ---
+    const nomeUsuario = document.getElementById("nome-usuario-home");
+    const cargoUsuario = document.getElementById("cargo-usuario");
+
+    const nickname = localStorage.getItem("nickname");
+    const role = localStorage.getItem("role");
+
+    console.log("Nickname salvo:", nickname);
+    console.log("Role salvo:", role);
+
+    if (nomeUsuario) nomeUsuario.textContent = nickname;
+    if (cargoUsuario) cargoUsuario.textContent = role;
+
+
+    // --- LOGIN ---
     const formLogin = document.getElementById('LoginUsuarios');
       
     if (formLogin) {
@@ -17,43 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ email, password: senha }),
-                     
                 });
                  
+                const data = await res.json();
+                console.log("STATUS:", res.status);
+                console.log("RES.OK:", res.ok);
+                console.log("DADOS:", data);
 
+                console.log("NICKNAME:", data.nickname);
+                console.log("ROLE:", data.role);
                 
-              const data = await res.json();
-              console.log("STATUS:", res.status);
-              console.log("RES.OK:", res.ok);
-              console.log("DADOS:", data);
+                if (data.token) {
+                    alert(data.msg || "Login feito com sucesso!");
+                
+                    localStorage.setItem("token", data.token);
+                    localStorage.setItem("nickname", data.nickname);
+                    localStorage.setItem("role", data.role);
+                
+                    if (data.role === "admin") {
+                        window.location.href = "/front-end/ADM/principal/index.html";
+                    } else {
+                        window.location.href = "/front-end/PRINCIPAL/index.html";
+                    }
 
-              
-            console.log("NICKNAME:", data.nickname);
-            console.log("ROLE:", data.role);
-              if (data.token) {
-                  alert(data.msg || "Login feito com sucesso!");
-              
-                  localStorage.setItem("token", data.token);
-                  localStorage.setItem("nickname", data.nickname);
-                  localStorage.setItem("role", data.role);
-              
-                  if (data.role === "admin") {
-              
-                      window.location.href =
-                      "/front-end/ADM/principal/index.html";
-              
-                  } else {
-              
-                      window.location.href =
-                      "/front-end/PRINCIPAL/index.html";
-              
-                  }
-
-
-              } else {
-                  alert(data.msg || "Erro no login");
-              }
-
+                } else {
+                    alert(data.msg || "Erro no login");
+                }
 
             } catch (erro) {
                 console.error("ERRO LOGIN:", erro);
@@ -63,36 +81,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-
-    document.addEventListener("DOMContentLoaded", () => {
-
-    const nomeUsuario = document.getElementById("nome-usuario-home");
-    const cargoUsuario = document.getElementById("cargo-usuario");
-
-    const nickname = localStorage.getItem("nickname");
-    const role = localStorage.getItem("role");
-
-    console.log("Nickname salvo:", nickname);
-    console.log("Role salvo:", role);
-
-    if (nomeUsuario) nomeUsuario.textContent = nickname;
-    if (cargoUsuario) cargoUsuario.textContent = role;
-});
-
-
-  //registro
+    // --- REGISTRO ---
     const formRegistro = document.getElementById('registrarUsuarios');
 
     if (formRegistro) {
         formRegistro.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const nickname = document.getElementById('nickname').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
+            const nicknameReg = document.getElementById('nickname').value;
+            const emailReg = document.getElementById('email').value;
+            const passwordReg = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
-            console.log("passei aquii no registro")
-            if (password !== confirmPassword) {
+            
+            console.log("passei aquii no registro");
+            
+            if (passwordReg !== confirmPassword) {
                 alert("As senhas não coincidem!");
                 return;
             }
@@ -101,17 +104,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const res = await fetch('http://localhost:5000/auth/register', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ nickname, email, password })
+                    body: JSON.stringify({ nickname: nicknameReg, email: emailReg, password: passwordReg })
                 });
 
                 const data = await res.json();
                
                 if (res.ok) {
                     alert("Conta criada com sucesso!");
-
-            
-                   window.location.href = "/front-end/INICIO/index.html";
-
+                    window.location.href = "/front-end/INICIO/index.html";
                 } else {
                     alert(data.msg || "Erro ao cadastrar");
                 }
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-  //dashboard
+    // --- DASHBOARD ---
     const btnDashboard = document.getElementById('btnDashboard');
 
     if (btnDashboard) {
@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const res = await fetch('http://localhost:5000/auth/dashboard', {
                     method: 'GET',
-                    
                 });
 
                 const text = await res.text();
@@ -145,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-//logout
+    // --- LOGOUT ---
     const btnLogout = document.getElementById('btnLogout');
 
     if (btnLogout) {
@@ -153,13 +152,15 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 await fetch('http://localhost:5000/auth/logout', {
                     method: 'GET'
-                
                 });
 
                 alert("Logout feito");
 
-                
-                window.location.href = "/login.html";
+                // CRUCIAL: Limpa TODAS as credenciais do front-end
+                localStorage.clear(); 
+
+                // Redireciona substituindo o histórico para não conseguir clicar na seta "Voltar"
+                window.location.replace("/login.html"); 
 
             } catch (err) {
                 console.log(err);
@@ -168,4 +169,4 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-});
+}); // Fim do DOMContentLoaded principal

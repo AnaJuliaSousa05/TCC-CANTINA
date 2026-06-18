@@ -2,6 +2,12 @@
 // 1. MANTÉM O TEMA CLARO ATIVO, TROCA OS ÍCONES E ATUALIZA O NOME
 // ==========================================
 document.addEventListener("DOMContentLoaded", () => {
+
+    if (!localStorage.getItem("token")) {
+    alert("Acesso negado!");
+    window.location.replace("/login.html");
+}
+
     const temaSalvo = localStorage.getItem("tema");
     const logoCantina = document.getElementById("logo-cantina");
 
@@ -41,58 +47,71 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ==========================================
-// 2. CONTROLE DA FOTO DE PERFIL (UPLOAD, COMPRESSÃO E CARREGAMENTO)
+// 2. CONTROLE DA FOTO DE PERFIL (HOME - CORRIGIDO DE VEZ)
 // ==========================================
-const photoInput = document.getElementById("photo-input");
-const photoPreview = document.getElementById("photo-preview");
+function sincronizarFotoPerfilHome() {
+    const photoPreviewHome = document.getElementById("photo-preview");
+    const photoInputHome = document.getElementById("photo-input");
+    
+    // Pega o nome do usuário atualizado ou o fallback "comum"
+    const usuarioLogadoAtual = localStorage.getItem("nickname") || "comum";
+    const chaveFotoUsuarioAtual = `fotoPerfil_${usuarioLogadoAtual}`;
+    const fotoSalva = localStorage.getItem(chaveFotoUsuarioAtual);
 
-const usuarioLogado = localStorage.getItem("nickname") || "comum";
-const chaveFotoUsuario = `fotoPerfil_${usuarioLogado}`;
+    if (fotoSalva && photoPreviewHome) {
+        photoPreviewHome.src = fotoSalva;
+    } else if (photoPreviewHome) {
+        photoPreviewHome.src = "../PRINCIPAL/foto/icon3.png";
+    }
 
-if (photoInput) {
-    photoInput.addEventListener("change", function(){
-        const file = photoInput.files[0];
+    // Vincula o clique da imagem ao input file escondido
+    if (photoPreviewHome && photoInputHome) {
+        photoPreviewHome.removeEventListener("click", abrirSeletorArquivos);
+        photoPreviewHome.addEventListener("click", abrirSeletorArquivos);
+    }
+}
 
-        if(file){
+function abrirSeletorArquivos() {
+    const photoInputHome = document.getElementById("photo-input");
+    if (photoInputHome) photoInputHome.click();
+}
+
+// Ouvinte para quando o usuário altera a foto a partir da Home
+const photoInputHome = document.getElementById("photo-input");
+if (photoInputHome) {
+    photoInputHome.addEventListener("change", function() {
+        const file = this.files[0];
+        const photoPreviewHome = document.getElementById("photo-preview");
+        const usuarioLogadoAtual = localStorage.getItem("nickname") || "comum";
+        const chaveFotoUsuarioAtual = `fotoPerfil_${usuarioLogadoAtual}`;
+
+        if (file) {
             const reader = new FileReader();
-
-            reader.onload = function(e){
+            reader.onload = function(e) {
                 const img = new Image();
                 img.src = e.target.result;
-
                 img.onload = function() {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    
                     canvas.width = 150;
                     canvas.height = 150;
-                    
                     ctx.drawImage(img, 0, 0, 150, 150);
                     
                     const fotoCompactada = canvas.toDataURL('image/jpeg', 0.7);
-
-                    if (photoPreview) {
-                        photoPreview.src = fotoCompactada;
-                    }
+                    if (photoPreviewHome) photoPreviewHome.src = fotoCompactada;
                     
-                    localStorage.setItem(chaveFotoUsuario, fotoCompactada);
+                    localStorage.setItem(chaveFotoUsuarioAtual, fotoCompactada);
+                    alert("Foto de perfil atualizada!");
                 };
             }
-
             reader.readAsDataURL(file);
         }
     });
 }
 
-window.addEventListener("load", function(){
-    const fotoSalva = localStorage.getItem(chaveFotoUsuario);
-
-    if(fotoSalva && photoPreview){
-        photoPreview.src = fotoSalva;
-   } else if (photoPreview) {
-    photoPreview.src = "../PRINCIPAL/foto/icon3.png";
-}
-});
+// Execuções em múltiplos gatilhos para garantir estabilidade visual
+document.addEventListener("DOMContentLoaded", sincronizarFotoPerfilHome);
+window.addEventListener("load", sincronizarFotoPerfilHome);
 
 // ==========================================
 // 3. FUNÇÃO MULTI-USO: FAVORITAR E SALVAR NO LOCALSTORAGE
@@ -616,3 +635,35 @@ function pedirAgoraDinamico(id, nome, preco) {
 
     pedirAgoraAoCarrinho(id);
 }
+
+// ==========================================
+// 13. CONTROLE DE LOGOUT DA PÁGINA USUÁRIO (CORRIGIDO)
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const btnLogout = document.getElementById('btnLogout');
+
+    if (btnLogout) {
+        btnLogout.addEventListener('click', async () => {
+            try {
+                // Tenta avisar o servidor sobre o logout
+                await fetch('http://localhost:5000/auth/logout', {
+                    method: 'GET'
+                });
+            } catch (err) {
+                console.log("Servidor offline, limpando dados locais...", err);
+            }
+
+            alert("Sessão encerrada com sucesso!");
+
+            // 🔥 CORREÇÃO CRUCIAL: Em vez de usar localStorage.clear(), 
+            // removemos apenas o que pertence à SESSÃO ATUAL, preservando as fotos!
+            localStorage.removeItem("token");
+            localStorage.removeItem("carrinho");
+            // Se houver outras informações temporárias da sessão, remova-as individualmente aqui.
+            // Exemplo: localStorage.removeItem("historicoPedidos"); (opcional, caso queira limpar o histórico ao sair)
+
+            // Redireciona substituindo o histórico para a página inicial/login
+            window.location.replace("/front-end/INICIO/index.html"); 
+        });
+    }
+});

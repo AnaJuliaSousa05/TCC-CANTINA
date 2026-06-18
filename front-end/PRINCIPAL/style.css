@@ -243,6 +243,7 @@ hr {
     border-radius: 25px;
 }
 
+/* Modificado para alinhar os elementos internamente no centro horizontal */
 .itens-cardapio div {
     background-color: #1a1a1a;
     border-radius: 15px;
@@ -251,6 +252,7 @@ hr {
     transition: transform 0.2s ease-in-out;
     display: flex;
     flex-direction: column; 
+    align-items: center;    /* ADICIONADO: Centraliza a imagem e os textos horizontalmente */
     height: 100%; 
 }
 
@@ -258,11 +260,13 @@ hr {
     transform: translateY(-4px); 
 }
 
+/* Modificado para desgrudar do topo e ter tamanho adequado e harmonioso */
 .itens-cardapio img {
-    width: 100%;
-    height: 160px;
-    object-fit: contain;
-    border-radius: 10px 10px 0 0;
+    width: 200px;           /* ADICIONADO: Largura controlada para não esmagar nas bordas */
+    height: 150px;          /* Altura proporcional e fixa */
+    object-fit: cover;      /* Garante o preenchimento correto sem distorcer o alimento */
+    border-radius: 12px;    /* Arredonda os 4 cantos da imagem de forma suave */
+    margin-top: 25px;       /* ADICIONADO: Cria o espaço perfeito no topo do card */
     display: block; 
 }
 
@@ -273,6 +277,8 @@ hr {
     justify-content: flex-start;
     padding: 1rem;
     flex-grow: 1; 
+    width: 100%;            /* Garante que o bloco de informações ocupe a largura total interna */
+    box-sizing: border-box;
 }
 
 .itens-cardapio .info .titulo-container {
@@ -361,7 +367,6 @@ hr {
 .itens-cardapio .info .pedir:hover {
     transform: translateY(-2px);
 }
-
 /* ==========================================================================
    FORMULÁRIO / INPUTS
    ========================================================================== */
